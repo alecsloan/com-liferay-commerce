@@ -70,6 +70,8 @@ public class CPDefinitionWrapper implements CPDefinition,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("CProductId", getCProductId());
+		attributes.put("CPTaxCategoryId", getCPTaxCategoryId());
 		attributes.put("productTypeName", getProductTypeName());
 		attributes.put("availableIndividually", isAvailableIndividually());
 		attributes.put("ignoreSKUCombinations", isIgnoreSKUCombinations());
@@ -81,7 +83,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 		attributes.put("height", getHeight());
 		attributes.put("depth", getDepth());
 		attributes.put("weight", getWeight());
-		attributes.put("CPTaxCategoryId", getCPTaxCategoryId());
 		attributes.put("taxExempt", isTaxExempt());
 		attributes.put("telcoOrElectronics", isTelcoOrElectronics());
 		attributes.put("DDMStructureKey", getDDMStructureKey());
@@ -89,6 +90,7 @@ public class CPDefinitionWrapper implements CPDefinition,
 		attributes.put("displayDate", getDisplayDate());
 		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
+		attributes.put("version", getVersion());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
@@ -160,6 +162,18 @@ public class CPDefinitionWrapper implements CPDefinition,
 			setModifiedDate(modifiedDate);
 		}
 
+		Long CProductId = (Long)attributes.get("CProductId");
+
+		if (CProductId != null) {
+			setCProductId(CProductId);
+		}
+
+		Long CPTaxCategoryId = (Long)attributes.get("CPTaxCategoryId");
+
+		if (CPTaxCategoryId != null) {
+			setCPTaxCategoryId(CPTaxCategoryId);
+		}
+
 		String productTypeName = (String)attributes.get("productTypeName");
 
 		if (productTypeName != null) {
@@ -228,12 +242,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 			setWeight(weight);
 		}
 
-		Long CPTaxCategoryId = (Long)attributes.get("CPTaxCategoryId");
-
-		if (CPTaxCategoryId != null) {
-			setCPTaxCategoryId(CPTaxCategoryId);
-		}
-
 		Boolean taxExempt = (Boolean)attributes.get("taxExempt");
 
 		if (taxExempt != null) {
@@ -275,6 +283,12 @@ public class CPDefinitionWrapper implements CPDefinition,
 
 		if (lastPublishDate != null) {
 			setLastPublishDate(lastPublishDate);
+		}
+
+		Integer version = (Integer)attributes.get("version");
+
+		if (version != null) {
+			setVersion(version);
 		}
 
 		Integer status = (Integer)attributes.get("status");
@@ -360,6 +374,16 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public java.util.List<CPInstance> getCPInstances() {
 		return _cpDefinition.getCPInstances();
+	}
+
+	/**
+	* Returns the c product ID of this cp definition.
+	*
+	* @return the c product ID of this cp definition
+	*/
+	@Override
+	public long getCProductId() {
+		return _cpDefinition.getCProductId();
 	}
 
 	/**
@@ -929,6 +953,16 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
+	* Returns the version of this cp definition.
+	*
+	* @return the version of this cp definition
+	*/
+	@Override
+	public int getVersion() {
+		return _cpDefinition.getVersion();
+	}
+
+	/**
 	* Returns the weight of this cp definition.
 	*
 	* @return the weight of this cp definition
@@ -1196,6 +1230,16 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public void setCPDefinitionId(long CPDefinitionId) {
 		_cpDefinition.setCPDefinitionId(CPDefinitionId);
+	}
+
+	/**
+	* Sets the c product ID of this cp definition.
+	*
+	* @param CProductId the c product ID of this cp definition
+	*/
+	@Override
+	public void setCProductId(long CProductId) {
+		_cpDefinition.setCProductId(CProductId);
 	}
 
 	/**
@@ -1558,6 +1602,16 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public void setUuid(String uuid) {
 		_cpDefinition.setUuid(uuid);
+	}
+
+	/**
+	* Sets the version of this cp definition.
+	*
+	* @param version the version of this cp definition
+	*/
+	@Override
+	public void setVersion(int version) {
+		_cpDefinition.setVersion(version);
 	}
 
 	/**

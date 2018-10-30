@@ -52,6 +52,8 @@ create table CPDefinition (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	CProductId LONG,
+	CPTaxCategoryId LONG,
 	productTypeName VARCHAR(75) null,
 	availableIndividually BOOLEAN,
 	ignoreSKUCombinations BOOLEAN,
@@ -63,7 +65,6 @@ create table CPDefinition (
 	height DOUBLE,
 	depth DOUBLE,
 	weight DOUBLE,
-	CPTaxCategoryId LONG,
 	taxExempt BOOLEAN,
 	telcoOrElectronics BOOLEAN,
 	DDMStructureKey VARCHAR(75) null,
@@ -71,6 +72,7 @@ create table CPDefinition (
 	displayDate DATE null,
 	expirationDate DATE null,
 	lastPublishDate DATE null,
+	version INTEGER,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
@@ -340,4 +342,17 @@ create table CPTaxCategory (
 	modifiedDate DATE null,
 	name STRING null,
 	description STRING null
+);
+
+create table CProduct (
+	uuid_ VARCHAR(75) null,
+	CProductId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	draftDefinitionId LONG,
+	publishedDefinitionId LONG
 );

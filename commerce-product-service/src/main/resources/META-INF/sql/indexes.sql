@@ -100,3 +100,7 @@ create index IX_5B218A65 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], co
 create unique index IX_FFE36627 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_DB66F708 on CPTaxCategory (groupId);
+
+create index IX_77F5B8F8 on CProduct (groupId);
+create index IX_39773566 on CProduct (uuid_[$COLUMN_LENGTH:75$], companyId);
+create unique index IX_9F9DD68 on CProduct (uuid_[$COLUMN_LENGTH:75$], groupId);

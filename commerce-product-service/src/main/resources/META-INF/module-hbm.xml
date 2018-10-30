@@ -16,6 +16,7 @@
 	<import class="com.liferay.commerce.product.model.CPOption" />
 	<import class="com.liferay.commerce.product.model.CPOptionCategory" />
 	<import class="com.liferay.commerce.product.model.CPOptionValue" />
+	<import class="com.liferay.commerce.product.model.CProduct" />
 	<import class="com.liferay.commerce.product.model.CPRule" />
 	<import class="com.liferay.commerce.product.model.CPRuleAssetCategoryRel" />
 	<import class="com.liferay.commerce.product.model.CPRuleUserSegmentRel" />
@@ -61,6 +62,8 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="CProductId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="CPTaxCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="productTypeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="availableIndividually" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="ignoreSKUCombinations" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
@@ -72,7 +75,6 @@
 		<property name="height" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="depth" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="weight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="CPTaxCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="taxExempt" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="telcoOrElectronics" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="DDMStructureKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -80,6 +82,7 @@
 		<property name="displayDate" type="org.hibernate.type.TimestampType" />
 		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
 		<property name="lastPublishDate" type="org.hibernate.type.TimestampType" />
+		<property name="version" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -311,6 +314,20 @@
 		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property column="key_" name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lastPublishDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.liferay.commerce.product.model.impl.CProductImpl" table="CProduct">
+		<id name="CProductId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="draftDefinitionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="publishedDefinitionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.commerce.product.model.impl.CPRuleImpl" table="CPRule">
 		<id name="CPRuleId" type="long">

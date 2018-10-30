@@ -44,6 +44,8 @@ public class CPDefinitionSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setCProductId(model.getCProductId());
+		soapModel.setCPTaxCategoryId(model.getCPTaxCategoryId());
 		soapModel.setProductTypeName(model.getProductTypeName());
 		soapModel.setAvailableIndividually(model.isAvailableIndividually());
 		soapModel.setIgnoreSKUCombinations(model.isIgnoreSKUCombinations());
@@ -55,7 +57,6 @@ public class CPDefinitionSoap implements Serializable {
 		soapModel.setHeight(model.getHeight());
 		soapModel.setDepth(model.getDepth());
 		soapModel.setWeight(model.getWeight());
-		soapModel.setCPTaxCategoryId(model.getCPTaxCategoryId());
 		soapModel.setTaxExempt(model.isTaxExempt());
 		soapModel.setTelcoOrElectronics(model.isTelcoOrElectronics());
 		soapModel.setDDMStructureKey(model.getDDMStructureKey());
@@ -63,6 +64,7 @@ public class CPDefinitionSoap implements Serializable {
 		soapModel.setDisplayDate(model.getDisplayDate());
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
+		soapModel.setVersion(model.getVersion());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
@@ -199,6 +201,22 @@ public class CPDefinitionSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public long getCProductId() {
+		return _CProductId;
+	}
+
+	public void setCProductId(long CProductId) {
+		_CProductId = CProductId;
+	}
+
+	public long getCPTaxCategoryId() {
+		return _CPTaxCategoryId;
+	}
+
+	public void setCPTaxCategoryId(long CPTaxCategoryId) {
+		_CPTaxCategoryId = CPTaxCategoryId;
+	}
+
 	public String getProductTypeName() {
 		return _productTypeName;
 	}
@@ -307,14 +325,6 @@ public class CPDefinitionSoap implements Serializable {
 		_weight = weight;
 	}
 
-	public long getCPTaxCategoryId() {
-		return _CPTaxCategoryId;
-	}
-
-	public void setCPTaxCategoryId(long CPTaxCategoryId) {
-		_CPTaxCategoryId = CPTaxCategoryId;
-	}
-
 	public boolean getTaxExempt() {
 		return _taxExempt;
 	}
@@ -383,6 +393,14 @@ public class CPDefinitionSoap implements Serializable {
 		_lastPublishDate = lastPublishDate;
 	}
 
+	public int getVersion() {
+		return _version;
+	}
+
+	public void setVersion(int version) {
+		_version = version;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -425,6 +443,8 @@ public class CPDefinitionSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _CProductId;
+	private long _CPTaxCategoryId;
 	private String _productTypeName;
 	private boolean _availableIndividually;
 	private boolean _ignoreSKUCombinations;
@@ -436,7 +456,6 @@ public class CPDefinitionSoap implements Serializable {
 	private double _height;
 	private double _depth;
 	private double _weight;
-	private long _CPTaxCategoryId;
 	private boolean _taxExempt;
 	private boolean _telcoOrElectronics;
 	private String _DDMStructureKey;
@@ -444,6 +463,7 @@ public class CPDefinitionSoap implements Serializable {
 	private Date _displayDate;
 	private Date _expirationDate;
 	private Date _lastPublishDate;
+	private int _version;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;

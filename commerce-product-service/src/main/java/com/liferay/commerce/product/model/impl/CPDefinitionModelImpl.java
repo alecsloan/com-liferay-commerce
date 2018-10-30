@@ -93,6 +93,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "CProductId", Types.BIGINT },
+			{ "CPTaxCategoryId", Types.BIGINT },
 			{ "productTypeName", Types.VARCHAR },
 			{ "availableIndividually", Types.BOOLEAN },
 			{ "ignoreSKUCombinations", Types.BOOLEAN },
@@ -104,7 +106,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			{ "height", Types.DOUBLE },
 			{ "depth", Types.DOUBLE },
 			{ "weight", Types.DOUBLE },
-			{ "CPTaxCategoryId", Types.BIGINT },
 			{ "taxExempt", Types.BOOLEAN },
 			{ "telcoOrElectronics", Types.BOOLEAN },
 			{ "DDMStructureKey", Types.VARCHAR },
@@ -112,6 +113,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			{ "displayDate", Types.TIMESTAMP },
 			{ "expirationDate", Types.TIMESTAMP },
 			{ "lastPublishDate", Types.TIMESTAMP },
+			{ "version", Types.INTEGER },
 			{ "status", Types.INTEGER },
 			{ "statusByUserId", Types.BIGINT },
 			{ "statusByUserName", Types.VARCHAR },
@@ -130,6 +132,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("CProductId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("CPTaxCategoryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("productTypeName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("availableIndividually", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("ignoreSKUCombinations", Types.BOOLEAN);
@@ -141,7 +145,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		TABLE_COLUMNS_MAP.put("height", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("depth", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("weight", Types.DOUBLE);
-		TABLE_COLUMNS_MAP.put("CPTaxCategoryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("taxExempt", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("telcoOrElectronics", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("DDMStructureKey", Types.VARCHAR);
@@ -149,13 +152,14 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		TABLE_COLUMNS_MAP.put("displayDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("expirationDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("version", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("statusByUserName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPDefinition (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,defaultLanguageId VARCHAR(75) null,CPDefinitionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productTypeName VARCHAR(75) null,availableIndividually BOOLEAN,ignoreSKUCombinations BOOLEAN,shippable BOOLEAN,freeShipping BOOLEAN,shipSeparately BOOLEAN,shippingExtraPrice DOUBLE,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,CPTaxCategoryId LONG,taxExempt BOOLEAN,telcoOrElectronics BOOLEAN,DDMStructureKey VARCHAR(75) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPDefinition (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,defaultLanguageId VARCHAR(75) null,CPDefinitionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CProductId LONG,CPTaxCategoryId LONG,productTypeName VARCHAR(75) null,availableIndividually BOOLEAN,ignoreSKUCombinations BOOLEAN,shippable BOOLEAN,freeShipping BOOLEAN,shipSeparately BOOLEAN,shippingExtraPrice DOUBLE,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,taxExempt BOOLEAN,telcoOrElectronics BOOLEAN,DDMStructureKey VARCHAR(75) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,version INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPDefinition";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpDefinition.displayDate DESC, cpDefinition.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPDefinition.displayDate DESC, CPDefinition.createDate DESC";
@@ -203,6 +207,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setCProductId(soapModel.getCProductId());
+		model.setCPTaxCategoryId(soapModel.getCPTaxCategoryId());
 		model.setProductTypeName(soapModel.getProductTypeName());
 		model.setAvailableIndividually(soapModel.isAvailableIndividually());
 		model.setIgnoreSKUCombinations(soapModel.isIgnoreSKUCombinations());
@@ -214,7 +220,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		model.setHeight(soapModel.getHeight());
 		model.setDepth(soapModel.getDepth());
 		model.setWeight(soapModel.getWeight());
-		model.setCPTaxCategoryId(soapModel.getCPTaxCategoryId());
 		model.setTaxExempt(soapModel.isTaxExempt());
 		model.setTelcoOrElectronics(soapModel.isTelcoOrElectronics());
 		model.setDDMStructureKey(soapModel.getDDMStructureKey());
@@ -222,6 +227,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		model.setDisplayDate(soapModel.getDisplayDate());
 		model.setExpirationDate(soapModel.getExpirationDate());
 		model.setLastPublishDate(soapModel.getLastPublishDate());
+		model.setVersion(soapModel.getVersion());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
@@ -300,6 +306,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("CProductId", getCProductId());
+		attributes.put("CPTaxCategoryId", getCPTaxCategoryId());
 		attributes.put("productTypeName", getProductTypeName());
 		attributes.put("availableIndividually", isAvailableIndividually());
 		attributes.put("ignoreSKUCombinations", isIgnoreSKUCombinations());
@@ -311,7 +319,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		attributes.put("height", getHeight());
 		attributes.put("depth", getDepth());
 		attributes.put("weight", getWeight());
-		attributes.put("CPTaxCategoryId", getCPTaxCategoryId());
 		attributes.put("taxExempt", isTaxExempt());
 		attributes.put("telcoOrElectronics", isTelcoOrElectronics());
 		attributes.put("DDMStructureKey", getDDMStructureKey());
@@ -319,6 +326,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		attributes.put("displayDate", getDisplayDate());
 		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
+		attributes.put("version", getVersion());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
@@ -393,6 +401,18 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			setModifiedDate(modifiedDate);
 		}
 
+		Long CProductId = (Long)attributes.get("CProductId");
+
+		if (CProductId != null) {
+			setCProductId(CProductId);
+		}
+
+		Long CPTaxCategoryId = (Long)attributes.get("CPTaxCategoryId");
+
+		if (CPTaxCategoryId != null) {
+			setCPTaxCategoryId(CPTaxCategoryId);
+		}
+
 		String productTypeName = (String)attributes.get("productTypeName");
 
 		if (productTypeName != null) {
@@ -461,12 +481,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			setWeight(weight);
 		}
 
-		Long CPTaxCategoryId = (Long)attributes.get("CPTaxCategoryId");
-
-		if (CPTaxCategoryId != null) {
-			setCPTaxCategoryId(CPTaxCategoryId);
-		}
-
 		Boolean taxExempt = (Boolean)attributes.get("taxExempt");
 
 		if (taxExempt != null) {
@@ -508,6 +522,12 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 		if (lastPublishDate != null) {
 			setLastPublishDate(lastPublishDate);
+		}
+
+		Integer version = (Integer)attributes.get("version");
+
+		if (version != null) {
+			setVersion(version);
 		}
 
 		Integer status = (Integer)attributes.get("status");
@@ -1078,6 +1098,40 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@JSON
 	@Override
+	public long getCProductId() {
+		return _CProductId;
+	}
+
+	@Override
+	public void setCProductId(long CProductId) {
+		_CProductId = CProductId;
+	}
+
+	@JSON
+	@Override
+	public long getCPTaxCategoryId() {
+		return _CPTaxCategoryId;
+	}
+
+	@Override
+	public void setCPTaxCategoryId(long CPTaxCategoryId) {
+		_columnBitmask |= CPTAXCATEGORYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCPTaxCategoryId) {
+			_setOriginalCPTaxCategoryId = true;
+
+			_originalCPTaxCategoryId = _CPTaxCategoryId;
+		}
+
+		_CPTaxCategoryId = CPTaxCategoryId;
+	}
+
+	public long getOriginalCPTaxCategoryId() {
+		return _originalCPTaxCategoryId;
+	}
+
+	@JSON
+	@Override
 	public String getProductTypeName() {
 		if (_productTypeName == null) {
 			return "";
@@ -1234,29 +1288,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@JSON
 	@Override
-	public long getCPTaxCategoryId() {
-		return _CPTaxCategoryId;
-	}
-
-	@Override
-	public void setCPTaxCategoryId(long CPTaxCategoryId) {
-		_columnBitmask |= CPTAXCATEGORYID_COLUMN_BITMASK;
-
-		if (!_setOriginalCPTaxCategoryId) {
-			_setOriginalCPTaxCategoryId = true;
-
-			_originalCPTaxCategoryId = _CPTaxCategoryId;
-		}
-
-		_CPTaxCategoryId = CPTaxCategoryId;
-	}
-
-	public long getOriginalCPTaxCategoryId() {
-		return _originalCPTaxCategoryId;
-	}
-
-	@JSON
-	@Override
 	public boolean getTaxExempt() {
 		return _taxExempt;
 	}
@@ -1363,6 +1394,17 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 	@Override
 	public void setLastPublishDate(Date lastPublishDate) {
 		_lastPublishDate = lastPublishDate;
+	}
+
+	@JSON
+	@Override
+	public int getVersion() {
+		return _version;
+	}
+
+	@Override
+	public void setVersion(int version) {
+		_version = version;
 	}
 
 	@JSON
@@ -1700,6 +1742,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		cpDefinitionImpl.setUserName(getUserName());
 		cpDefinitionImpl.setCreateDate(getCreateDate());
 		cpDefinitionImpl.setModifiedDate(getModifiedDate());
+		cpDefinitionImpl.setCProductId(getCProductId());
+		cpDefinitionImpl.setCPTaxCategoryId(getCPTaxCategoryId());
 		cpDefinitionImpl.setProductTypeName(getProductTypeName());
 		cpDefinitionImpl.setAvailableIndividually(isAvailableIndividually());
 		cpDefinitionImpl.setIgnoreSKUCombinations(isIgnoreSKUCombinations());
@@ -1711,7 +1755,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		cpDefinitionImpl.setHeight(getHeight());
 		cpDefinitionImpl.setDepth(getDepth());
 		cpDefinitionImpl.setWeight(getWeight());
-		cpDefinitionImpl.setCPTaxCategoryId(getCPTaxCategoryId());
 		cpDefinitionImpl.setTaxExempt(isTaxExempt());
 		cpDefinitionImpl.setTelcoOrElectronics(isTelcoOrElectronics());
 		cpDefinitionImpl.setDDMStructureKey(getDDMStructureKey());
@@ -1719,6 +1762,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		cpDefinitionImpl.setDisplayDate(getDisplayDate());
 		cpDefinitionImpl.setExpirationDate(getExpirationDate());
 		cpDefinitionImpl.setLastPublishDate(getLastPublishDate());
+		cpDefinitionImpl.setVersion(getVersion());
 		cpDefinitionImpl.setStatus(getStatus());
 		cpDefinitionImpl.setStatusByUserId(getStatusByUserId());
 		cpDefinitionImpl.setStatusByUserName(getStatusByUserName());
@@ -1884,6 +1928,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			cpDefinitionCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
+		cpDefinitionCacheModel.CProductId = getCProductId();
+
+		cpDefinitionCacheModel.CPTaxCategoryId = getCPTaxCategoryId();
+
 		cpDefinitionCacheModel.productTypeName = getProductTypeName();
 
 		String productTypeName = cpDefinitionCacheModel.productTypeName;
@@ -1911,8 +1959,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		cpDefinitionCacheModel.depth = getDepth();
 
 		cpDefinitionCacheModel.weight = getWeight();
-
-		cpDefinitionCacheModel.CPTaxCategoryId = getCPTaxCategoryId();
 
 		cpDefinitionCacheModel.taxExempt = isTaxExempt();
 
@@ -1955,6 +2001,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			cpDefinitionCacheModel.lastPublishDate = Long.MIN_VALUE;
 		}
 
+		cpDefinitionCacheModel.version = getVersion();
+
 		cpDefinitionCacheModel.status = getStatus();
 
 		cpDefinitionCacheModel.statusByUserId = getStatusByUserId();
@@ -1981,7 +2029,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(71);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -2003,6 +2051,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", CProductId=");
+		sb.append(getCProductId());
+		sb.append(", CPTaxCategoryId=");
+		sb.append(getCPTaxCategoryId());
 		sb.append(", productTypeName=");
 		sb.append(getProductTypeName());
 		sb.append(", availableIndividually=");
@@ -2025,8 +2077,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		sb.append(getDepth());
 		sb.append(", weight=");
 		sb.append(getWeight());
-		sb.append(", CPTaxCategoryId=");
-		sb.append(getCPTaxCategoryId());
 		sb.append(", taxExempt=");
 		sb.append(isTaxExempt());
 		sb.append(", telcoOrElectronics=");
@@ -2041,6 +2091,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		sb.append(getExpirationDate());
 		sb.append(", lastPublishDate=");
 		sb.append(getLastPublishDate());
+		sb.append(", version=");
+		sb.append(getVersion());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", statusByUserId=");
@@ -2056,7 +2108,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(103);
+		StringBundler sb = new StringBundler(109);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPDefinition");
@@ -2103,6 +2155,14 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>CProductId</column-name><column-value><![CDATA[");
+		sb.append(getCProductId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>CPTaxCategoryId</column-name><column-value><![CDATA[");
+		sb.append(getCPTaxCategoryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>productTypeName</column-name><column-value><![CDATA[");
 		sb.append(getProductTypeName());
 		sb.append("]]></column-value></column>");
@@ -2147,10 +2207,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		sb.append(getWeight());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>CPTaxCategoryId</column-name><column-value><![CDATA[");
-		sb.append(getCPTaxCategoryId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>taxExempt</column-name><column-value><![CDATA[");
 		sb.append(isTaxExempt());
 		sb.append("]]></column-value></column>");
@@ -2177,6 +2233,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		sb.append(
 			"<column><column-name>lastPublishDate</column-name><column-value><![CDATA[");
 		sb.append(getLastPublishDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>version</column-name><column-value><![CDATA[");
+		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
@@ -2221,6 +2281,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
+	private long _CProductId;
+	private long _CPTaxCategoryId;
+	private long _originalCPTaxCategoryId;
+	private boolean _setOriginalCPTaxCategoryId;
 	private String _productTypeName;
 	private boolean _availableIndividually;
 	private boolean _ignoreSKUCombinations;
@@ -2232,9 +2296,6 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 	private double _height;
 	private double _depth;
 	private double _weight;
-	private long _CPTaxCategoryId;
-	private long _originalCPTaxCategoryId;
-	private boolean _setOriginalCPTaxCategoryId;
 	private boolean _taxExempt;
 	private boolean _telcoOrElectronics;
 	private String _DDMStructureKey;
@@ -2243,6 +2304,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 	private Date _originalDisplayDate;
 	private Date _expirationDate;
 	private Date _lastPublishDate;
+	private int _version;
 	private int _status;
 	private int _originalStatus;
 	private boolean _setOriginalStatus;
