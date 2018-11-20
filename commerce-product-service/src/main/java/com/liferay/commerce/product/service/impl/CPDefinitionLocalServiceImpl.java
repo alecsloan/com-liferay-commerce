@@ -291,6 +291,7 @@ public class CPDefinitionLocalServiceImpl
 		cpDefinition.setDefaultLanguageId(LocaleUtil.toLanguageId(locale));
 		cpDefinition.setDisplayDate(displayDate);
 		cpDefinition.setExpirationDate(expirationDate);
+		cpDefinition.setVersion(1);
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
 			cpDefinition.setStatus(WorkflowConstants.STATUS_DRAFT);
@@ -314,17 +315,26 @@ public class CPDefinitionLocalServiceImpl
 		// Commerce product instance
 
 		if (Validator.isNotNull(defaultSku)) {
-			ServiceContext newServiceContext = new ServiceContext();
+			ServiceContext cpInstanceServiceContext = new ServiceContext();
 
-			newServiceContext.setScopeGroupId(serviceContext.getScopeGroupId());
-			newServiceContext.setUserId(serviceContext.getUserId());
+			cpInstanceServiceContext.setScopeGroupId(
+				serviceContext.getScopeGroupId());
+			cpInstanceServiceContext.setUserId(serviceContext.getUserId());
 
 			cpInstanceLocalService.addCPInstance(
 				cpDefinitionId, defaultSku, null, null, true, null, true,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, newServiceContext);
+				expirationDateMinute, neverExpire, cpInstanceServiceContext);
+
+			ServiceContext cProductServiceContext = new ServiceContext();
+
+			cProductServiceContext.setScopeGroupId(
+				serviceContext.getScopeGroupId());
+			cProductServiceContext.setUserId(serviceContext.getUserId());
+
+			cProductLocalService.addCProduct(cProductServiceContext);
 		}
 
 		// Commerce product friendly URL
