@@ -117,6 +117,10 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	public CPDefinitionInventory deleteCPDefinitionInventory(
 		long CPDefinitionInventoryId) throws PortalException;
 
+	/**
+	* @deprecated As of 1.1
+	*/
+	@Deprecated
 	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId);
 
 	/**
@@ -195,6 +199,10 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	public CPDefinitionInventory fetchCPDefinitionInventory(
 		long CPDefinitionInventoryId);
 
+	/**
+	* @deprecated As of 1.1
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
 		long cpDefinitionId) throws PortalException;
