@@ -105,6 +105,10 @@ public class CPDefinitionInventoryLocalServiceUtil {
 		return getService().deleteCPDefinitionInventory(CPDefinitionInventoryId);
 	}
 
+	/**
+	* @deprecated As of 1.1
+	*/
+	@Deprecated
 	public static void deleteCPDefinitionInventoryByCPDefinitionId(
 		long cpDefinitionId) {
 		getService().deleteCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
@@ -202,6 +206,10 @@ public class CPDefinitionInventoryLocalServiceUtil {
 		return getService().fetchCPDefinitionInventory(CPDefinitionInventoryId);
 	}
 
+	/**
+	* @deprecated As of 1.1
+	*/
+	@Deprecated
 	public static com.liferay.commerce.model.CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
 		long cpDefinitionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
