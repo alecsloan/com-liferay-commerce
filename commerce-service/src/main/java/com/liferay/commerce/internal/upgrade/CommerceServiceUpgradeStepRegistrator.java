@@ -17,17 +17,23 @@ package com.liferay.commerce.internal.upgrade;
 import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderItemUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderNoteUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v1_2_0.CPDAvailabilityEstimateUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v1_2_0.CPDefinitionInventoryUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v1_2_0.CommerceWarehouseItemUpgradeProcess;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
-
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Alec Sloan
  */
 @Component(immediate = true, service = UpgradeStepRegistrator.class)
-public class CommerceOrderUpgradeStepRegistrator
+public class CommerceServiceUpgradeStepRegistrator
 	implements UpgradeStepRegistrator {
 
 	@Override
@@ -42,6 +48,15 @@ public class CommerceOrderUpgradeStepRegistrator
 			new CommerceOrderItemUpgradeProcess(),
 			new CommerceOrderNoteUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_1_2_0,
+			new CommerceWarehouseItemUpgradeProcess(
+				_cpDefinitionLocalService, _cpInstanceLocalService),
+			new com.liferay.commerce.internal.upgrade.v1_2_0.CommerceOrderItemUpgradeProcess(
+				_cpDefinitionLocalService, _cpInstanceLocalService),
+			new CPDAvailabilityEstimateUpgradeProcess(),
+			new CPDefinitionInventoryUpgradeProcess());
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -51,7 +66,15 @@ public class CommerceOrderUpgradeStepRegistrator
 
 	private static final String _SCHEMA_VERSION_1_1_0 = "1.1.0";
 
+	private static final String _SCHEMA_VERSION_1_2_0 = "1.2.0";
+
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceOrderUpgradeStepRegistrator.class);
+		CommerceServiceUpgradeStepRegistrator.class);
+
+	@Reference
+	private CPDefinitionLocalService _cpDefinitionLocalService;
+
+	@Reference
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 }
