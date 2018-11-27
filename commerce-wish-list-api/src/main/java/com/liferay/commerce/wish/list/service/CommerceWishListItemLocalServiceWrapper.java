@@ -99,11 +99,19 @@ public class CommerceWishListItemLocalServiceWrapper
 		_commerceWishListItemLocalService.deleteCommerceWishListItems(commerceWishListId);
 	}
 
+	/**
+	* @deprecated As of 1.1
+	*/
+	@Deprecated
 	@Override
 	public void deleteCommerceWishListItemsByCPDefinitionId(long cpDefinitionId) {
 		_commerceWishListItemLocalService.deleteCommerceWishListItemsByCPDefinitionId(cpDefinitionId);
 	}
 
+	/**
+	* @deprecated As of 1.1
+	*/
+	@Deprecated
 	@Override
 	public void deleteCommerceWishListItemsByCPInstanceId(long cpInstanceId) {
 		_commerceWishListItemLocalService.deleteCommerceWishListItemsByCPInstanceId(cpInstanceId);

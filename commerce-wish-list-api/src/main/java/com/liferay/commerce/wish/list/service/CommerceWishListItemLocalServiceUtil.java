@@ -103,11 +103,19 @@ public class CommerceWishListItemLocalServiceUtil {
 		getService().deleteCommerceWishListItems(commerceWishListId);
 	}
 
+	/**
+	* @deprecated As of 1.1
+	*/
+	@Deprecated
 	public static void deleteCommerceWishListItemsByCPDefinitionId(
 		long cpDefinitionId) {
 		getService().deleteCommerceWishListItemsByCPDefinitionId(cpDefinitionId);
 	}
 
+	/**
+	* @deprecated As of 1.1
+	*/
+	@Deprecated
 	public static void deleteCommerceWishListItemsByCPInstanceId(
 		long cpInstanceId) {
 		getService().deleteCommerceWishListItemsByCPInstanceId(cpInstanceId);
