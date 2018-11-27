@@ -77,7 +77,7 @@
 
 		<column name="commerceWishListId" type="long" />
 		<column name="CProductId" type="long" />
-		<column name="CPInstanceUuid" type="long" />
+		<column name="CPInstanceUuid" type="String" />
 		<column name="json" type="String" />
 
 		<!-- Order -->
