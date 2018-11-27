@@ -109,8 +109,16 @@ public interface CommerceWishListItemLocalService extends BaseLocalService,
 
 	public void deleteCommerceWishListItems(long commerceWishListId);
 
+	/**
+	* @deprecated As of 1.1
+	*/
+	@Deprecated
 	public void deleteCommerceWishListItemsByCPDefinitionId(long cpDefinitionId);
 
+	/**
+	* @deprecated As of 1.1
+	*/
+	@Deprecated
 	public void deleteCommerceWishListItemsByCPInstanceId(long cpInstanceId);
 
 	/**
