@@ -16,6 +16,7 @@ package com.liferay.commerce.product.internal.upgrade;
 
 import com.liferay.commerce.product.internal.upgrade.v1_1_0.CPRuleUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_2_0.CProductUpgradeProcess;
+import com.liferay.commerce.product.internal.upgrade.v1_2_0.CPFriendlyURLEntryUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
@@ -41,7 +42,8 @@ public class CommerceProductUpgradeStepRegistrator
 
 		registry.register(
 			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_1_2_0,
-			new CProductUpgradeProcess());
+			new CProductUpgradeProcess(),
+			new CPFriendlyURLEntryUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRODUCT UPGRADE STEP REGISTRATOR FINISHED");
