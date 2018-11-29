@@ -44,7 +44,8 @@ public class CommerceProductUpgradeStepRegistrator
 		registry.register(
 			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_1_2_0,
 			new ProductSubscriptionUpgradeProcess(),
-			new CProductUpgradeProcess());
+			new CProductUpgradeProcess(),
+			new CPFriendlyURLEntryUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRODUCT UPGRADE STEP REGISTRATOR FINISHED");
