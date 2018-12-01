@@ -1495,35 +1495,35 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "cpdAvailabilityEstimate.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(cpdAvailabilityEstimate.uuid IS NULL OR cpdAvailabilityEstimate.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "cpdAvailabilityEstimate.companyId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_CPDEFINITIONID = new FinderPath(CPDAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_CPRODUCTID = new FinderPath(CPDAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
 			CPDAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED,
 			CPDAvailabilityEstimateImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByCPDefinitionId", new String[] { Long.class.getName() },
-			CPDAvailabilityEstimateModelImpl.CPDEFINITIONID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CPDEFINITIONID = new FinderPath(CPDAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
+			"fetchByCProductId", new String[] { Long.class.getName() },
+			CPDAvailabilityEstimateModelImpl.CPRODUCTID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_CPRODUCTID = new FinderPath(CPDAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
 			CPDAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPDefinitionId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCProductId",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns the cpd availability estimate where CPDefinitionId = &#63; or throws a {@link NoSuchCPDAvailabilityEstimateException} if it could not be found.
+	 * Returns the cpd availability estimate where CProductId = &#63; or throws a {@link NoSuchCPDAvailabilityEstimateException} if it could not be found.
 	 *
-	 * @param CPDefinitionId the cp definition ID
+	 * @param CProductId the c product ID
 	 * @return the matching cpd availability estimate
 	 * @throws NoSuchCPDAvailabilityEstimateException if a matching cpd availability estimate could not be found
 	 */
 	@Override
-	public CPDAvailabilityEstimate findByCPDefinitionId(long CPDefinitionId)
+	public CPDAvailabilityEstimate findByCProductId(long CProductId)
 		throws NoSuchCPDAvailabilityEstimateException {
-		CPDAvailabilityEstimate cpdAvailabilityEstimate = fetchByCPDefinitionId(CPDefinitionId);
+		CPDAvailabilityEstimate cpdAvailabilityEstimate = fetchByCProductId(CProductId);
 
 		if (cpdAvailabilityEstimate == null) {
 			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("CPDefinitionId=");
-			msg.append(CPDefinitionId);
+			msg.append("CProductId=");
+			msg.append(CProductId);
 
 			msg.append("}");
 
@@ -1538,39 +1538,39 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the cpd availability estimate where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param CPDefinitionId the cp definition ID
+	 * @param CProductId the c product ID
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
 	@Override
-	public CPDAvailabilityEstimate fetchByCPDefinitionId(long CPDefinitionId) {
-		return fetchByCPDefinitionId(CPDefinitionId, true);
+	public CPDAvailabilityEstimate fetchByCProductId(long CProductId) {
+		return fetchByCProductId(CProductId, true);
 	}
 
 	/**
-	 * Returns the cpd availability estimate where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param CPDefinitionId the cp definition ID
+	 * @param CProductId the c product ID
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
 	@Override
-	public CPDAvailabilityEstimate fetchByCPDefinitionId(long CPDefinitionId,
+	public CPDAvailabilityEstimate fetchByCProductId(long CProductId,
 		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { CPDefinitionId };
+		Object[] finderArgs = new Object[] { CProductId };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CPRODUCTID,
 					finderArgs, this);
 		}
 
 		if (result instanceof CPDAvailabilityEstimate) {
 			CPDAvailabilityEstimate cpdAvailabilityEstimate = (CPDAvailabilityEstimate)result;
 
-			if ((CPDefinitionId != cpdAvailabilityEstimate.getCPDefinitionId())) {
+			if ((CProductId != cpdAvailabilityEstimate.getCProductId())) {
 				result = null;
 			}
 		}
@@ -1580,7 +1580,7 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 
 			query.append(_SQL_SELECT_CPDAVAILABILITYESTIMATE_WHERE);
 
-			query.append(_FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2);
+			query.append(_FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2);
 
 			String sql = query.toString();
 
@@ -1593,12 +1593,12 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId);
+				qPos.add(CProductId);
 
 				List<CPDAvailabilityEstimate> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
+					finderCache.putResult(FINDER_PATH_FETCH_BY_CPRODUCTID,
 						finderArgs, list);
 				}
 				else {
@@ -1610,7 +1610,7 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_CPRODUCTID,
 					finderArgs);
 
 				throw processException(e);
@@ -1629,30 +1629,30 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes the cpd availability estimate where CPDefinitionId = &#63; from the database.
+	 * Removes the cpd availability estimate where CProductId = &#63; from the database.
 	 *
-	 * @param CPDefinitionId the cp definition ID
+	 * @param CProductId the c product ID
 	 * @return the cpd availability estimate that was removed
 	 */
 	@Override
-	public CPDAvailabilityEstimate removeByCPDefinitionId(long CPDefinitionId)
+	public CPDAvailabilityEstimate removeByCProductId(long CProductId)
 		throws NoSuchCPDAvailabilityEstimateException {
-		CPDAvailabilityEstimate cpdAvailabilityEstimate = findByCPDefinitionId(CPDefinitionId);
+		CPDAvailabilityEstimate cpdAvailabilityEstimate = findByCProductId(CProductId);
 
 		return remove(cpdAvailabilityEstimate);
 	}
 
 	/**
-	 * Returns the number of cpd availability estimates where CPDefinitionId = &#63;.
+	 * Returns the number of cpd availability estimates where CProductId = &#63;.
 	 *
-	 * @param CPDefinitionId the cp definition ID
+	 * @param CProductId the c product ID
 	 * @return the number of matching cpd availability estimates
 	 */
 	@Override
-	public int countByCPDefinitionId(long CPDefinitionId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPDEFINITIONID;
+	public int countByCProductId(long CProductId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPRODUCTID;
 
-		Object[] finderArgs = new Object[] { CPDefinitionId };
+		Object[] finderArgs = new Object[] { CProductId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1661,7 +1661,7 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 
 			query.append(_SQL_COUNT_CPDAVAILABILITYESTIMATE_WHERE);
 
-			query.append(_FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2);
+			query.append(_FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2);
 
 			String sql = query.toString();
 
@@ -1674,7 +1674,7 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId);
+				qPos.add(CProductId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1693,7 +1693,7 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2 = "cpdAvailabilityEstimate.CPDefinitionId = ?";
+	private static final String _FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2 = "cpdAvailabilityEstimate.CProductId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEAVAILABILITYESTIMATEID =
 		new FinderPath(CPDAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
 			CPDAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED,
@@ -2268,8 +2268,8 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 				cpdAvailabilityEstimate.getGroupId()
 			}, cpdAvailabilityEstimate);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
-			new Object[] { cpdAvailabilityEstimate.getCPDefinitionId() },
+		finderCache.putResult(FINDER_PATH_FETCH_BY_CPRODUCTID,
+			new Object[] { cpdAvailabilityEstimate.getCProductId() },
 			cpdAvailabilityEstimate);
 
 		cpdAvailabilityEstimate.resetOriginalValues();
@@ -2360,11 +2360,11 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
 			cpdAvailabilityEstimateModelImpl, false);
 
-		args = new Object[] { cpdAvailabilityEstimateModelImpl.getCPDefinitionId() };
+		args = new Object[] { cpdAvailabilityEstimateModelImpl.getCProductId() };
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID, args,
+		finderCache.putResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args,
 			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID, args,
+		finderCache.putResult(FINDER_PATH_FETCH_BY_CPRODUCTID, args,
 			cpdAvailabilityEstimateModelImpl, false);
 	}
 
@@ -2394,21 +2394,21 @@ public class CPDAvailabilityEstimatePersistenceImpl extends BasePersistenceImpl<
 
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					cpdAvailabilityEstimateModelImpl.getCPDefinitionId()
+					cpdAvailabilityEstimateModelImpl.getCProductId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_CPRODUCTID, args);
 		}
 
 		if ((cpdAvailabilityEstimateModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_CPDEFINITIONID.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_CPRODUCTID.getColumnBitmask()) != 0) {
 			Object[] args = new Object[] {
-					cpdAvailabilityEstimateModelImpl.getOriginalCPDefinitionId()
+					cpdAvailabilityEstimateModelImpl.getOriginalCProductId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_CPRODUCTID, args);
 		}
 	}
 

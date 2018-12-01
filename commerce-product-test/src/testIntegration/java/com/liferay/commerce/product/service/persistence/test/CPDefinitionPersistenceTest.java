@@ -412,9 +412,8 @@ public class CPDefinitionPersistenceTest {
 			"published", true, "displayDate", true, "expirationDate", true,
 			"lastPublishDate", true, "subscriptionEnabled", true,
 			"subscriptionLength", true, "subscriptionType", true,
-			"subscriptionTypeSettings", true, "maxSubscriptionCycles", true,
-			"version", true, "status", true, "statusByUserId", true,
-			"statusByUserName", true, "statusDate", true);
+			"maxSubscriptionCycles", true, "version", true, "status", true,
+			"statusByUserId", true, "statusByUserName", true, "statusDate", true);
 	}
 
 	@Test

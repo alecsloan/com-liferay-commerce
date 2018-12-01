@@ -246,6 +246,12 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 		_cpDefinitionLocalService.checkCPDefinitions();
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CPDefinition copyCPDefinition(
+		long cpDefinitionId) {
+		return _cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
+	}
+
 	/**
 	* Creates a new cp definition with the primary key. Does not add the cp definition to the database.
 	*
@@ -702,6 +708,17 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 	public String getUrlTitleMapAsXML(long cpDefinitionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionLocalService.getUrlTitleMapAsXML(cpDefinitionId);
+	}
+
+	@Override
+	public boolean isPublishedCPDefinition(
+		com.liferay.commerce.product.model.CPDefinition cpDefinition) {
+		return _cpDefinitionLocalService.isPublishedCPDefinition(cpDefinition);
+	}
+
+	@Override
+	public boolean isPublishedCPDefinition(long cpDefinitionId) {
+		return _cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId);
 	}
 
 	@Override
