@@ -46,6 +46,10 @@ public class CommerceWarehouseItemLocalServiceWrapper
 		return _commerceWarehouseItemLocalService.addCommerceWarehouseItem(commerceWarehouseItem);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Override
 	public com.liferay.commerce.model.CommerceWarehouseItem addCommerceWarehouseItem(
 		long commerceWarehouseId, long cpInstanceId, int quantity,
@@ -53,6 +57,16 @@ public class CommerceWarehouseItemLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceWarehouseItemLocalService.addCommerceWarehouseItem(commerceWarehouseId,
 			cpInstanceId, quantity, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceWarehouseItem addCommerceWarehouseItem(
+		long commerceWarehouseId, long cProductId, String cpInstanceUuid,
+		int quantity,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWarehouseItemLocalService.addCommerceWarehouseItem(commerceWarehouseId,
+			cProductId, cpInstanceUuid, quantity, serviceContext);
 	}
 
 	/**
@@ -99,8 +113,29 @@ public class CommerceWarehouseItemLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCommerceWarehouseItemsByCPInstanceId(long cpInstanceId) {
+	public void deleteCommerceWarehouseItemsByCPI_CPIU(long cProductId,
+		String cpInstanceUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceWarehouseItemLocalService.deleteCommerceWarehouseItemsByCPI_CPIU(cProductId,
+			cpInstanceUuid);
+	}
+
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
+	@Override
+	public void deleteCommerceWarehouseItemsByCPInstanceId(long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		_commerceWarehouseItemLocalService.deleteCommerceWarehouseItemsByCPInstanceId(cpInstanceId);
+	}
+
+	@Override
+	public void deleteCommerceWarehouseItemsByCWI_CPIU(
+		long commerceWarehouseId, String cpInstanceUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceWarehouseItemLocalService.deleteCommerceWarehouseItemsByCWI_CPIU(commerceWarehouseId,
+			cpInstanceUuid);
 	}
 
 	/**
@@ -205,11 +240,24 @@ public class CommerceWarehouseItemLocalServiceWrapper
 		return _commerceWarehouseItemLocalService.fetchCommerceWarehouseItem(commerceWarehouseItemId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Override
 	public com.liferay.commerce.model.CommerceWarehouseItem fetchCommerceWarehouseItem(
-		long commerceWarehouseId, long cpInstanceId) {
+		long commerceWarehouseId, long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceWarehouseItemLocalService.fetchCommerceWarehouseItem(commerceWarehouseId,
 			cpInstanceId);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceWarehouseItem fetchCommerceWarehouseItemByCWI_CPIU(
+		long commerceWarehouseId, String cpInstanceUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWarehouseItemLocalService.fetchCommerceWarehouseItemByCWI_CPIU(commerceWarehouseId,
+			cpInstanceUuid);
 	}
 
 	@Override
@@ -249,16 +297,26 @@ public class CommerceWarehouseItemLocalServiceWrapper
 			end);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
-		long cpInstanceId) {
+		long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceWarehouseItemLocalService.getCommerceWarehouseItems(cpInstanceId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
 		long cpInstanceId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouseItem> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouseItem> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceWarehouseItemLocalService.getCommerceWarehouseItems(cpInstanceId,
 			start, end, orderByComparator);
 	}
@@ -267,6 +325,23 @@ public class CommerceWarehouseItemLocalServiceWrapper
 	public java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItemsByCommerceWarehouseId(
 		long commerceWarehouseId) {
 		return _commerceWarehouseItemLocalService.getCommerceWarehouseItemsByCommerceWarehouseId(commerceWarehouseId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItemsByCPI_CPIU(
+		long cProductId, String cpInstanceUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWarehouseItemLocalService.getCommerceWarehouseItemsByCPI_CPIU(cProductId,
+			cpInstanceUuid);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItemsByCPI_CPIU(
+		long cProductId, String cpInstanceUuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouseItem> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWarehouseItemLocalService.getCommerceWarehouseItemsByCPI_CPIU(cProductId,
+			cpInstanceUuid, start, end, orderByComparator);
 	}
 
 	/**
@@ -279,9 +354,22 @@ public class CommerceWarehouseItemLocalServiceWrapper
 		return _commerceWarehouseItemLocalService.getCommerceWarehouseItemsCount();
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Override
-	public int getCommerceWarehouseItemsCount(long cpInstanceId) {
+	public int getCommerceWarehouseItemsCount(long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceWarehouseItemLocalService.getCommerceWarehouseItemsCount(cpInstanceId);
+	}
+
+	@Override
+	public int getCommerceWarehouseItemsCount(long cProductId,
+		String cpInstanceUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWarehouseItemLocalService.getCommerceWarehouseItemsCount(cProductId,
+			cpInstanceUuid);
 	}
 
 	@Override

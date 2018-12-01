@@ -79,10 +79,12 @@ public class CPDefinitionInventoryLocalServiceWrapper
 	*
 	* @param cpDefinitionInventory the cp definition inventory
 	* @return the cp definition inventory that was removed
+	* @throws PortalException
 	*/
 	@Override
 	public com.liferay.commerce.model.CPDefinitionInventory deleteCPDefinitionInventory(
-		com.liferay.commerce.model.CPDefinitionInventory cpDefinitionInventory) {
+		com.liferay.commerce.model.CPDefinitionInventory cpDefinitionInventory)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionInventoryLocalService.deleteCPDefinitionInventory(cpDefinitionInventory);
 	}
 
@@ -101,7 +103,8 @@ public class CPDefinitionInventoryLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId) {
+	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		_cpDefinitionInventoryLocalService.deleteCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
 	}
 

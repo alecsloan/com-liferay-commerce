@@ -152,11 +152,12 @@ public abstract class CPDefinitionInventoryLocalServiceBaseImpl
 	 *
 	 * @param cpDefinitionInventory the cp definition inventory
 	 * @return the cp definition inventory that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CPDefinitionInventory deleteCPDefinitionInventory(
-		CPDefinitionInventory cpDefinitionInventory) {
+		CPDefinitionInventory cpDefinitionInventory) throws PortalException {
 		return cpDefinitionInventoryPersistence.remove(cpDefinitionInventory);
 	}
 
