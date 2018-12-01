@@ -329,6 +329,15 @@ public class CPInstancePersistenceTest {
 	}
 
 	@Test
+	public void testCountByU_C() throws Exception {
+		_persistence.countByU_C("", RandomTestUtil.nextLong());
+
+		_persistence.countByU_C("null", 0L);
+
+		_persistence.countByU_C((String)null, 0L);
+	}
+
+	@Test
 	public void testCountByG_ST() throws Exception {
 		_persistence.countByG_ST(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextInt());
@@ -422,14 +431,13 @@ public class CPInstancePersistenceTest {
 			true, "companyId", true, "userId", true, "userName", true,
 			"createDate", true, "modifiedDate", true, "CPDefinitionId", true,
 			"sku", true, "gtin", true, "manufacturerPartNumber", true,
-			"purchasable", true, "json", true, "width", true, "height", true,
-			"depth", true, "weight", true, "price", true, "promoPrice", true,
-			"cost", true, "published", true, "displayDate", true,
-			"expirationDate", true, "lastPublishDate", true,
-			"overrideSubscriptionInfo", true, "subscriptionEnabled", true,
-			"subscriptionLength", true, "subscriptionType", true,
-			"subscriptionTypeSettings", true, "maxSubscriptionCycles", true,
-			"status", true, "statusByUserId", true, "statusByUserName", true,
+			"purchasable", true, "width", true, "height", true, "depth", true,
+			"weight", true, "price", true, "promoPrice", true, "cost", true,
+			"published", true, "displayDate", true, "expirationDate", true,
+			"lastPublishDate", true, "overrideSubscriptionInfo", true,
+			"subscriptionEnabled", true, "subscriptionLength", true,
+			"subscriptionType", true, "maxSubscriptionCycles", true, "status",
+			true, "statusByUserId", true, "statusByUserName", true,
 			"statusDate", true);
 	}
 
@@ -641,6 +649,13 @@ public class CPInstancePersistenceTest {
 		Assert.assertEquals(Long.valueOf(existingCPInstance.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCPInstance,
 				"getOriginalGroupId", new Class<?>[0]));
+
+		Assert.assertTrue(Objects.equals(existingCPInstance.getUuid(),
+				ReflectionTestUtil.invoke(existingCPInstance,
+					"getOriginalUuid", new Class<?>[0])));
+		Assert.assertEquals(Long.valueOf(existingCPInstance.getCPDefinitionId()),
+			ReflectionTestUtil.<Long>invoke(existingCPInstance,
+				"getOriginalCPDefinitionId", new Class<?>[0]));
 
 		Assert.assertEquals(Long.valueOf(existingCPInstance.getCPDefinitionId()),
 			ReflectionTestUtil.<Long>invoke(existingCPInstance,

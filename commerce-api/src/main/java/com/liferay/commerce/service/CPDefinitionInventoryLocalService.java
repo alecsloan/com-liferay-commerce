@@ -100,11 +100,12 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	*
 	* @param cpDefinitionInventory the cp definition inventory
 	* @return the cp definition inventory that was removed
+	* @throws PortalException
 	*/
 	@Indexable(type = IndexableType.DELETE)
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CPDefinitionInventory deleteCPDefinitionInventory(
-		CPDefinitionInventory cpDefinitionInventory);
+		CPDefinitionInventory cpDefinitionInventory) throws PortalException;
 
 	/**
 	* Deletes the cp definition inventory with the primary key from the database. Also notifies the appropriate model listeners.
@@ -117,7 +118,8 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	public CPDefinitionInventory deleteCPDefinitionInventory(
 		long CPDefinitionInventoryId) throws PortalException;
 
-	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId);
+	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId)
+		throws PortalException;
 
 	/**
 	* @throws PortalException
