@@ -254,6 +254,12 @@ public class CPDefinitionLocalServiceUtil {
 		getService().checkCPDefinitions();
 	}
 
+	public static com.liferay.commerce.product.model.CPDefinition copyCPDefinition(
+		long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().copyCPDefinition(cpDefinitionId);
+	}
+
 	/**
 	* Creates a new cp definition with the primary key. Does not add the cp definition to the database.
 	*
