@@ -41,7 +41,7 @@ public class CommerceWarehouseItemImpl extends CommerceWarehouseItemBaseImpl {
 	@Override
 	public CPInstance getCPInstance() throws PortalException {
 		return CPInstanceLocalServiceUtil.getCPInstanceByUuidAndGroupId(
-		getCPInstanceUuid(), getGroupId());
+			getCPInstanceUuid(), getGroupId());
 	}
 
 }

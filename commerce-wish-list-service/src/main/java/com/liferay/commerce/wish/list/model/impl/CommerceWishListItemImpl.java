@@ -33,7 +33,7 @@ public class CommerceWishListItemImpl extends CommerceWishListItemBaseImpl {
 	public CommerceWishListItemImpl() {
 	}
 
-	/*
+	/**
 	 * @deprecated As of 1.1
 	 */
 	@Deprecated
@@ -49,7 +49,7 @@ public class CommerceWishListItemImpl extends CommerceWishListItemBaseImpl {
 			getCommerceWishListId());
 	}
 
-	/*
+	/**
 	 * @deprecated as of 1.1
 	 */
 	@Deprecated

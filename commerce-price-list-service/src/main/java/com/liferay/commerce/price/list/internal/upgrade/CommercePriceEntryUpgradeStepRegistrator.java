@@ -20,6 +20,7 @@ import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -58,4 +59,5 @@ public class CommercePriceEntryUpgradeStepRegistrator
 
 	@Reference
 	private CPInstanceLocalService _cpInstanceLocalService;
+
 }

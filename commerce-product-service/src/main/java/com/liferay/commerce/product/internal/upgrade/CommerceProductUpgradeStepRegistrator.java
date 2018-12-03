@@ -15,8 +15,8 @@
 package com.liferay.commerce.product.internal.upgrade;
 
 import com.liferay.commerce.product.internal.upgrade.v1_1_0.CPRuleUpgradeProcess;
-import com.liferay.commerce.product.internal.upgrade.v1_2_0.CProductUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_2_0.CPFriendlyURLEntryUpgradeProcess;
+import com.liferay.commerce.product.internal.upgrade.v1_2_0.CProductUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;

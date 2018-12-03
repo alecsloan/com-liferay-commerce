@@ -20,6 +20,7 @@ import com.liferay.commerce.wish.list.internal.upgrade.v1_1_0.CommerceWishListIt
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 

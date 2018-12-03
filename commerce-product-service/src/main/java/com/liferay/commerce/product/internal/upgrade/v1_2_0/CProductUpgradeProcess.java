@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.internal.upgrade.v1_2_0;
 
-import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.impl.CPDefinitionModelImpl;
 import com.liferay.commerce.product.model.impl.CProductModelImpl;
 import com.liferay.petra.string.StringPool;

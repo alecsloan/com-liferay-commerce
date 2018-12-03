@@ -103,7 +103,8 @@ public class CommerceWarehouseItemLocalServiceImpl
 	@Deprecated
 	@Override
 	public CommerceWarehouseItem fetchCommerceWarehouseItem(
-		long commerceWarehouseId, long cpInstanceId) throws PortalException {
+			long commerceWarehouseId, long cpInstanceId)
+		throws PortalException {
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
@@ -118,7 +119,8 @@ public class CommerceWarehouseItemLocalServiceImpl
 	@Deprecated
 	@Override
 	public List<CommerceWarehouseItem> getCommerceWarehouseItems(
-		long cpInstanceId) throws PortalException {
+			long cpInstanceId)
+		throws PortalException {
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
@@ -136,8 +138,9 @@ public class CommerceWarehouseItemLocalServiceImpl
 	@Deprecated
 	@Override
 	public List<CommerceWarehouseItem> getCommerceWarehouseItems(
-		long cpInstanceId, int start, int end,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator) throws PortalException {
+			long cpInstanceId, int start, int end,
+			OrderByComparator<CommerceWarehouseItem> orderByComparator)
+		throws PortalException {
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);

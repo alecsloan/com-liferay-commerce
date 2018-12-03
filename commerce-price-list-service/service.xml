@@ -40,9 +40,6 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CPInstanceUuid" return-type="Collection">
-			<finder-column name="CPInstanceUuid" />
-		</finder>
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
@@ -52,9 +49,12 @@
 		<finder name="CommercePriceListId" return-type="Collection">
 			<finder-column name="commercePriceListId" />
 		</finder>
-		<finder name="C_C" return-type="CommercePriceEntry" unique="true">
+		<finder name="CPInstanceUuid" return-type="Collection">
 			<finder-column name="CPInstanceUuid" />
+		</finder>
+		<finder name="C_C" return-type="CommercePriceEntry" unique="true">
 			<finder-column name="commercePriceListId" />
+			<finder-column name="CPInstanceUuid" />
 		</finder>
 
 		<!-- References -->

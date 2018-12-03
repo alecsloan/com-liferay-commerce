@@ -22,7 +22,6 @@ import com.liferay.commerce.price.list.service.base.CommercePriceEntryLocalServi
 import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.petra.string.CharPool;
@@ -137,7 +136,7 @@ public class CommercePriceEntryLocalServiceImpl
 		}
 	}
 
-	/*
+	/**
 	 * @deprecated As of 1.1
 	 */
 	@Deprecated
@@ -149,8 +148,8 @@ public class CommercePriceEntryLocalServiceImpl
 			cpInstanceId);
 
 		List<CommercePriceEntry> commercePriceEntries =
-			commercePriceEntryPersistence.findByUuid_C(cpInstance.getUuid(),
-				cpInstance.getCompanyId());
+			commercePriceEntryPersistence.findByUuid_C(
+				cpInstance.getUuid(), cpInstance.getCompanyId());
 
 		for (CommercePriceEntry commercePriceEntry : commercePriceEntries) {
 			deleteCommercePriceEntry(commercePriceEntry);
@@ -202,13 +201,14 @@ public class CommercePriceEntryLocalServiceImpl
 			companyId, externalReferenceCode);
 	}
 
-	/*
+	/**
 	 * @deprecated As of 1.1
 	 */
 	@Deprecated
 	@Override
 	public CommercePriceEntry fetchCommercePriceEntry(
-		long cpInstanceId, long commercePriceListId) throws PortalException {
+			long cpInstanceId, long commercePriceListId)
+		throws PortalException {
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
@@ -217,19 +217,19 @@ public class CommercePriceEntryLocalServiceImpl
 			commercePriceListId, cpInstance.getUuid());
 	}
 
-	/*
+	/**
 	 * @deprecated As of 1.1
 	 */
 	@Deprecated
 	@Override
 	public CommercePriceEntry fetchCommercePriceEntry(
-		long cpInstanceId, long commercePriceListId, boolean useAncestor)
-		 	throws PortalException {
+			long cpInstanceId, long commercePriceListId, boolean useAncestor)
+		throws PortalException {
 
-		CommercePriceEntry commercePriceEntry =
-			fetchCommercePriceEntry(cpInstanceId, commercePriceListId);
+		CommercePriceEntry commercePriceEntry = fetchCommercePriceEntry(
+			cpInstanceId, commercePriceListId);
 
-		if (!useAncestor || commercePriceEntry != null) {
+		if (!useAncestor || (commercePriceEntry != null)) {
 			return commercePriceEntry;
 		}
 
@@ -283,13 +283,14 @@ public class CommercePriceEntryLocalServiceImpl
 		return commercePriceEntryPersistence.countByGroupId(groupId);
 	}
 
-	/*
+	/**
 	 * @deprecated As of 1.1
 	 */
 	@Deprecated
 	@Override
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-		long cpInstanceId, int start, int end) throws PortalException {
+			long cpInstanceId, int start, int end)
+		throws PortalException {
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
@@ -298,15 +299,15 @@ public class CommercePriceEntryLocalServiceImpl
 			cpInstance.getUuid(), start, end);
 	}
 
-	/*
+	/**
 	 * @deprecated As of 1.1
 	 */
 	@Deprecated
 	@Override
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-		long cpInstanceId, int start, int end,
-		OrderByComparator<CommercePriceEntry> orderByComparator)
-			throws PortalException {
+			long cpInstanceId, int start, int end,
+			OrderByComparator<CommercePriceEntry> orderByComparator)
+		throws PortalException {
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
@@ -315,13 +316,13 @@ public class CommercePriceEntryLocalServiceImpl
 			cpInstance.getUuid(), start, end, orderByComparator);
 	}
 
-	/*
+	/**
 	 * @deprecated As of 1.1
 	 */
 	@Deprecated
 	@Override
 	public int getInstanceCommercePriceEntriesCount(long cpInstanceId)
-	throws PortalException {
+		throws PortalException {
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
@@ -617,10 +618,10 @@ public class CommercePriceEntryLocalServiceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommercePriceEntryLocalServiceImpl.class);
 
-	@ServiceReference(type = CPInstanceLocalService.class)
-	private CPInstanceLocalService _cpInstanceLocalService;
-
 	@ServiceReference(type = CPDefinitionLocalService.class)
 	private CPDefinitionLocalService _cpDefinitionLocalService;
+
+	@ServiceReference(type = CPInstanceLocalService.class)
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 }
