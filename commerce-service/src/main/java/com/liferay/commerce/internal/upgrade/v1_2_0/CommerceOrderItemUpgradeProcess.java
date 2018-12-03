@@ -24,16 +24,14 @@ import com.liferay.portal.kernel.dao.db.IndexMetadata;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
-import java.lang.Override;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -45,13 +43,13 @@ public class CommerceOrderItemUpgradeProcess extends UpgradeProcess {
 	public CommerceOrderItemUpgradeProcess(
 		CPDefinitionLocalService cpDefinitionLocalService,
 		CPInstanceLocalService cpInstanceLocalService) {
-			_cpDefinitionLocalService = cpDefinitionLocalService;
-			_cpInstanceLocalService = cpInstanceLocalService;
+
+		_cpDefinitionLocalService = cpDefinitionLocalService;
+		_cpInstanceLocalService = cpInstanceLocalService;
 	}
 
 	@Override
 	protected void doUpgrade() throws Exception {
-
 		_addColumn(
 			CommerceOrderItemModelImpl.class,
 			CommerceOrderItemModelImpl.TABLE_NAME, "CProductId", "LONG");
@@ -177,7 +175,7 @@ public class CommerceOrderItemUpgradeProcess extends UpgradeProcess {
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceOrderItemUpgradeProcess.class);
 
-	private CPDefinitionLocalService _cpDefinitionLocalService;
-	private CPInstanceLocalService _cpInstanceLocalService;
+	private final CPDefinitionLocalService _cpDefinitionLocalService;
+	private final CPInstanceLocalService _cpInstanceLocalService;
 
 }

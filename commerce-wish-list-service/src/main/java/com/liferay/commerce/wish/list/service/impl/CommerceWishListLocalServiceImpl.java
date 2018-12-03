@@ -282,8 +282,7 @@ public class CommerceWishListLocalServiceImpl
 					fromCommerceWishListItem.getCPInstanceUuid(),
 					fromCommerceWishListItem.getGroupId());
 
-			long cpDefinitionId =
-				fromCPInstance.getCPDefinitionId();
+			long cpDefinitionId = fromCPInstance.getCPDefinitionId();
 
 			long cpInstanceId = fromCPInstance.getCPInstanceId();
 

@@ -24,16 +24,14 @@ import com.liferay.portal.kernel.dao.db.IndexMetadata;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
-import java.lang.Override;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -45,8 +43,9 @@ public class CommercePriceEntryUpgradeProcess extends UpgradeProcess {
 	public CommercePriceEntryUpgradeProcess(
 		CPDefinitionLocalService cpDefinitionLocalService,
 		CPInstanceLocalService cpInstanceLocalService) {
-			_cpDefinitionLocalService = cpDefinitionLocalService;
-			_cpInstanceLocalService = cpInstanceLocalService;
+
+		_cpDefinitionLocalService = cpDefinitionLocalService;
+		_cpInstanceLocalService = cpInstanceLocalService;
 	}
 
 	@Override
@@ -57,7 +56,8 @@ public class CommercePriceEntryUpgradeProcess extends UpgradeProcess {
 
 		_addColumn(
 			CommercePriceEntryModelImpl.class,
-			CommercePriceEntryModelImpl.TABLE_NAME, "CPInstanceUuid", "VARCHAR(75)");
+			CommercePriceEntryModelImpl.TABLE_NAME, "CPInstanceUuid",
+			"VARCHAR(75)");
 
 		_addIndexes(CommercePriceEntryModelImpl.TABLE_NAME);
 

@@ -25,6 +25,7 @@ import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -52,8 +53,9 @@ public class CommerceServiceUpgradeStepRegistrator
 			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_1_2_0,
 			new CommerceWarehouseItemUpgradeProcess(
 				_cpDefinitionLocalService, _cpInstanceLocalService),
-			new com.liferay.commerce.internal.upgrade.v1_2_0.CommerceOrderItemUpgradeProcess(
-				_cpDefinitionLocalService, _cpInstanceLocalService),
+			new com.liferay.commerce.internal.upgrade.v1_2_0.
+				CommerceOrderItemUpgradeProcess(
+					_cpDefinitionLocalService, _cpInstanceLocalService),
 			new CPDAvailabilityEstimateUpgradeProcess(),
 			new CPDefinitionInventoryUpgradeProcess());
 

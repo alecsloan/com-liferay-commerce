@@ -21,13 +21,13 @@ import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.wish.list.exception.GuestWishListItemMaxAllowedException;
 import com.liferay.commerce.wish.list.internal.configuration.CommerceWishListConfiguration;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.base.CommerceWishListItemLocalServiceBaseImpl;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -87,16 +87,17 @@ public class CommerceWishListItemLocalServiceImpl
 			commerceWishListId);
 	}
 
-	/*
+	/**
 	 * @deprecated As of 1.1
 	 */
 	@Deprecated
 	@Override
 	public void deleteCommerceWishListItemsByCPDefinitionId(
 		long cpDefinitionId) {
+
 		try {
-			CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
-				cpDefinitionId);
+			CPDefinition cpDefinition =
+				_cpDefinitionLocalService.getCPDefinition(cpDefinitionId);
 
 			commerceWishListItemPersistence.removeByCProductId(
 				cpDefinition.getCProductId());
@@ -106,10 +107,9 @@ public class CommerceWishListItemLocalServiceImpl
 				_log.error(pe, pe);
 			}
 		}
-
 	}
 
-	/*
+	/**
 	 * @deprecated As of 1.1
 	 */
 	@Deprecated
@@ -127,7 +127,6 @@ public class CommerceWishListItemLocalServiceImpl
 				_log.error(pe, pe);
 			}
 		}
-
 	}
 
 	@Override

@@ -71,8 +71,8 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 				fetchCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
 
 			if (cpdAvailabilityEstimate != null) {
-				cpdAvailabilityEstimateLocalService.deleteCPDAvailabilityEstimate(
-					cpdAvailabilityEstimate);
+				cpdAvailabilityEstimateLocalService.
+					deleteCPDAvailabilityEstimate(cpdAvailabilityEstimate);
 			}
 		}
 		catch (PortalException pe) {
@@ -98,7 +98,8 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 	@Deprecated
 	@Override
 	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCPDefinitionId(
-		long cpDefinitionId) throws PortalException {
+			long cpDefinitionId)
+		throws PortalException {
 
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
