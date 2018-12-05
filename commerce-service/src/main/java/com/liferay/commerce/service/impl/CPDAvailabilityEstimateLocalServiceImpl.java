@@ -54,8 +54,8 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 			cpdAvailabilityEstimatePersistence.findByPrimaryKey(
 				cpdAvailabilityEstimateId);
 
-		return cpdAvailabilityEstimateLocalService.
-			deleteCPDAvailabilityEstimate(cpdAvailabilityEstimate);
+		return cpdAvailabilityEstimateLocalService.deleteCPDAvailabilityEstimate(
+			cpdAvailabilityEstimate);
 	}
 
 	/**
@@ -66,26 +66,30 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 	public void deleteCPDAvailabilityEstimateByCPDefinitionId(
 		long cpDefinitionId) {
 
-		try {
-			CPDAvailabilityEstimate cpdAvailabilityEstimate =
-				fetchCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
+			cpDefinitionId);
 
-			if (cpdAvailabilityEstimate != null) {
-				cpdAvailabilityEstimateLocalService.
-					deleteCPDAvailabilityEstimate(cpdAvailabilityEstimate);
-			}
+		if (cpDefinition != null) {
+			cpdAvailabilityEstimateLocalService.deleteCPDAvailabilityEstimateByCProductId(
+				cpDefinition.getCProductId());
 		}
-		catch (PortalException pe) {
-			if (_log.isWarnEnabled()) {
-				_log.error(pe, pe);
-			}
+	}
+
+	@Override
+	public void deleteCPDAvailabilityEstimateByCProductId(long cProductId) {
+		CPDAvailabilityEstimate cpdAvailabilityEstimate =
+			cpdAvailabilityEstimateLocalService.
+				fetchCPDAvailabilityEstimateByCProductId(cProductId);
+
+		if (cpdAvailabilityEstimate != null) {
+			cpdAvailabilityEstimateLocalService.deleteCPDAvailabilityEstimate(
+				cpdAvailabilityEstimate);
 		}
 	}
 
 	@Override
 	public void deleteCPDAvailabilityEstimates(
-			long commerceAvailabilityEstimateId)
-		throws PortalException {
+		long commerceAvailabilityEstimateId) {
 
 		cpdAvailabilityEstimatePersistence.
 			removeByCommerceAvailabilityEstimateId(
@@ -104,13 +108,40 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
 
-		return cpdAvailabilityEstimatePersistence.fetchByCProductId(
-			cpDefinition.getCProductId());
+		return cpdAvailabilityEstimateLocalService.
+			fetchCPDAvailabilityEstimateByCProductId(
+				cpDefinition.getCProductId());
 	}
 
 	@Override
+	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCProductId(
+		long cProductId) {
+
+		return cpdAvailabilityEstimatePersistence.fetchByCProductId(cProductId);
+	}
+
+	/**
+	 * @deprecated As of Judson (7.1.x)
+	 */
+	@Deprecated
+	@Override
 	public CPDAvailabilityEstimate updateCPDAvailabilityEstimate(
 			long cpdAvailabilityEstimateId, long cpDefinitionId,
+			long commerceAvailabilityEstimateId, ServiceContext serviceContext)
+		throws PortalException {
+
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpDefinitionId);
+
+		return cpdAvailabilityEstimateLocalService.
+			updateCPDAvailabilityEstimateByCProductId(
+				cpdAvailabilityEstimateId, cpDefinition.getCProductId(),
+				commerceAvailabilityEstimateId, serviceContext);
+	}
+
+	@Override
+	public CPDAvailabilityEstimate updateCPDAvailabilityEstimateByCProductId(
+			long cpdAvailabilityEstimateId, long cProductId,
 			long commerceAvailabilityEstimateId, ServiceContext serviceContext)
 		throws PortalException {
 
@@ -129,7 +160,7 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 		}
 
 		CPDAvailabilityEstimate cpdAvailabilityEstimate =
-			fetchCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
+			fetchCPDAvailabilityEstimateByCProductId(cProductId);
 
 		if (cpdAvailabilityEstimate != null) {
 			cpdAvailabilityEstimate.setCommerceAvailabilityEstimateId(
@@ -139,20 +170,17 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 				cpdAvailabilityEstimate);
 		}
 
-		return addCPDAvailabilityEstimate(
-			cpDefinitionId, commerceAvailabilityEstimateId, serviceContext);
+		return addCPDAvailabilityEstimateByCProductId(
+			cProductId, commerceAvailabilityEstimateId, serviceContext);
 	}
 
-	protected CPDAvailabilityEstimate addCPDAvailabilityEstimate(
-			long cpDefinitionId, long commerceAvailabilityEstimateId,
+	protected CPDAvailabilityEstimate addCPDAvailabilityEstimateByCProductId(
+			long cProductId, long commerceAvailabilityEstimateId,
 			ServiceContext serviceContext)
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
 		long groupId = serviceContext.getScopeGroupId();
-
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
-			cpDefinitionId);
 
 		long cpdAvailabilityEstimateId = counterLocalService.increment();
 
@@ -165,9 +193,9 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 		cpdAvailabilityEstimate.setCompanyId(user.getCompanyId());
 		cpdAvailabilityEstimate.setUserId(user.getUserId());
 		cpdAvailabilityEstimate.setUserName(user.getFullName());
-		cpdAvailabilityEstimate.setCProductId(cpDefinition.getCProductId());
 		cpdAvailabilityEstimate.setCommerceAvailabilityEstimateId(
 			commerceAvailabilityEstimateId);
+		cpdAvailabilityEstimate.setCProductId(cProductId);
 
 		cpdAvailabilityEstimatePersistence.update(cpdAvailabilityEstimate);
 
