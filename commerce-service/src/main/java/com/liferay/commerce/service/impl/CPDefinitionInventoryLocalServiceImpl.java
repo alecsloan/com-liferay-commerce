@@ -34,6 +34,10 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 public class CPDefinitionInventoryLocalServiceImpl
 	extends CPDefinitionInventoryLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated As of Judson (7.1.x)
+	 */
+	@Deprecated
 	@Override
 	public CPDefinitionInventory addCPDefinitionInventory(
 			long cpDefinitionId, String cpDefinitionInventoryEngine,
@@ -44,11 +48,29 @@ public class CPDefinitionInventoryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
-
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
+
+		return cpDefinitionInventoryLocalService.addCPDefinitionInventoryByCProductId(
+				cpDefinition.getCProductId(), cpDefinitionInventoryEngine,
+				lowStockActivity, displayAvailability, displayStockQuantity,
+				minStockQuantity, backOrders, minOrderQuantity,
+				maxOrderQuantity, allowedOrderQuantities, multipleOrderQuantity,
+				serviceContext);
+	}
+
+	@Override
+	public CPDefinitionInventory addCPDefinitionInventoryByCProductId(
+			long cProductId, String cpDefinitionInventoryEngine,
+			String lowStockActivity, boolean displayAvailability,
+			boolean displayStockQuantity, int minStockQuantity,
+			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
+			String allowedOrderQuantities, int multipleOrderQuantity,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+		long groupId = serviceContext.getScopeGroupId();
 
 		long cpDefinitionInventoryId = counterLocalService.increment();
 
@@ -60,7 +82,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 		cpDefinitionInventory.setCompanyId(user.getCompanyId());
 		cpDefinitionInventory.setUserId(user.getUserId());
 		cpDefinitionInventory.setUserName(user.getFullName());
-		cpDefinitionInventory.setCProductId(cpDefinition.getCProductId());
+		cpDefinitionInventory.setCProductId(cProductId);
 		cpDefinitionInventory.setCPDefinitionInventoryEngine(
 			cpDefinitionInventoryEngine);
 		cpDefinitionInventory.setLowStockActivity(lowStockActivity);
@@ -107,18 +129,24 @@ public class CPDefinitionInventoryLocalServiceImpl
 	public void deleteCPDefinitionInventoryByCPDefinitionId(
 		long cpDefinitionId) {
 
-		try {
-			CPDefinitionInventory cpDefinitionInventory =
-				fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
+			cpDefinitionId);
 
-			if (cpDefinitionInventory != null) {
-				deleteCPDefinitionInventory(cpDefinitionInventory);
-			}
+		if (cpDefinition != null) {
+			cpDefinitionInventoryLocalService.deleteCPDefinitionInventoryByCProductId(
+				cpDefinition.getCProductId());
 		}
-		catch (PortalException pe) {
-			if (_log.isWarnEnabled()) {
-				_log.error(pe, pe);
-			}
+	}
+
+	@Override
+	public void deleteCPDefinitionInventoryByCProductId(long cProductId) {
+		CPDefinitionInventory cpDefinitionInventory =
+			cpDefinitionInventoryLocalService.
+				fetchCPDefinitionInventoryByCProductId(cProductId);
+
+		if (cpDefinitionInventory != null) {
+			cpDefinitionInventoryLocalService.deleteCPDefinitionInventory(
+				cpDefinitionInventory);
 		}
 	}
 
@@ -134,8 +162,16 @@ public class CPDefinitionInventoryLocalServiceImpl
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
 
-		return cpDefinitionInventoryPersistence.findByCProductId(
-			cpDefinition.getCProductId());
+		return cpDefinitionInventoryLocalService.
+			fetchCPDefinitionInventoryByCProductId(
+				cpDefinition.getCProductId());
+	}
+
+	@Override
+	public CPDefinitionInventory fetchCPDefinitionInventoryByCProductId(
+		long cProductId) {
+
+		return cpDefinitionInventoryPersistence.fetchByCProductId(cProductId);
 	}
 
 	@Override
