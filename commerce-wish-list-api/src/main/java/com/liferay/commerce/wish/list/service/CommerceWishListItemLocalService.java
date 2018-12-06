@@ -72,8 +72,16 @@ public interface CommerceWishListItemLocalService extends BaseLocalService,
 	public CommerceWishListItem addCommerceWishListItem(
 		CommerceWishListItem commerceWishListItem);
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public CommerceWishListItem addCommerceWishListItem(
 		long commerceWishListId, long cpDefinitionId, long cpInstanceId,
+		String json, ServiceContext serviceContext) throws PortalException;
+
+	public CommerceWishListItem addCommerceWishListItem(
+		long commerceWishListId, long cProductId, String cpInstanceUuid,
 		String json, ServiceContext serviceContext) throws PortalException;
 
 	/**
