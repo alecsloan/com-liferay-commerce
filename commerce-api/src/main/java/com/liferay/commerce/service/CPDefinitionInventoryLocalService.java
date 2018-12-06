@@ -77,6 +77,10 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	public CPDefinitionInventory addCPDefinitionInventory(
 		CPDefinitionInventory cpDefinitionInventory);
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public CPDefinitionInventory addCPDefinitionInventory(long cpDefinitionId,
 		String cpDefinitionInventoryEngine, String lowStockActivity,
 		boolean displayAvailability, boolean displayStockQuantity,
@@ -84,6 +88,14 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 		int maxOrderQuantity, String allowedOrderQuantities,
 		int multipleOrderQuantity, ServiceContext serviceContext)
 		throws PortalException;
+
+	public CPDefinitionInventory addCPDefinitionInventoryByCProductId(
+		long cProductId, String cpDefinitionInventoryEngine,
+		String lowStockActivity, boolean displayAvailability,
+		boolean displayStockQuantity, int minStockQuantity, boolean backOrders,
+		int minOrderQuantity, int maxOrderQuantity,
+		String allowedOrderQuantities, int multipleOrderQuantity,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new cp definition inventory with the primary key. Does not add the cp definition inventory to the database.
@@ -122,6 +134,8 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	*/
 	@Deprecated
 	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId);
+
+	public void deleteCPDefinitionInventoryByCProductId(long cProductId);
 
 	/**
 	* @throws PortalException
@@ -206,6 +220,10 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
 		long cpDefinitionId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPDefinitionInventory fetchCPDefinitionInventoryByCProductId(
+		long cProductId);
 
 	/**
 	* Returns the cp definition inventory matching the UUID and group.

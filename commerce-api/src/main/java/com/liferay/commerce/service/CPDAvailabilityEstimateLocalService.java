@@ -116,8 +116,10 @@ public interface CPDAvailabilityEstimateLocalService extends BaseLocalService,
 	public void deleteCPDAvailabilityEstimateByCPDefinitionId(
 		long cpDefinitionId);
 
+	public void deleteCPDAvailabilityEstimateByCProductId(long cProductId);
+
 	public void deleteCPDAvailabilityEstimates(
-		long commerceAvailabilityEstimateId) throws PortalException;
+		long commerceAvailabilityEstimateId);
 
 	/**
 	* @throws PortalException
@@ -202,6 +204,10 @@ public interface CPDAvailabilityEstimateLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCPDefinitionId(
 		long cpDefinitionId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCProductId(
+		long cProductId);
 
 	/**
 	* Returns the cpd availability estimate matching the UUID and group.
@@ -318,8 +324,17 @@ public interface CPDAvailabilityEstimateLocalService extends BaseLocalService,
 	public CPDAvailabilityEstimate updateCPDAvailabilityEstimate(
 		CPDAvailabilityEstimate cpdAvailabilityEstimate);
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public CPDAvailabilityEstimate updateCPDAvailabilityEstimate(
 		long cpdAvailabilityEstimateId, long cpDefinitionId,
+		long commerceAvailabilityEstimateId, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CPDAvailabilityEstimate updateCPDAvailabilityEstimateByCProductId(
+		long cpdAvailabilityEstimateId, long cProductId,
 		long commerceAvailabilityEstimateId, ServiceContext serviceContext)
 		throws PortalException;
 }
