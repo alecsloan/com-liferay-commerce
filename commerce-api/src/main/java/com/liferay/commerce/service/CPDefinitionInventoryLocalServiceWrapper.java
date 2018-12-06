@@ -46,6 +46,10 @@ public class CPDefinitionInventoryLocalServiceWrapper
 		return _cpDefinitionInventoryLocalService.addCPDefinitionInventory(cpDefinitionInventory);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Override
 	public com.liferay.commerce.model.CPDefinitionInventory addCPDefinitionInventory(
 		long cpDefinitionId, String cpDefinitionInventoryEngine,
@@ -56,6 +60,22 @@ public class CPDefinitionInventoryLocalServiceWrapper
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionInventoryLocalService.addCPDefinitionInventory(cpDefinitionId,
+			cpDefinitionInventoryEngine, lowStockActivity, displayAvailability,
+			displayStockQuantity, minStockQuantity, backOrders,
+			minOrderQuantity, maxOrderQuantity, allowedOrderQuantities,
+			multipleOrderQuantity, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CPDefinitionInventory addCPDefinitionInventoryByCProductId(
+		long cProductId, String cpDefinitionInventoryEngine,
+		String lowStockActivity, boolean displayAvailability,
+		boolean displayStockQuantity, int minStockQuantity, boolean backOrders,
+		int minOrderQuantity, int maxOrderQuantity,
+		String allowedOrderQuantities, int multipleOrderQuantity,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionInventoryLocalService.addCPDefinitionInventoryByCProductId(cProductId,
 			cpDefinitionInventoryEngine, lowStockActivity, displayAvailability,
 			displayStockQuantity, minStockQuantity, backOrders,
 			minOrderQuantity, maxOrderQuantity, allowedOrderQuantities,
@@ -107,6 +127,11 @@ public class CPDefinitionInventoryLocalServiceWrapper
 	@Override
 	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId) {
 		_cpDefinitionInventoryLocalService.deleteCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
+	}
+
+	@Override
+	public void deleteCPDefinitionInventoryByCProductId(long cProductId) {
+		_cpDefinitionInventoryLocalService.deleteCPDefinitionInventoryByCProductId(cProductId);
 	}
 
 	/**
@@ -220,6 +245,12 @@ public class CPDefinitionInventoryLocalServiceWrapper
 		long cpDefinitionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionInventoryLocalService.fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CPDefinitionInventory fetchCPDefinitionInventoryByCProductId(
+		long cProductId) {
+		return _cpDefinitionInventoryLocalService.fetchCPDefinitionInventoryByCProductId(cProductId);
 	}
 
 	/**
