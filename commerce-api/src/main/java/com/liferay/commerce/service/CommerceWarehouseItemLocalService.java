@@ -72,9 +72,17 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 	public CommerceWarehouseItem addCommerceWarehouseItem(
 		CommerceWarehouseItem commerceWarehouseItem);
 
+	/**
+	* @deprecated as of 1.1
+	*/
+	@Deprecated
 	public CommerceWarehouseItem addCommerceWarehouseItem(
 		long commerceWarehouseId, long cpInstanceId, int quantity,
 		ServiceContext serviceContext) throws PortalException;
+
+	public CommerceWarehouseItem addCommerceWarehouseItem(
+		long commerceWarehouseId, long cProductId, String cpInstanceUuid,
+		int quantity, ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new commerce warehouse item with the primary key. Does not add the commerce warehouse item to the database.
@@ -109,11 +117,18 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 
 	public void deleteCommerceWarehouseItems(long commerceWarehouseId);
 
+	public void deleteCommerceWarehouseItemsByCPI_CPIU(long cProductId,
+		String cpInstanceUuid) throws PortalException;
+
 	/**
-	* @deprecated As of Judson (7.1.x)
+	* @deprecated As of 1.1
 	*/
 	@Deprecated
 	public void deleteCommerceWarehouseItemsByCPInstanceId(long cpInstanceId)
+		throws PortalException;
+
+	public void deleteCommerceWarehouseItemsByCWI_CPIU(
+		long commerceWarehouseId, String cpInstanceUuid)
 		throws PortalException;
 
 	/**
@@ -193,12 +208,17 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 		long commerceWarehouseItemId);
 
 	/**
-	* @deprecated As of Judson (7.1.x)
+	* @deprecated As of 1.1
 	*/
 	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceWarehouseItem fetchCommerceWarehouseItem(
 		long commerceWarehouseId, long cpInstanceId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceWarehouseItem fetchCommerceWarehouseItemByCWI_CPIU(
+		long commerceWarehouseId, String cpInstanceUuid)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -230,7 +250,7 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 		int end);
 
 	/**
-	* @deprecated As of Judson (7.1.x)
+	* @deprecated As of 1.1
 	*/
 	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -238,7 +258,7 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 		long cpInstanceId) throws PortalException;
 
 	/**
-	* @deprecated As of Judson (7.1.x)
+	* @deprecated As of 1.1
 	*/
 	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -251,6 +271,16 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 	public List<CommerceWarehouseItem> getCommerceWarehouseItemsByCommerceWarehouseId(
 		long commerceWarehouseId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceWarehouseItem> getCommerceWarehouseItemsByCPI_CPIU(
+		long cProductId, String cpInstanceUuid) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceWarehouseItem> getCommerceWarehouseItemsByCPI_CPIU(
+		long cProductId, String cpInstanceUuid, int start, int end,
+		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+		throws PortalException;
+
 	/**
 	* Returns the number of commerce warehouse items.
 	*
@@ -260,12 +290,16 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 	public int getCommerceWarehouseItemsCount();
 
 	/**
-	* @deprecated As of Judson (7.1.x)
+	* @deprecated As of 1.1
 	*/
 	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceWarehouseItemsCount(long cpInstanceId)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceWarehouseItemsCount(long cProductId,
+		String cpInstanceUuid) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPInstanceQuantity(long cpInstanceId);
