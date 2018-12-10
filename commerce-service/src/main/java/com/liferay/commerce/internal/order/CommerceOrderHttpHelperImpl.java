@@ -20,8 +20,11 @@ import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
@@ -410,6 +413,8 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 				CommerceOrderConstants.ORDER_STATUS_OPEN);
 
 			if (commerceOrder != null) {
+				_validateCommerceOrderItemVersions(commerceOrder);
+
 				_commerceOrderUuidThreadLocal.set(commerceOrder);
 
 				return commerceOrder;
@@ -464,11 +469,33 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			themeDisplay.getRequest(), themeDisplay.getResponse(), cookie);
 	}
 
+	private void _validateCommerceOrderItemVersions(CommerceOrder commerceOrder)
+		throws PortalException {
+
+		VersionCommerceOrderValidatorImpl versionCommerceOrderValidator =
+			new VersionCommerceOrderValidatorImpl();
+
+		versionCommerceOrderValidator.setCommerceOrderItemLocalService(
+			_commerceOrderItemLocalService);
+
+		versionCommerceOrderValidator.setCPInstanceLocalService(
+			_cpInstanceLocalService);
+
+		for (CommerceOrderItem commerceOrderItem :
+				commerceOrder.getCommerceOrderItems()) {
+
+			versionCommerceOrderValidator.validate(commerceOrderItem);
+		}
+	}
+
 	private static ModelResourcePermission<CommerceOrder>
 		_commerceOrderModelResourcePermission;
 	private static final ThreadLocal<CommerceOrder>
 		_commerceOrderUuidThreadLocal = new CentralizedThreadLocal<>(
 			CommerceOrderHttpHelperImpl.class.getName());
+
+	@Reference
+	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
 
 	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;
@@ -481,6 +508,9 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 	@Reference
 	private CommerceOrganizationHelper _commerceOrganizationHelper;
+
+	@Reference
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@Reference
 	private Portal _portal;
