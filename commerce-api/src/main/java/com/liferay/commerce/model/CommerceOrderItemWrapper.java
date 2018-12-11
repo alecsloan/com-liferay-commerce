@@ -319,6 +319,12 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 		return _commerceOrderItem.getCPInstanceId();
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CProduct getCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderItem.getCProduct();
+	}
+
 	/**
 	* Returns the c product ID of this commerce order item.
 	*
