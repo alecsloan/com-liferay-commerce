@@ -201,6 +201,16 @@ public class CommerceWishListItemWrapper implements CommerceWishListItem,
 	}
 
 	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
+	@Override
+	public com.liferay.commerce.product.model.CPDefinition getCPDefinition()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWishListItem.getCPDefinition();
+	}
+
+	/**
 	* Returns the cp instance uuid of this commerce wish list item.
 	*
 	* @return the cp instance uuid of this commerce wish list item
@@ -323,6 +333,12 @@ public class CommerceWishListItemWrapper implements CommerceWishListItem,
 	@Override
 	public boolean isEscapedModel() {
 		return _commerceWishListItem.isEscapedModel();
+	}
+
+	@Override
+	public boolean isIgnoreSKUCombinations()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWishListItem.isIgnoreSKUCombinations();
 	}
 
 	@Override
