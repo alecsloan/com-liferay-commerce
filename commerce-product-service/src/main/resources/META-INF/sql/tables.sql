@@ -93,8 +93,8 @@ create table CPDefinitionLink (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	CPDefinitionId1 LONG,
-	CPDefinitionId2 LONG,
+	CPDefinitionId LONG,
+	CProductId LONG,
 	priority DOUBLE,
 	type_ VARCHAR(75) null
 );

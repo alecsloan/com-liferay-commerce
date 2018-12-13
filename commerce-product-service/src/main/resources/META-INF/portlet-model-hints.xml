@@ -77,8 +77,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="CPDefinitionId1" type="long" />
-		<field name="CPDefinitionId2" type="long" />
+		<field name="CPDefinitionId" type="long" />
+		<field name="CProductId" type="long" />
 		<field name="priority" type="double" />
 		<field name="type" type="String" />
 	</model>
