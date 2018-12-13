@@ -508,6 +508,14 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	public String getUrlTitleMapAsXML(long cpDefinitionId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isPublishedCPDefinition(CPDefinition cpDefinition)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isPublishedCPDefinition(long cpDefinitionId)
+		throws PortalException;
+
 	public void moveCPDefinitionsToTrash(long groupId, long userId)
 		throws PortalException;
 

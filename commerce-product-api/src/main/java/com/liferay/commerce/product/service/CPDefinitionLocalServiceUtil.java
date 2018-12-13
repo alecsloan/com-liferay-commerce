@@ -670,6 +670,17 @@ public class CPDefinitionLocalServiceUtil {
 		return getService().getUrlTitleMapAsXML(cpDefinitionId);
 	}
 
+	public static boolean isPublishedCPDefinition(
+		com.liferay.commerce.product.model.CPDefinition cpDefinition)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().isPublishedCPDefinition(cpDefinition);
+	}
+
+	public static boolean isPublishedCPDefinition(long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().isPublishedCPDefinition(cpDefinitionId);
+	}
+
 	public static void moveCPDefinitionsToTrash(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().moveCPDefinitionsToTrash(groupId, userId);
