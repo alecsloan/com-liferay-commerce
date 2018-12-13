@@ -712,6 +712,19 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 	}
 
 	@Override
+	public boolean isPublishedCPDefinition(
+		com.liferay.commerce.product.model.CPDefinition cpDefinition)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionLocalService.isPublishedCPDefinition(cpDefinition);
+	}
+
+	@Override
+	public boolean isPublishedCPDefinition(long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId);
+	}
+
+	@Override
 	public void moveCPDefinitionsToTrash(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_cpDefinitionLocalService.moveCPDefinitionsToTrash(groupId, userId);
