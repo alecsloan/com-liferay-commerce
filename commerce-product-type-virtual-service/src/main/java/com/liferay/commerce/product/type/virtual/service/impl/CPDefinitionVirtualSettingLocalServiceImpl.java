@@ -215,6 +215,22 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			termsOfUseRequired, termsOfUseContentMap,
 			termsOfUseJournalArticleResourcePrimKey);
 
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionVirtualSetting.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionVirtualSetting.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionVirtualSetting =
+				cpDefinitionVirtualSettingPersistence.findByCPDefinitionId(
+					newCPDefinition.getCPDefinitionId());
+		}
+
 		cpDefinitionVirtualSetting.setFileEntryId(fileEntryId);
 		cpDefinitionVirtualSetting.setUrl(url);
 		cpDefinitionVirtualSetting.setActivationStatus(activationStatus);
