@@ -473,6 +473,8 @@ public class CPDefinitionLocalServiceImpl
 
 		newCPDefinition.setModifiedDate(new Date());
 
+		newCPDefinition.setVersion(originalCPDefinition.getVersion() + 1);
+
 		cpDefinitionPersistence.update(newCPDefinition);
 
 		// CPDefinitionLocalization
