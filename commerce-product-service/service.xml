@@ -286,7 +286,7 @@
 		<finder name="CPDefinitionId" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
 		</finder>
-		<finder name="U_C" return-type="Collection">
+		<finder name="U_C" return-type="CPDefinitionOptionRel" unique="true">
 			<finder-column name="uuid" />
 			<finder-column name="CPDefinitionId" />
 		</finder>
