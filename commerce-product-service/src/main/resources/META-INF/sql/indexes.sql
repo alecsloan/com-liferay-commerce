@@ -32,7 +32,7 @@ create unique index IX_F4B4ACB5 on CPDefinitionLocalization (CPDefinitionId, lan
 create index IX_749E99EB on CPDefinitionOptionRel (CPDefinitionId, skuContributor);
 create index IX_449BFCFE on CPDefinitionOptionRel (companyId);
 create index IX_A65BAB00 on CPDefinitionOptionRel (groupId);
-create index IX_E8C2F719 on CPDefinitionOptionRel (uuid_[$COLUMN_LENGTH:75$], CPDefinitionId);
+create unique index IX_E8C2F719 on CPDefinitionOptionRel (uuid_[$COLUMN_LENGTH:75$], CPDefinitionId);
 create index IX_7BED0C5E on CPDefinitionOptionRel (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_EB691260 on CPDefinitionOptionRel (uuid_[$COLUMN_LENGTH:75$], groupId);
 
