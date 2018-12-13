@@ -77,10 +77,6 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	public CPDefinitionInventory addCPDefinitionInventory(
 		CPDefinitionInventory cpDefinitionInventory);
 
-	/**
-	* @deprecated As of Judson (7.1.x)
-	*/
-	@Deprecated
 	public CPDefinitionInventory addCPDefinitionInventory(long cpDefinitionId,
 		String cpDefinitionInventoryEngine, String lowStockActivity,
 		boolean displayAvailability, boolean displayStockQuantity,
@@ -88,14 +84,6 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 		int maxOrderQuantity, String allowedOrderQuantities,
 		int multipleOrderQuantity, ServiceContext serviceContext)
 		throws PortalException;
-
-	public CPDefinitionInventory addCPDefinitionInventoryByCProductId(
-		long cProductId, String cpDefinitionInventoryEngine,
-		String lowStockActivity, boolean displayAvailability,
-		boolean displayStockQuantity, int minStockQuantity, boolean backOrders,
-		int minOrderQuantity, int maxOrderQuantity,
-		String allowedOrderQuantities, int multipleOrderQuantity,
-		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new cp definition inventory with the primary key. Does not add the cp definition inventory to the database.
@@ -112,11 +100,12 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	*
 	* @param cpDefinitionInventory the cp definition inventory
 	* @return the cp definition inventory that was removed
+	* @throws PortalException
 	*/
 	@Indexable(type = IndexableType.DELETE)
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CPDefinitionInventory deleteCPDefinitionInventory(
-		CPDefinitionInventory cpDefinitionInventory);
+		CPDefinitionInventory cpDefinitionInventory) throws PortalException;
 
 	/**
 	* Deletes the cp definition inventory with the primary key from the database. Also notifies the appropriate model listeners.
@@ -129,13 +118,8 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	public CPDefinitionInventory deleteCPDefinitionInventory(
 		long CPDefinitionInventoryId) throws PortalException;
 
-	/**
-	* @deprecated As of Judson (7.1.x)
-	*/
-	@Deprecated
-	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId);
-
-	public void deleteCPDefinitionInventoryByCProductId(long cProductId);
+	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId)
+		throws PortalException;
 
 	/**
 	* @throws PortalException
@@ -213,17 +197,9 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 	public CPDefinitionInventory fetchCPDefinitionInventory(
 		long CPDefinitionInventoryId);
 
-	/**
-	* @deprecated As of Judson (7.1.x)
-	*/
-	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
 		long cpDefinitionId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDefinitionInventory fetchCPDefinitionInventoryByCProductId(
-		long cProductId);
 
 	/**
 	* Returns the cp definition inventory matching the UUID and group.

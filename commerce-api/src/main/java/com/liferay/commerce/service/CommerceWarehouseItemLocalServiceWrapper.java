@@ -47,7 +47,7 @@ public class CommerceWarehouseItemLocalServiceWrapper
 	}
 
 	/**
-	* @deprecated as of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	@Override
@@ -121,7 +121,7 @@ public class CommerceWarehouseItemLocalServiceWrapper
 	}
 
 	/**
-	* @deprecated As of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	@Override
@@ -241,7 +241,7 @@ public class CommerceWarehouseItemLocalServiceWrapper
 	}
 
 	/**
-	* @deprecated As of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	@Override
@@ -298,7 +298,7 @@ public class CommerceWarehouseItemLocalServiceWrapper
 	}
 
 	/**
-	* @deprecated As of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	@Override
@@ -309,7 +309,7 @@ public class CommerceWarehouseItemLocalServiceWrapper
 	}
 
 	/**
-	* @deprecated As of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	@Override
@@ -355,7 +355,7 @@ public class CommerceWarehouseItemLocalServiceWrapper
 	}
 
 	/**
-	* @deprecated As of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	@Override

@@ -55,7 +55,7 @@ public class CommerceWarehouseItemLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated as of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	public static com.liferay.commerce.model.CommerceWarehouseItem addCommerceWarehouseItem(
@@ -124,7 +124,7 @@ public class CommerceWarehouseItemLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated As of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	public static void deleteCommerceWarehouseItemsByCPInstanceId(
@@ -234,7 +234,7 @@ public class CommerceWarehouseItemLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated As of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	public static com.liferay.commerce.model.CommerceWarehouseItem fetchCommerceWarehouseItem(
@@ -286,7 +286,7 @@ public class CommerceWarehouseItemLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated As of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	public static java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
@@ -296,7 +296,7 @@ public class CommerceWarehouseItemLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated As of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	public static java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
@@ -341,7 +341,7 @@ public class CommerceWarehouseItemLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated As of 1.1
+	* @deprecated As of Judson (7.1.x)
 	*/
 	@Deprecated
 	public static int getCommerceWarehouseItemsCount(long cpInstanceId)
