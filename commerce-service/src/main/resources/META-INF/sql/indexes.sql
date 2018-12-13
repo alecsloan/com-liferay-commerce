@@ -3,7 +3,7 @@ create index IX_E560850D on CPDAvailabilityEstimate (commerceAvailabilityEstimat
 create index IX_609B2AF4 on CPDAvailabilityEstimate (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_7919DE76 on CPDAvailabilityEstimate (uuid_[$COLUMN_LENGTH:75$], groupId);
 
-create unique index IX_AEE0677D on CPDefinitionInventory (CProductId);
+create unique index IX_34D62DF1 on CPDefinitionInventory (CPDefinitionId);
 create index IX_51AED1D6 on CPDefinitionInventory (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_274DD5D8 on CPDefinitionInventory (uuid_[$COLUMN_LENGTH:75$], groupId);
 

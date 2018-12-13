@@ -388,7 +388,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="CProductId" type="long" />
+		<field name="CPDefinitionId" type="long" />
 		<field name="CPDefinitionInventoryEngine" type="String" />
 		<field name="lowStockActivity" type="String" />
 		<field name="displayAvailability" type="boolean" />

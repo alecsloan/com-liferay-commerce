@@ -21,7 +21,7 @@ create table CPDefinitionInventory (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	CProductId LONG,
+	CPDefinitionId LONG,
 	CPDefinitionInventoryEngine VARCHAR(75) null,
 	lowStockActivity VARCHAR(75) null,
 	displayAvailability BOOLEAN,

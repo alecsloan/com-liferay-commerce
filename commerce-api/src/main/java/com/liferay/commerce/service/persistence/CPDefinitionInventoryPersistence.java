@@ -371,49 +371,49 @@ public interface CPDefinitionInventoryPersistence extends BasePersistence<CPDefi
 	public int countByUuid_C(String uuid, long companyId);
 
 	/**
-	* Returns the cp definition inventory where CProductId = &#63; or throws a {@link NoSuchCPDefinitionInventoryException} if it could not be found.
+	* Returns the cp definition inventory where CPDefinitionId = &#63; or throws a {@link NoSuchCPDefinitionInventoryException} if it could not be found.
 	*
-	* @param CProductId the c product ID
+	* @param CPDefinitionId the cp definition ID
 	* @return the matching cp definition inventory
 	* @throws NoSuchCPDefinitionInventoryException if a matching cp definition inventory could not be found
 	*/
-	public CPDefinitionInventory findByCProductId(long CProductId)
+	public CPDefinitionInventory findByCPDefinitionId(long CPDefinitionId)
 		throws NoSuchCPDefinitionInventoryException;
 
 	/**
-	* Returns the cp definition inventory where CProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the cp definition inventory where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param CProductId the c product ID
+	* @param CPDefinitionId the cp definition ID
 	* @return the matching cp definition inventory, or <code>null</code> if a matching cp definition inventory could not be found
 	*/
-	public CPDefinitionInventory fetchByCProductId(long CProductId);
+	public CPDefinitionInventory fetchByCPDefinitionId(long CPDefinitionId);
 
 	/**
-	* Returns the cp definition inventory where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the cp definition inventory where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param CProductId the c product ID
+	* @param CPDefinitionId the cp definition ID
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching cp definition inventory, or <code>null</code> if a matching cp definition inventory could not be found
 	*/
-	public CPDefinitionInventory fetchByCProductId(long CProductId,
+	public CPDefinitionInventory fetchByCPDefinitionId(long CPDefinitionId,
 		boolean retrieveFromCache);
 
 	/**
-	* Removes the cp definition inventory where CProductId = &#63; from the database.
+	* Removes the cp definition inventory where CPDefinitionId = &#63; from the database.
 	*
-	* @param CProductId the c product ID
+	* @param CPDefinitionId the cp definition ID
 	* @return the cp definition inventory that was removed
 	*/
-	public CPDefinitionInventory removeByCProductId(long CProductId)
+	public CPDefinitionInventory removeByCPDefinitionId(long CPDefinitionId)
 		throws NoSuchCPDefinitionInventoryException;
 
 	/**
-	* Returns the number of cp definition inventories where CProductId = &#63;.
+	* Returns the number of cp definition inventories where CPDefinitionId = &#63;.
 	*
-	* @param CProductId the c product ID
+	* @param CPDefinitionId the cp definition ID
 	* @return the number of matching cp definition inventories
 	*/
-	public int countByCProductId(long CProductId);
+	public int countByCPDefinitionId(long CPDefinitionId);
 
 	/**
 	* Caches the cp definition inventory in the entity cache if it is enabled.
