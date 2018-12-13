@@ -83,8 +83,8 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", CProductId=");
-		sb.append(CProductId);
+		sb.append(", CPDefinitionId=");
+		sb.append(CPDefinitionId);
 		sb.append(", CPDefinitionInventoryEngine=");
 		sb.append(CPDefinitionInventoryEngine);
 		sb.append(", lowStockActivity=");
@@ -147,7 +147,7 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 			cpDefinitionInventoryImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		cpDefinitionInventoryImpl.setCProductId(CProductId);
+		cpDefinitionInventoryImpl.setCPDefinitionId(CPDefinitionId);
 
 		if (CPDefinitionInventoryEngine == null) {
 			cpDefinitionInventoryImpl.setCPDefinitionInventoryEngine("");
@@ -199,7 +199,7 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		CProductId = objectInput.readLong();
+		CPDefinitionId = objectInput.readLong();
 		CPDefinitionInventoryEngine = objectInput.readUTF();
 		lowStockActivity = objectInput.readUTF();
 
@@ -247,7 +247,7 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(CProductId);
+		objectOutput.writeLong(CPDefinitionId);
 
 		if (CPDefinitionInventoryEngine == null) {
 			objectOutput.writeUTF("");
@@ -293,7 +293,7 @@ public class CPDefinitionInventoryCacheModel implements CacheModel<CPDefinitionI
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long CProductId;
+	public long CPDefinitionId;
 	public String CPDefinitionInventoryEngine;
 	public String lowStockActivity;
 	public boolean displayAvailability;

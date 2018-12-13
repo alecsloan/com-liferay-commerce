@@ -183,21 +183,21 @@ public class CommerceWarehouseItemPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCPI_CPIU() throws Exception {
-		_persistence.countByCPI_CPIU(RandomTestUtil.nextLong(), "");
-
-		_persistence.countByCPI_CPIU(0L, "null");
-
-		_persistence.countByCPI_CPIU(0L, (String)null);
-	}
-
-	@Test
 	public void testCountByCWI_CPIU() throws Exception {
 		_persistence.countByCWI_CPIU(RandomTestUtil.nextLong(), "");
 
 		_persistence.countByCWI_CPIU(0L, "null");
 
 		_persistence.countByCWI_CPIU(0L, (String)null);
+	}
+
+	@Test
+	public void testCountByCPI_CPIU() throws Exception {
+		_persistence.countByCPI_CPIU(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByCPI_CPIU(0L, "null");
+
+		_persistence.countByCPI_CPIU(0L, (String)null);
 	}
 
 	@Test

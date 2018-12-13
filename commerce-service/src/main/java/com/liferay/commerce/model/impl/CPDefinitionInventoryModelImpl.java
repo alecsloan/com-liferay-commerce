@@ -81,7 +81,7 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "CProductId", Types.BIGINT },
+			{ "CPDefinitionId", Types.BIGINT },
 			{ "CPDefinitionInventoryEngine", Types.VARCHAR },
 			{ "lowStockActivity", Types.VARCHAR },
 			{ "displayAvailability", Types.BOOLEAN },
@@ -104,7 +104,7 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("CProductId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("CPDefinitionId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("CPDefinitionInventoryEngine", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("lowStockActivity", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("displayAvailability", Types.BOOLEAN);
@@ -117,7 +117,7 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 		TABLE_COLUMNS_MAP.put("multipleOrderQuantity", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPDefinitionInventory (uuid_ VARCHAR(75) null,CPDefinitionInventoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CProductId LONG,CPDefinitionInventoryEngine VARCHAR(75) null,lowStockActivity VARCHAR(75) null,displayAvailability BOOLEAN,displayStockQuantity BOOLEAN,minStockQuantity INTEGER,backOrders BOOLEAN,minOrderQuantity INTEGER,maxOrderQuantity INTEGER,allowedOrderQuantities VARCHAR(75) null,multipleOrderQuantity INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table CPDefinitionInventory (uuid_ VARCHAR(75) null,CPDefinitionInventoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,CPDefinitionInventoryEngine VARCHAR(75) null,lowStockActivity VARCHAR(75) null,displayAvailability BOOLEAN,displayStockQuantity BOOLEAN,minStockQuantity INTEGER,backOrders BOOLEAN,minOrderQuantity INTEGER,maxOrderQuantity INTEGER,allowedOrderQuantities VARCHAR(75) null,multipleOrderQuantity INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table CPDefinitionInventory";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpDefinitionInventory.CPDefinitionInventoryId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPDefinitionInventory.CPDefinitionInventoryId ASC";
@@ -133,7 +133,7 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.model.CPDefinitionInventory"),
 			true);
-	public static final long CPRODUCTID_COLUMN_BITMASK = 1L;
+	public static final long CPDEFINITIONID_COLUMN_BITMASK = 1L;
 	public static final long COMPANYID_COLUMN_BITMASK = 2L;
 	public static final long GROUPID_COLUMN_BITMASK = 4L;
 	public static final long UUID_COLUMN_BITMASK = 8L;
@@ -161,7 +161,7 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setCProductId(soapModel.getCProductId());
+		model.setCPDefinitionId(soapModel.getCPDefinitionId());
 		model.setCPDefinitionInventoryEngine(soapModel.getCPDefinitionInventoryEngine());
 		model.setLowStockActivity(soapModel.getLowStockActivity());
 		model.setDisplayAvailability(soapModel.isDisplayAvailability());
@@ -245,7 +245,7 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CProductId", getCProductId());
+		attributes.put("CPDefinitionId", getCPDefinitionId());
 		attributes.put("CPDefinitionInventoryEngine",
 			getCPDefinitionInventoryEngine());
 		attributes.put("lowStockActivity", getLowStockActivity());
@@ -315,10 +315,10 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CProductId = (Long)attributes.get("CProductId");
+		Long CPDefinitionId = (Long)attributes.get("CPDefinitionId");
 
-		if (CProductId != null) {
-			setCProductId(CProductId);
+		if (CPDefinitionId != null) {
+			setCPDefinitionId(CPDefinitionId);
 		}
 
 		String CPDefinitionInventoryEngine = (String)attributes.get(
@@ -541,25 +541,25 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 
 	@JSON
 	@Override
-	public long getCProductId() {
-		return _CProductId;
+	public long getCPDefinitionId() {
+		return _CPDefinitionId;
 	}
 
 	@Override
-	public void setCProductId(long CProductId) {
-		_columnBitmask |= CPRODUCTID_COLUMN_BITMASK;
+	public void setCPDefinitionId(long CPDefinitionId) {
+		_columnBitmask |= CPDEFINITIONID_COLUMN_BITMASK;
 
-		if (!_setOriginalCProductId) {
-			_setOriginalCProductId = true;
+		if (!_setOriginalCPDefinitionId) {
+			_setOriginalCPDefinitionId = true;
 
-			_originalCProductId = _CProductId;
+			_originalCPDefinitionId = _CPDefinitionId;
 		}
 
-		_CProductId = CProductId;
+		_CPDefinitionId = CPDefinitionId;
 	}
 
-	public long getOriginalCProductId() {
-		return _originalCProductId;
+	public long getOriginalCPDefinitionId() {
+		return _originalCPDefinitionId;
 	}
 
 	@JSON
@@ -751,7 +751,7 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 		cpDefinitionInventoryImpl.setUserName(getUserName());
 		cpDefinitionInventoryImpl.setCreateDate(getCreateDate());
 		cpDefinitionInventoryImpl.setModifiedDate(getModifiedDate());
-		cpDefinitionInventoryImpl.setCProductId(getCProductId());
+		cpDefinitionInventoryImpl.setCPDefinitionId(getCPDefinitionId());
 		cpDefinitionInventoryImpl.setCPDefinitionInventoryEngine(getCPDefinitionInventoryEngine());
 		cpDefinitionInventoryImpl.setLowStockActivity(getLowStockActivity());
 		cpDefinitionInventoryImpl.setDisplayAvailability(isDisplayAvailability());
@@ -836,9 +836,9 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 
 		cpDefinitionInventoryModelImpl._setModifiedDate = false;
 
-		cpDefinitionInventoryModelImpl._originalCProductId = cpDefinitionInventoryModelImpl._CProductId;
+		cpDefinitionInventoryModelImpl._originalCPDefinitionId = cpDefinitionInventoryModelImpl._CPDefinitionId;
 
-		cpDefinitionInventoryModelImpl._setOriginalCProductId = false;
+		cpDefinitionInventoryModelImpl._setOriginalCPDefinitionId = false;
 
 		cpDefinitionInventoryModelImpl._columnBitmask = 0;
 	}
@@ -889,7 +889,7 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 			cpDefinitionInventoryCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		cpDefinitionInventoryCacheModel.CProductId = getCProductId();
+		cpDefinitionInventoryCacheModel.CPDefinitionId = getCPDefinitionId();
 
 		cpDefinitionInventoryCacheModel.CPDefinitionInventoryEngine = getCPDefinitionInventoryEngine();
 
@@ -954,8 +954,8 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", CProductId=");
-		sb.append(getCProductId());
+		sb.append(", CPDefinitionId=");
+		sb.append(getCPDefinitionId());
 		sb.append(", CPDefinitionInventoryEngine=");
 		sb.append(getCPDefinitionInventoryEngine());
 		sb.append(", lowStockActivity=");
@@ -1022,8 +1022,8 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>CProductId</column-name><column-value><![CDATA[");
-		sb.append(getCProductId());
+			"<column><column-name>CPDefinitionId</column-name><column-value><![CDATA[");
+		sb.append(getCPDefinitionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>CPDefinitionInventoryEngine</column-name><column-value><![CDATA[");
@@ -1089,9 +1089,9 @@ public class CPDefinitionInventoryModelImpl extends BaseModelImpl<CPDefinitionIn
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _CProductId;
-	private long _originalCProductId;
-	private boolean _setOriginalCProductId;
+	private long _CPDefinitionId;
+	private long _originalCPDefinitionId;
+	private boolean _setOriginalCPDefinitionId;
 	private String _CPDefinitionInventoryEngine;
 	private String _lowStockActivity;
 	private boolean _displayAvailability;

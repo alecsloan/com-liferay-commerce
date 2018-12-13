@@ -1490,35 +1490,35 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "cpDefinitionInventory.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(cpDefinitionInventory.uuid IS NULL OR cpDefinitionInventory.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "cpDefinitionInventory.companyId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_CPRODUCTID = new FinderPath(CPDefinitionInventoryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_CPDEFINITIONID = new FinderPath(CPDefinitionInventoryModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionInventoryModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionInventoryImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByCProductId", new String[] { Long.class.getName() },
-			CPDefinitionInventoryModelImpl.CPRODUCTID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CPRODUCTID = new FinderPath(CPDefinitionInventoryModelImpl.ENTITY_CACHE_ENABLED,
+			"fetchByCPDefinitionId", new String[] { Long.class.getName() },
+			CPDefinitionInventoryModelImpl.CPDEFINITIONID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_CPDEFINITIONID = new FinderPath(CPDefinitionInventoryModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionInventoryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCProductId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPDefinitionId",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns the cp definition inventory where CProductId = &#63; or throws a {@link NoSuchCPDefinitionInventoryException} if it could not be found.
+	 * Returns the cp definition inventory where CPDefinitionId = &#63; or throws a {@link NoSuchCPDefinitionInventoryException} if it could not be found.
 	 *
-	 * @param CProductId the c product ID
+	 * @param CPDefinitionId the cp definition ID
 	 * @return the matching cp definition inventory
 	 * @throws NoSuchCPDefinitionInventoryException if a matching cp definition inventory could not be found
 	 */
 	@Override
-	public CPDefinitionInventory findByCProductId(long CProductId)
+	public CPDefinitionInventory findByCPDefinitionId(long CPDefinitionId)
 		throws NoSuchCPDefinitionInventoryException {
-		CPDefinitionInventory cpDefinitionInventory = fetchByCProductId(CProductId);
+		CPDefinitionInventory cpDefinitionInventory = fetchByCPDefinitionId(CPDefinitionId);
 
 		if (cpDefinitionInventory == null) {
 			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("CProductId=");
-			msg.append(CProductId);
+			msg.append("CPDefinitionId=");
+			msg.append(CPDefinitionId);
 
 			msg.append("}");
 
@@ -1533,39 +1533,39 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 	}
 
 	/**
-	 * Returns the cp definition inventory where CProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cp definition inventory where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param CProductId the c product ID
+	 * @param CPDefinitionId the cp definition ID
 	 * @return the matching cp definition inventory, or <code>null</code> if a matching cp definition inventory could not be found
 	 */
 	@Override
-	public CPDefinitionInventory fetchByCProductId(long CProductId) {
-		return fetchByCProductId(CProductId, true);
+	public CPDefinitionInventory fetchByCPDefinitionId(long CPDefinitionId) {
+		return fetchByCPDefinitionId(CPDefinitionId, true);
 	}
 
 	/**
-	 * Returns the cp definition inventory where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the cp definition inventory where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param CProductId the c product ID
+	 * @param CPDefinitionId the cp definition ID
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching cp definition inventory, or <code>null</code> if a matching cp definition inventory could not be found
 	 */
 	@Override
-	public CPDefinitionInventory fetchByCProductId(long CProductId,
+	public CPDefinitionInventory fetchByCPDefinitionId(long CPDefinitionId,
 		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { CProductId };
+		Object[] finderArgs = new Object[] { CPDefinitionId };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CPRODUCTID,
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
 					finderArgs, this);
 		}
 
 		if (result instanceof CPDefinitionInventory) {
 			CPDefinitionInventory cpDefinitionInventory = (CPDefinitionInventory)result;
 
-			if ((CProductId != cpDefinitionInventory.getCProductId())) {
+			if ((CPDefinitionId != cpDefinitionInventory.getCPDefinitionId())) {
 				result = null;
 			}
 		}
@@ -1575,7 +1575,7 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 
 			query.append(_SQL_SELECT_CPDEFINITIONINVENTORY_WHERE);
 
-			query.append(_FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2);
+			query.append(_FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2);
 
 			String sql = query.toString();
 
@@ -1588,12 +1588,12 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CProductId);
+				qPos.add(CPDefinitionId);
 
 				List<CPDefinitionInventory> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_CPRODUCTID,
+					finderCache.putResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
 						finderArgs, list);
 				}
 				else {
@@ -1605,7 +1605,7 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_CPRODUCTID,
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
 					finderArgs);
 
 				throw processException(e);
@@ -1624,30 +1624,30 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 	}
 
 	/**
-	 * Removes the cp definition inventory where CProductId = &#63; from the database.
+	 * Removes the cp definition inventory where CPDefinitionId = &#63; from the database.
 	 *
-	 * @param CProductId the c product ID
+	 * @param CPDefinitionId the cp definition ID
 	 * @return the cp definition inventory that was removed
 	 */
 	@Override
-	public CPDefinitionInventory removeByCProductId(long CProductId)
+	public CPDefinitionInventory removeByCPDefinitionId(long CPDefinitionId)
 		throws NoSuchCPDefinitionInventoryException {
-		CPDefinitionInventory cpDefinitionInventory = findByCProductId(CProductId);
+		CPDefinitionInventory cpDefinitionInventory = findByCPDefinitionId(CPDefinitionId);
 
 		return remove(cpDefinitionInventory);
 	}
 
 	/**
-	 * Returns the number of cp definition inventories where CProductId = &#63;.
+	 * Returns the number of cp definition inventories where CPDefinitionId = &#63;.
 	 *
-	 * @param CProductId the c product ID
+	 * @param CPDefinitionId the cp definition ID
 	 * @return the number of matching cp definition inventories
 	 */
 	@Override
-	public int countByCProductId(long CProductId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPRODUCTID;
+	public int countByCPDefinitionId(long CPDefinitionId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPDEFINITIONID;
 
-		Object[] finderArgs = new Object[] { CProductId };
+		Object[] finderArgs = new Object[] { CPDefinitionId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1656,7 +1656,7 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 
 			query.append(_SQL_COUNT_CPDEFINITIONINVENTORY_WHERE);
 
-			query.append(_FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2);
+			query.append(_FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2);
 
 			String sql = query.toString();
 
@@ -1669,7 +1669,7 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CProductId);
+				qPos.add(CPDefinitionId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1688,7 +1688,7 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2 = "cpDefinitionInventory.CProductId = ?";
+	private static final String _FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2 = "cpDefinitionInventory.CPDefinitionId = ?";
 
 	public CPDefinitionInventoryPersistenceImpl() {
 		setModelClass(CPDefinitionInventory.class);
@@ -1729,8 +1729,8 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 				cpDefinitionInventory.getGroupId()
 			}, cpDefinitionInventory);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CPRODUCTID,
-			new Object[] { cpDefinitionInventory.getCProductId() },
+		finderCache.putResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
+			new Object[] { cpDefinitionInventory.getCPDefinitionId() },
 			cpDefinitionInventory);
 
 		cpDefinitionInventory.resetOriginalValues();
@@ -1819,11 +1819,11 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
 			cpDefinitionInventoryModelImpl, false);
 
-		args = new Object[] { cpDefinitionInventoryModelImpl.getCProductId() };
+		args = new Object[] { cpDefinitionInventoryModelImpl.getCPDefinitionId() };
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args,
+		finderCache.putResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID, args,
 			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CPRODUCTID, args,
+		finderCache.putResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID, args,
 			cpDefinitionInventoryModelImpl, false);
 	}
 
@@ -1853,21 +1853,21 @@ public class CPDefinitionInventoryPersistenceImpl extends BasePersistenceImpl<CP
 
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					cpDefinitionInventoryModelImpl.getCProductId()
+					cpDefinitionInventoryModelImpl.getCPDefinitionId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CPRODUCTID, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID, args);
 		}
 
 		if ((cpDefinitionInventoryModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_CPRODUCTID.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_CPDEFINITIONID.getColumnBitmask()) != 0) {
 			Object[] args = new Object[] {
-					cpDefinitionInventoryModelImpl.getOriginalCProductId()
+					cpDefinitionInventoryModelImpl.getOriginalCPDefinitionId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CPRODUCTID, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID, args);
 		}
 	}
 
