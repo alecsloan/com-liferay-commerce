@@ -106,6 +106,22 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			cpDefinitionVirtualSettingPersistence.create(
 				cpDefinitionVirtualSettingId);
 
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionVirtualSetting.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				_cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionVirtualSetting.getCPDefinitionId());
+
+			_cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionVirtualSetting =
+				cpDefinitionVirtualSettingPersistence.findByCPDefinitionId(
+					newCPDefinition.getCPDefinitionId());
+		}
+
 		cpDefinitionVirtualSetting.setUuid(serviceContext.getUuid());
 		cpDefinitionVirtualSetting.setGroupId(groupId);
 		cpDefinitionVirtualSetting.setCompanyId(user.getCompanyId());
@@ -142,8 +158,25 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 				cpDefinitionId);
 
 		if (cpDefinitionVirtualSetting != null) {
-			cpDefinitionVirtualSettingLocalService.
-				deleteCPDefinitionVirtualSetting(cpDefinitionVirtualSetting);
+
+			if (_cpDefinitionLocalService.isPublishedCPDefinition(
+					cpDefinitionVirtualSetting.getCPDefinitionId())) {
+
+				CPDefinition newCPDefinition =
+					_cpDefinitionLocalService.copyCPDefinition(
+						cpDefinitionVirtualSetting.getCPDefinitionId());
+
+				_cProductLocalService.updatePublishedDefinitionId(
+					newCPDefinition.getCProductId(),
+					newCPDefinition.getCPDefinitionId());
+
+				cpDefinitionVirtualSetting =
+					cpDefinitionVirtualSettingPersistence.findByCPDefinitionId(
+						newCPDefinition.getCPDefinitionId());
+			}
+
+			cpDefinitionVirtualSettingPersistence.
+				remove(cpDefinitionVirtualSetting);
 		}
 
 		return cpDefinitionVirtualSetting;
