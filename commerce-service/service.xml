@@ -957,7 +957,7 @@
 
 		<!-- Other fields -->
 
-		<column name="CProductId" type="long" />
+		<column name="CPDefinitionId" type="long" />
 		<column name="CPDefinitionInventoryEngine" type="String" />
 		<column name="lowStockActivity" type="String" />
 		<column name="displayAvailability" type="boolean" />
@@ -971,8 +971,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CProductId" return-type="CPDefinitionInventory" unique="true">
-			<finder-column name="CProductId" />
+		<finder name="CPDefinitionId" return-type="CPDefinitionInventory" unique="true">
+			<finder-column name="CPDefinitionId" />
 		</finder>
 	</entity>
 	<exceptions>
