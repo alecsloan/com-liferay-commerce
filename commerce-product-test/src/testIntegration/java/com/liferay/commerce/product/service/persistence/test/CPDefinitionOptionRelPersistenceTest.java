@@ -249,6 +249,15 @@ public class CPDefinitionOptionRelPersistenceTest {
 	}
 
 	@Test
+	public void testCountByU_C() throws Exception {
+		_persistence.countByU_C("", RandomTestUtil.nextLong());
+
+		_persistence.countByU_C("null", 0L);
+
+		_persistence.countByU_C((String)null, 0L);
+	}
+
+	@Test
 	public void testCountByC_SC() throws Exception {
 		_persistence.countByC_SC(RandomTestUtil.nextLong(),
 			RandomTestUtil.randomBoolean());

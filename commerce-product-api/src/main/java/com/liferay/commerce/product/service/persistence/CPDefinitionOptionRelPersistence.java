@@ -772,6 +772,154 @@ public interface CPDefinitionOptionRelPersistence extends BasePersistence<CPDefi
 	public int countByCPDefinitionId(long CPDefinitionId);
 
 	/**
+	* Returns all the cp definition option rels where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @return the matching cp definition option rels
+	*/
+	public java.util.List<CPDefinitionOptionRel> findByU_C(String uuid,
+		long CPDefinitionId);
+
+	/**
+	* Returns a range of all the cp definition option rels where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @param start the lower bound of the range of cp definition option rels
+	* @param end the upper bound of the range of cp definition option rels (not inclusive)
+	* @return the range of matching cp definition option rels
+	*/
+	public java.util.List<CPDefinitionOptionRel> findByU_C(String uuid,
+		long CPDefinitionId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the cp definition option rels where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @param start the lower bound of the range of cp definition option rels
+	* @param end the upper bound of the range of cp definition option rels (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching cp definition option rels
+	*/
+	public java.util.List<CPDefinitionOptionRel> findByU_C(String uuid,
+		long CPDefinitionId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionOptionRel> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the cp definition option rels where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionOptionRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @param start the lower bound of the range of cp definition option rels
+	* @param end the upper bound of the range of cp definition option rels (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching cp definition option rels
+	*/
+	public java.util.List<CPDefinitionOptionRel> findByU_C(String uuid,
+		long CPDefinitionId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionOptionRel> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first cp definition option rel in the ordered set where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching cp definition option rel
+	* @throws NoSuchCPDefinitionOptionRelException if a matching cp definition option rel could not be found
+	*/
+	public CPDefinitionOptionRel findByU_C_First(String uuid,
+		long CPDefinitionId,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionOptionRel> orderByComparator)
+		throws NoSuchCPDefinitionOptionRelException;
+
+	/**
+	* Returns the first cp definition option rel in the ordered set where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
+	*/
+	public CPDefinitionOptionRel fetchByU_C_First(String uuid,
+		long CPDefinitionId,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionOptionRel> orderByComparator);
+
+	/**
+	* Returns the last cp definition option rel in the ordered set where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching cp definition option rel
+	* @throws NoSuchCPDefinitionOptionRelException if a matching cp definition option rel could not be found
+	*/
+	public CPDefinitionOptionRel findByU_C_Last(String uuid,
+		long CPDefinitionId,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionOptionRel> orderByComparator)
+		throws NoSuchCPDefinitionOptionRelException;
+
+	/**
+	* Returns the last cp definition option rel in the ordered set where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
+	*/
+	public CPDefinitionOptionRel fetchByU_C_Last(String uuid,
+		long CPDefinitionId,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionOptionRel> orderByComparator);
+
+	/**
+	* Returns the cp definition option rels before and after the current cp definition option rel in the ordered set where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* @param CPDefinitionOptionRelId the primary key of the current cp definition option rel
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next cp definition option rel
+	* @throws NoSuchCPDefinitionOptionRelException if a cp definition option rel with the primary key could not be found
+	*/
+	public CPDefinitionOptionRel[] findByU_C_PrevAndNext(
+		long CPDefinitionOptionRelId, String uuid, long CPDefinitionId,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionOptionRel> orderByComparator)
+		throws NoSuchCPDefinitionOptionRelException;
+
+	/**
+	* Removes all the cp definition option rels where uuid = &#63; and CPDefinitionId = &#63; from the database.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	*/
+	public void removeByU_C(String uuid, long CPDefinitionId);
+
+	/**
+	* Returns the number of cp definition option rels where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @return the number of matching cp definition option rels
+	*/
+	public int countByU_C(String uuid, long CPDefinitionId);
+
+	/**
 	* Returns all the cp definition option rels where CPDefinitionId = &#63; and skuContributor = &#63;.
 	*
 	* @param CPDefinitionId the cp definition ID
