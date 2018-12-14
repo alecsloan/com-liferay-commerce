@@ -321,8 +321,7 @@ public class CProductLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CProduct updatePublishedDefinitionId(
-		long cProductId, long publishedDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long cProductId, long publishedDefinitionId) {
 		return getService()
 				   .updatePublishedDefinitionId(cProductId,
 			publishedDefinitionId);

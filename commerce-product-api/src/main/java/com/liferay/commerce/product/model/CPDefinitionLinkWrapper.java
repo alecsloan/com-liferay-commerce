@@ -172,13 +172,8 @@ public class CPDefinitionLinkWrapper implements CPDefinitionLink,
 	}
 
 	@Override
-	public CPDefinition getCPDefinition1() {
-		return _cpDefinitionLink.getCPDefinition1();
-	}
-
-	@Override
-	public CPDefinition getCPDefinition2() {
-		return _cpDefinitionLink.getCPDefinition2();
+	public CPDefinition getCPDefinition() {
+		return _cpDefinitionLink.getCPDefinition();
 	}
 
 	/**
@@ -199,6 +194,11 @@ public class CPDefinitionLinkWrapper implements CPDefinitionLink,
 	@Override
 	public long getCPDefinitionLinkId() {
 		return _cpDefinitionLink.getCPDefinitionLinkId();
+	}
+
+	@Override
+	public CProduct getCProduct() {
+		return _cpDefinitionLink.getCProduct();
 	}
 
 	/**

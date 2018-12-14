@@ -36,11 +36,11 @@ public class CPDefinitionGroupedEntryLocalServiceWrapper
 
 	@Override
 	public void addCPDefinitionGroupedEntries(long cpDefinitionId,
-		long[] entryCPDefinitionIds,
+		long[] entryCProductIds,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntries(cpDefinitionId,
-			entryCPDefinitionIds, serviceContext);
+			entryCProductIds, serviceContext);
 	}
 
 	/**
@@ -57,12 +57,12 @@ public class CPDefinitionGroupedEntryLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry addCPDefinitionGroupedEntry(
-		long cpDefinitionId, long entryCPDefinitionId, double priority,
+		long cpDefinitionId, long entryCProductId, double priority,
 		int quantity,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntry(cpDefinitionId,
-			entryCPDefinitionId, priority, quantity, serviceContext);
+			entryCProductId, priority, quantity, serviceContext);
 	}
 
 	/**
@@ -212,9 +212,9 @@ public class CPDefinitionGroupedEntryLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
-		long cpDefinitionId, long entryCPDefinitionId) {
+		long cpDefinitionId, long entryCProductId) {
 		return _cpDefinitionGroupedEntryLocalService.fetchCPDefinitionGroupedEntryByC_E(cpDefinitionId,
-			entryCPDefinitionId);
+			entryCProductId);
 	}
 
 	/**

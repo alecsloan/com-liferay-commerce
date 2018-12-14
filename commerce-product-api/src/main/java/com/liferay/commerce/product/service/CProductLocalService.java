@@ -292,5 +292,5 @@ public interface CProductLocalService extends BaseLocalService,
 	public CProduct updateCProduct(CProduct cProduct);
 
 	public CProduct updatePublishedDefinitionId(long cProductId,
-		long publishedDefinitionId) throws PortalException;
+		long publishedDefinitionId);
 }

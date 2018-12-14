@@ -255,8 +255,7 @@ public class CPDefinitionLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinition copyCPDefinition(
-		long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long cpDefinitionId) {
 		return getService().copyCPDefinition(cpDefinitionId);
 	}
 
@@ -671,13 +670,11 @@ public class CPDefinitionLocalServiceUtil {
 	}
 
 	public static boolean isPublishedCPDefinition(
-		com.liferay.commerce.product.model.CPDefinition cpDefinition)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		com.liferay.commerce.product.model.CPDefinition cpDefinition) {
 		return getService().isPublishedCPDefinition(cpDefinition);
 	}
 
-	public static boolean isPublishedCPDefinition(long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public static boolean isPublishedCPDefinition(long cpDefinitionId) {
 		return getService().isPublishedCPDefinition(cpDefinitionId);
 	}
 

@@ -65,7 +65,7 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 	 * Never modify or reference this interface directly. Always use {@link CPDefinitionGroupedEntryLocalServiceUtil} to access the cp definition grouped entry local service. Add custom service methods to {@link com.liferay.commerce.product.type.grouped.service.impl.CPDefinitionGroupedEntryLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public void addCPDefinitionGroupedEntries(long cpDefinitionId,
-		long[] entryCPDefinitionIds, ServiceContext serviceContext)
+		long[] entryCProductIds, ServiceContext serviceContext)
 		throws PortalException;
 
 	/**
@@ -79,7 +79,7 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry);
 
 	public CPDefinitionGroupedEntry addCPDefinitionGroupedEntry(
-		long cpDefinitionId, long entryCPDefinitionId, double priority,
+		long cpDefinitionId, long entryCProductId, double priority,
 		int quantity, ServiceContext serviceContext) throws PortalException;
 
 	/**
@@ -193,7 +193,7 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
-		long cpDefinitionId, long entryCPDefinitionId);
+		long cpDefinitionId, long entryCProductId);
 
 	/**
 	* Returns the cp definition grouped entry matching the UUID and group.

@@ -200,6 +200,12 @@ public class CPDefinitionGroupedEntryWrapper implements CPDefinitionGroupedEntry
 		return _cpDefinitionGroupedEntry.getCPDefinitionId();
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CProduct getCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionGroupedEntry.getCProduct();
+	}
+
 	/**
 	* Returns the create date of this cp definition grouped entry.
 	*
@@ -208,12 +214,6 @@ public class CPDefinitionGroupedEntryWrapper implements CPDefinitionGroupedEntry
 	@Override
 	public Date getCreateDate() {
 		return _cpDefinitionGroupedEntry.getCreateDate();
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CPDefinition getEntryCPDefinition()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionGroupedEntry.getEntryCPDefinition();
 	}
 
 	/**

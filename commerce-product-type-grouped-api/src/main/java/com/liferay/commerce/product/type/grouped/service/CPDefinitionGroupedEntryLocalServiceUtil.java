@@ -43,12 +43,12 @@ public class CPDefinitionGroupedEntryLocalServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.product.type.grouped.service.impl.CPDefinitionGroupedEntryLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static void addCPDefinitionGroupedEntries(long cpDefinitionId,
-		long[] entryCPDefinitionIds,
+		long[] entryCProductIds,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService()
-			.addCPDefinitionGroupedEntries(cpDefinitionId,
-			entryCPDefinitionIds, serviceContext);
+			.addCPDefinitionGroupedEntries(cpDefinitionId, entryCProductIds,
+			serviceContext);
 	}
 
 	/**
@@ -63,13 +63,13 @@ public class CPDefinitionGroupedEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry addCPDefinitionGroupedEntry(
-		long cpDefinitionId, long entryCPDefinitionId, double priority,
+		long cpDefinitionId, long entryCProductId, double priority,
 		int quantity,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .addCPDefinitionGroupedEntry(cpDefinitionId,
-			entryCPDefinitionId, priority, quantity, serviceContext);
+			entryCProductId, priority, quantity, serviceContext);
 	}
 
 	/**
@@ -208,10 +208,10 @@ public class CPDefinitionGroupedEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
-		long cpDefinitionId, long entryCPDefinitionId) {
+		long cpDefinitionId, long entryCProductId) {
 		return getService()
 				   .fetchCPDefinitionGroupedEntryByC_E(cpDefinitionId,
-			entryCPDefinitionId);
+			entryCProductId);
 	}
 
 	/**

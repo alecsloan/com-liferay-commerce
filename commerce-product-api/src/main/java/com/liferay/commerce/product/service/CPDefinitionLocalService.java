@@ -189,8 +189,7 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 
 	public void checkCPDefinitions() throws PortalException;
 
-	public CPDefinition copyCPDefinition(long cpDefinitionId)
-		throws PortalException;
+	public CPDefinition copyCPDefinition(long cpDefinitionId);
 
 	/**
 	* Creates a new cp definition with the primary key. Does not add the cp definition to the database.
@@ -509,12 +508,10 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean isPublishedCPDefinition(CPDefinition cpDefinition)
-		throws PortalException;
+	public boolean isPublishedCPDefinition(CPDefinition cpDefinition);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean isPublishedCPDefinition(long cpDefinitionId)
-		throws PortalException;
+	public boolean isPublishedCPDefinition(long cpDefinitionId);
 
 	public void moveCPDefinitionsToTrash(long groupId, long userId)
 		throws PortalException;
