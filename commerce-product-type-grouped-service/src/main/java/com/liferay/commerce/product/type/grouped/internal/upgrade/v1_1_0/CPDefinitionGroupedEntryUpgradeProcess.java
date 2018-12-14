@@ -14,13 +14,26 @@
 
 package com.liferay.commerce.product.type.grouped.internal.upgrade.v1_1_0;
 
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryModelImpl;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.db.IndexMetadata;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringBundler;
+
+import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Ethan Bustad
@@ -136,7 +149,9 @@ public class CPDefinitionGroupedEntryUpgradeProcess extends UpgradeProcess {
 		}
 	}
 
-	private void _dropColumn(String tableName, String columnName) {
+	private void _dropColumn(String tableName, String columnName)
+		throws Exception {
+
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				String.format(
@@ -158,7 +173,9 @@ public class CPDefinitionGroupedEntryUpgradeProcess extends UpgradeProcess {
 		}
 	}
 
-	private void _dropIndex(String tableName, String indexName) {
+	private void _dropIndex(String tableName, String indexName)
+		throws Exception {
+
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				String.format(

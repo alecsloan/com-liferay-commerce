@@ -15,7 +15,9 @@
 package com.liferay.commerce.product.type.virtual.service.impl;
 
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.type.virtual.exception.CPDefinitionVirtualSettingException;
 import com.liferay.commerce.product.type.virtual.exception.CPDefinitionVirtualSettingFileEntryIdException;
@@ -106,20 +108,47 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			cpDefinitionVirtualSettingPersistence.create(
 				cpDefinitionVirtualSettingId);
 
-		if (_cpDefinitionLocalService.isPublishedCPDefinition(
-				cpDefinitionVirtualSetting.getCPDefinitionId())) {
+		try {
+			if (className.equals(CPDefinition.class.getName()) &&
+				_cpDefinitionLocalService.isPublishedCPDefinition(
+					cpDefinitionVirtualSetting.getClassPK())) {
 
-			CPDefinition newCPDefinition =
-				_cpDefinitionLocalService.copyCPDefinition(
-					cpDefinitionVirtualSetting.getCPDefinitionId());
+				CPDefinition newCPDefinition =
+					_cpDefinitionLocalService.copyCPDefinition(
+						cpDefinitionVirtualSetting.getClassPK());
 
-			_cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
-			cpDefinitionVirtualSetting =
-				cpDefinitionVirtualSettingPersistence.findByCPDefinitionId(
+				_cProductLocalService.updatePublishedDefinitionId(
+					newCPDefinition.getCProductId(),
 					newCPDefinition.getCPDefinitionId());
+
+				classPK = newCPDefinition.getCPDefinitionId();
+			}
+			else if (className.equals(CPInstance.class.getName())) {
+				CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+					cpDefinitionVirtualSetting.getClassPK());
+
+				if (_cpDefinitionLocalService.isPublishedCPDefinition(
+						cpInstance.getCPDefinitionId())) {
+
+					CPDefinition newCPDefinition =
+						_cpDefinitionLocalService.copyCPDefinition(
+							cpInstance.getCPDefinitionId());
+
+					_cProductLocalService.updatePublishedDefinitionId(
+						newCPDefinition.getCProductId(),
+						newCPDefinition.getCPDefinitionId());
+
+					CPInstance newCPInstance =
+						_cpInstanceLocalService.fetchCProductInstance(
+							newCPDefinition.getCProductId(),
+							cpInstance.getUuid());
+
+					classPK = newCPInstance.getCPInstanceId();
+				}
+			}
+		}
+		catch (PortalException pe) {
+			pe.printStackTrace();
 		}
 
 		cpDefinitionVirtualSetting.setUuid(serviceContext.getUuid());
@@ -181,20 +210,52 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 				classNameId, classPK);
 
 		if (cpDefinitionVirtualSetting != null) {
-			if (_cpDefinitionLocalService.isPublishedCPDefinition(
-					cpDefinitionVirtualSetting.getCPDefinitionId())) {
+			try {
+				if (className.equals(CPDefinition.class.getName()) &&
+					_cpDefinitionLocalService.isPublishedCPDefinition(
+						cpDefinitionVirtualSetting.getClassPK())) {
 
-				CPDefinition newCPDefinition =
-					_cpDefinitionLocalService.copyCPDefinition(
-						cpDefinitionVirtualSetting.getCPDefinitionId());
+					CPDefinition newCPDefinition =
+						_cpDefinitionLocalService.copyCPDefinition(
+							cpDefinitionVirtualSetting.getClassPK());
 
-				_cProductLocalService.updatePublishedDefinitionId(
-					newCPDefinition.getCProductId(),
-					newCPDefinition.getCPDefinitionId());
-
-				cpDefinitionVirtualSetting =
-					cpDefinitionVirtualSettingPersistence.findByCPDefinitionId(
+					_cProductLocalService.updatePublishedDefinitionId(
+						newCPDefinition.getCProductId(),
 						newCPDefinition.getCPDefinitionId());
+
+					cpDefinitionVirtualSetting =
+						cpDefinitionVirtualSettingPersistence.findByC_C(
+							classNameId, newCPDefinition.getCPDefinitionId());
+				}
+				else if (className.equals(CPInstance.class.getName())) {
+					CPInstance cpInstance =
+						_cpInstanceLocalService.getCPInstance(
+							cpDefinitionVirtualSetting.getClassPK());
+
+					if (_cpDefinitionLocalService.isPublishedCPDefinition(
+							cpInstance.getCPDefinitionId())) {
+
+						CPDefinition newCPDefinition =
+							_cpDefinitionLocalService.copyCPDefinition(
+								cpInstance.getCPDefinitionId());
+
+						_cProductLocalService.updatePublishedDefinitionId(
+							newCPDefinition.getCProductId(),
+							newCPDefinition.getCPDefinitionId());
+
+						CPInstance newCPInstance =
+							_cpInstanceLocalService.fetchCProductInstance(
+								newCPDefinition.getCProductId(),
+								cpInstance.getUuid());
+
+						cpDefinitionVirtualSetting =
+							cpDefinitionVirtualSettingPersistence.findByC_C(
+								classNameId, newCPInstance.getCPInstanceId());
+					}
+				}
+			}
+			catch (PortalException pe) {
+				pe.printStackTrace();
 			}
 
 			cpDefinitionVirtualSettingPersistence.remove(
@@ -278,20 +339,55 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			termsOfUseRequired, termsOfUseContentMap,
 			termsOfUseJournalArticleResourcePrimKey);
 
-		if (_cpDefinitionLocalService.isPublishedCPDefinition(
-				cpDefinitionVirtualSetting.getCPDefinitionId())) {
+		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
+			CPDefinition.class);
+		long cpInstanceClassNameId = classNameLocalService.getClassNameId(
+			CPInstance.class);
+
+		if ((cpDefinitionVirtualSetting.getClassNameId() ==
+				cpDefinitionClassNameId) &&
+			_cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionVirtualSetting.getClassPK())) {
 
 			CPDefinition newCPDefinition =
 				_cpDefinitionLocalService.copyCPDefinition(
-					cpDefinitionVirtualSetting.getCPDefinitionId());
+					cpDefinitionVirtualSetting.getClassPK());
 
 			_cProductLocalService.updatePublishedDefinitionId(
 				newCPDefinition.getCProductId(),
 				newCPDefinition.getCPDefinitionId());
 
 			cpDefinitionVirtualSetting =
-				cpDefinitionVirtualSettingPersistence.findByCPDefinitionId(
+				cpDefinitionVirtualSettingPersistence.findByC_C(
+					cpDefinitionVirtualSetting.getClassNameId(),
 					newCPDefinition.getCPDefinitionId());
+		}
+		else if (cpDefinitionVirtualSetting.getClassNameId() ==
+					cpInstanceClassNameId) {
+
+			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+				cpDefinitionVirtualSetting.getClassPK());
+
+			if (_cpDefinitionLocalService.isPublishedCPDefinition(
+					cpInstance.getCPDefinitionId())) {
+
+				CPDefinition newCPDefinition =
+					_cpDefinitionLocalService.copyCPDefinition(
+						cpInstance.getCPDefinitionId());
+
+				_cProductLocalService.updatePublishedDefinitionId(
+					newCPDefinition.getCProductId(),
+					newCPDefinition.getCPDefinitionId());
+
+				CPInstance newCPInstance =
+					_cpInstanceLocalService.fetchCProductInstance(
+						newCPDefinition.getCProductId(), cpInstance.getUuid());
+
+				cpDefinitionVirtualSetting =
+					cpDefinitionVirtualSettingPersistence.findByC_C(
+						cpDefinitionVirtualSetting.getClassNameId(),
+						newCPInstance.getCPInstanceId());
+			}
 		}
 
 		cpDefinitionVirtualSetting.setFileEntryId(fileEntryId);
@@ -402,6 +498,9 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 
 	@ServiceReference(type = CPDefinitionLocalService.class)
 	private CPDefinitionLocalService _cpDefinitionLocalService;
+
+	@ServiceReference(type = CPInstanceLocalService.class)
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@ServiceReference(type = CProductLocalService.class)
 	private CProductLocalService _cProductLocalService;
