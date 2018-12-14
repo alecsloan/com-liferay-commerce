@@ -72,14 +72,32 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
-
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
-		CPSubscriptionInfo cpSubscriptionInfo =
-			cpInstance.getCPSubscriptionInfo();
+		return addCommerceSubscriptionEntry(
+			cpInstance.getUuid(), cpInstance.getCProductId(),
+			commerceOrderItemId, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
+			String cpInstanceUuid, long cProductId, long commerceOrderItemId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+		long groupId = serviceContext.getScopeGroupId();
+
+		CPSubscriptionInfo cpSubscriptionInfo = null;
+
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCProductInstance(
+			cProductId, cpInstanceUuid);
+
+		if (cpInstance != null) {
+			cpSubscriptionInfo = cpInstance.getCPSubscriptionInfo();
+		}
 
 		if (cpSubscriptionInfo == null) {
 			throw new CommerceSubscriptionCPInstanceIdException();
@@ -102,7 +120,8 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		commerceSubscriptionEntry.setCompanyId(user.getCompanyId());
 		commerceSubscriptionEntry.setUserId(user.getUserId());
 		commerceSubscriptionEntry.setUserName(user.getFullName());
-		commerceSubscriptionEntry.setCPInstanceId(cpInstanceId);
+		commerceSubscriptionEntry.setCPInstanceUuid(cpInstanceUuid);
+		commerceSubscriptionEntry.setCProductId(cProductId);
 		commerceSubscriptionEntry.setCommerceOrderItemId(commerceOrderItemId);
 		commerceSubscriptionEntry.setSubscriptionLength(
 			cpSubscriptionInfo.getSubscriptionLength());
