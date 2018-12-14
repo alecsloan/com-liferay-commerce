@@ -34,12 +34,25 @@ public class CPDefinitionGroupedEntryLocalServiceWrapper
 		_cpDefinitionGroupedEntryLocalService = cpDefinitionGroupedEntryLocalService;
 	}
 
+	/**
+	* @deprecated as of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Override
 	public void addCPDefinitionGroupedEntries(long cpDefinitionId,
-		long[] entryCProductIds,
+		long[] entryCPDefinitionIds,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntries(cpDefinitionId,
+			entryCPDefinitionIds, serviceContext);
+	}
+
+	@Override
+	public void addCPDefinitionGroupedEntriesByEntryCProductIds(
+		long cpDefinitionId, long[] entryCProductIds,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntriesByEntryCProductIds(cpDefinitionId,
 			entryCProductIds, serviceContext);
 	}
 
@@ -55,13 +68,27 @@ public class CPDefinitionGroupedEntryLocalServiceWrapper
 		return _cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntry(cpDefinitionGroupedEntry);
 	}
 
+	/**
+	* @deprecated as of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Override
 	public com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry addCPDefinitionGroupedEntry(
-		long cpDefinitionId, long entryCProductId, double priority,
+		long cpDefinitionId, long entryCPDefinitionId, double priority,
 		int quantity,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntry(cpDefinitionId,
+			entryCPDefinitionId, priority, quantity, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry addCPDefinitionGroupedEntryByEntryCProductId(
+		long cpDefinitionId, long entryCProductId, double priority,
+		int quantity,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntryByEntryCProductId(cpDefinitionId,
 			entryCProductId, priority, quantity, serviceContext);
 	}
 
@@ -211,10 +238,22 @@ public class CPDefinitionGroupedEntryLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
+	public com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntry(
 		long cpDefinitionId, long entryCProductId) {
-		return _cpDefinitionGroupedEntryLocalService.fetchCPDefinitionGroupedEntryByC_E(cpDefinitionId,
+		return _cpDefinitionGroupedEntryLocalService.fetchCPDefinitionGroupedEntry(cpDefinitionId,
 			entryCProductId);
+	}
+
+	/**
+	* @deprecated as of Judson (7.1.x)
+	*/
+	@Deprecated
+	@Override
+	public com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
+		long cpDefinitionId, long entryCPDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionGroupedEntryLocalService.fetchCPDefinitionGroupedEntryByC_E(cpDefinitionId,
+			entryCPDefinitionId);
 	}
 
 	/**

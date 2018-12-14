@@ -64,9 +64,18 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPDefinitionGroupedEntryLocalServiceUtil} to access the cp definition grouped entry local service. Add custom service methods to {@link com.liferay.commerce.product.type.grouped.service.impl.CPDefinitionGroupedEntryLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+
+	/**
+	* @deprecated as of Judson (7.1.x)
+	*/
+	@Deprecated
 	public void addCPDefinitionGroupedEntries(long cpDefinitionId,
-		long[] entryCProductIds, ServiceContext serviceContext)
+		long[] entryCPDefinitionIds, ServiceContext serviceContext)
 		throws PortalException;
+
+	public void addCPDefinitionGroupedEntriesByEntryCProductIds(
+		long cpDefinitionId, long[] entryCProductIds,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Adds the cp definition grouped entry to the database. Also notifies the appropriate model listeners.
@@ -78,7 +87,15 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 	public CPDefinitionGroupedEntry addCPDefinitionGroupedEntry(
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry);
 
+	/**
+	* @deprecated as of Judson (7.1.x)
+	*/
+	@Deprecated
 	public CPDefinitionGroupedEntry addCPDefinitionGroupedEntry(
+		long cpDefinitionId, long entryCPDefinitionId, double priority,
+		int quantity, ServiceContext serviceContext) throws PortalException;
+
+	public CPDefinitionGroupedEntry addCPDefinitionGroupedEntryByEntryCProductId(
 		long cpDefinitionId, long entryCProductId, double priority,
 		int quantity, ServiceContext serviceContext) throws PortalException;
 
@@ -192,8 +209,17 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 		long CPDefinitionGroupedEntryId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
+	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntry(
 		long cpDefinitionId, long entryCProductId);
+
+	/**
+	* @deprecated as of Judson (7.1.x)
+	*/
+	@Deprecated
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
+		long cpDefinitionId, long entryCPDefinitionId)
+		throws PortalException;
 
 	/**
 	* Returns the cp definition grouped entry matching the UUID and group.
