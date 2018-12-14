@@ -53,18 +53,22 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 	@Override
 	public CProduct updatePublishedDefinitionId(
-			long cProductId, long publishedDefinitionId)
-		throws PortalException {
+		long cProductId, long publishedDefinitionId) {
 
-		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+		try {
+			CProduct cProduct = cProductLocalService.getCProduct(cProductId);
 
-		Date now = new Date();
+			Date now = new Date();
 
-		cProduct.setModifiedDate(now);
+			cProduct.setModifiedDate(now);
 
-		cProduct.setPublishedDefinitionId(publishedDefinitionId);
+			cProduct.setPublishedDefinitionId(publishedDefinitionId);
 
-		return cProductPersistence.update(cProduct);
+			return cProductPersistence.update(cProduct);
+		}
+		catch(PortalException pe){
+			return null;
+		}
 	}
 
 }

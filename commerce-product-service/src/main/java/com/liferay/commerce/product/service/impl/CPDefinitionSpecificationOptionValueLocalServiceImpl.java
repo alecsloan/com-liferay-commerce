@@ -113,7 +113,7 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 				newCPDefinition.getCPDefinitionId());
 
 			cpDefinitionSpecificationOptionValue =
-				cpDefinitionSpecificationOptionValuePersistence.findByC_CSO(
+				cpDefinitionSpecificationOptionValuePersistence.fetchByC_CSO(
 					newCPDefinition.getCPDefinitionId(),
 					cpDefinitionSpecificationOptionValue.
 						getCPSpecificationOptionId());
