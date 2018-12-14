@@ -647,8 +647,8 @@ public class CPDefinitionLocalServiceImpl
 			// CPDefinitionVirtualSetting
 
 			CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
-				_cpDefinitionVirtualSettingPersistence.fetchByCPDefinitionId(
-					cpDefinitionId);
+				_cpDefinitionVirtualSettingPersistence.fetchByC_C(
+					cpDefinitionClassNameId, cpDefinitionId);
 
 			if (cpDefinitionVirtualSetting != null) {
 				CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
@@ -660,7 +660,7 @@ public class CPDefinitionLocalServiceImpl
 				newCPDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
 					newCPDefinitionVirtualSettingId);
 				newCPDefinitionVirtualSetting.setModifiedDate(new Date());
-				newCPDefinitionVirtualSetting.setCPDefinitionId(newCPDefinitionId);
+				newCPDefinitionVirtualSetting.setClassPK(newCPDefinitionId);
 
 				_cpDefinitionVirtualSettingPersistence.update(
 					newCPDefinitionVirtualSetting);

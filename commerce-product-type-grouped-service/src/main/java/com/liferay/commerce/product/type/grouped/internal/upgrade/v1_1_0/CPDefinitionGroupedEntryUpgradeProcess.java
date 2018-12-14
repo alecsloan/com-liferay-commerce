@@ -15,7 +15,6 @@
 package com.liferay.commerce.product.type.grouped.internal.upgrade.v1_1_0;
 
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryModelImpl;
 import com.liferay.petra.string.StringPool;
@@ -39,12 +38,6 @@ import java.util.Objects;
  */
 public class CPDefinitionGroupedEntryUpgradeProcess
 	extends UpgradeProcess {
-
-	public CPDefinitionGroupedEntryUpgradeProcess(
-		CPDefinitionLocalService cpDefinitionLocalService) {
-
-		_cpDefinitionLocalService = cpDefinitionLocalService;
-	}
 
 	@Override
 	protected void doUpgrade() throws Exception {
@@ -71,11 +64,9 @@ public class CPDefinitionGroupedEntryUpgradeProcess
 			while (rs.next()) {
 				long entryCPDefinitionId = rs.getLong("entryCPDefinitionId");
 
-				CPDefinition cpDefinition =
-					_cpDefinitionLocalService.fetchCPDefinition(
-						entryCPDefinitionId);
+				long cProductId = _getCProductId(entryCPDefinitionId);
 
-				ps.setLong(1, cpDefinition.getCProductId());
+				ps.setLong(1, cProductId);
 				ps.setLong(2, entryCPDefinitionId);
 
 				ps.execute();
@@ -194,6 +185,28 @@ public class CPDefinitionGroupedEntryUpgradeProcess
 		}
 	}
 
+	private long _getCProductId(long cpDefinitionId) throws Exception {
+		Statement s = null;
+		ResultSet rs = null;
+
+		try {
+			s = connection.createStatement();
+
+			rs = s.executeQuery(
+				"select CProductId from CPDefinition where CPDefinitionId = " +
+					cpDefinitionId);
+
+			if (rs.next()) {
+				return rs.getLong("CProductId");
+			}
+		}
+		finally {
+			DataAccess.cleanUp(s, rs);
+		}
+
+		return 0;
+	}
+
 	private boolean _tableHasIndex(String tableName, String indexName)
 		throws Exception {
 
@@ -221,7 +234,5 @@ public class CPDefinitionGroupedEntryUpgradeProcess
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPDefinitionGroupedEntryUpgradeProcess.class);
-
-	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 }
