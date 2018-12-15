@@ -246,13 +246,21 @@ public class CPDefinitionLocalServiceImpl
 		CPDefinition cpDefinition = cpDefinitionPersistence.create(
 			cpDefinitionId);
 
-		Locale locale = LocaleUtil.getSiteDefault();
+		ServiceContext cProductServiceContext = new ServiceContext();
+
+		cProductServiceContext.setScopeGroupId(
+			serviceContext.getScopeGroupId());
+		cProductServiceContext.setUserId(serviceContext.getUserId());
+
+		CProduct cProduct = cProductLocalService.addCProduct(
+			cProductServiceContext);
 
 		cpDefinition.setUuid(serviceContext.getUuid());
 		cpDefinition.setGroupId(groupId);
 		cpDefinition.setCompanyId(user.getCompanyId());
 		cpDefinition.setUserId(user.getUserId());
 		cpDefinition.setUserName(user.getFullName());
+		cpDefinition.setCProductId(cProduct.getCProductId());
 		cpDefinition.setProductTypeName(productTypeName);
 		cpDefinition.setIgnoreSKUCombinations(ignoreSKUCombinations);
 		cpDefinition.setShippable(shippable);
@@ -269,7 +277,11 @@ public class CPDefinitionLocalServiceImpl
 		cpDefinition.setDDMStructureKey(ddmStructureKey);
 		cpDefinition.setPublished(published);
 		cpDefinition.setExternalReferenceCode(externalReferenceCode);
+
+		Locale locale = LocaleUtil.getSiteDefault();
+
 		cpDefinition.setDefaultLanguageId(LocaleUtil.toLanguageId(locale));
+
 		cpDefinition.setDisplayDate(displayDate);
 		cpDefinition.setExpirationDate(expirationDate);
 		cpDefinition.setSubscriptionEnabled(subscriptionEnabled);
@@ -282,6 +294,9 @@ public class CPDefinitionLocalServiceImpl
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
 			cpDefinition.setStatus(WorkflowConstants.STATUS_DRAFT);
+
+			cProductLocalService.updateDraftDefinitionId(
+				cProduct.getCProductId(), cpDefinition.getCPDefinitionId());
 		}
 		else {
 			cpDefinition.setStatus(WorkflowConstants.STATUS_EXPIRED);
@@ -314,14 +329,6 @@ public class CPDefinitionLocalServiceImpl
 				displayDateHour, displayDateMinute, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, cpInstanceServiceContext);
-
-			ServiceContext cProductServiceContext = new ServiceContext();
-
-			cProductServiceContext.setScopeGroupId(
-				serviceContext.getScopeGroupId());
-			cProductServiceContext.setUserId(serviceContext.getUserId());
-
-			cProductLocalService.addCProduct(cProductServiceContext);
 		}
 
 		// Commerce product friendly URL
