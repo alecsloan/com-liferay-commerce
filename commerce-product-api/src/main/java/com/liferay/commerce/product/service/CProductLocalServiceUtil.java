@@ -320,6 +320,12 @@ public class CProductLocalServiceUtil {
 		return getService().updateCProduct(cProduct);
 	}
 
+	public static com.liferay.commerce.product.model.CProduct updateDraftDefinitionId(
+		long cProductId, long draftDefinitionId) {
+		return getService()
+				   .updateDraftDefinitionId(cProductId, draftDefinitionId);
+	}
+
 	public static com.liferay.commerce.product.model.CProduct updatePublishedDefinitionId(
 		long cProductId, long publishedDefinitionId) {
 		return getService()

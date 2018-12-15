@@ -337,6 +337,13 @@ public class CProductLocalServiceWrapper implements CProductLocalService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CProduct updateDraftDefinitionId(
+		long cProductId, long draftDefinitionId) {
+		return _cProductLocalService.updateDraftDefinitionId(cProductId,
+			draftDefinitionId);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CProduct updatePublishedDefinitionId(
 		long cProductId, long publishedDefinitionId) {
 		return _cProductLocalService.updatePublishedDefinitionId(cProductId,

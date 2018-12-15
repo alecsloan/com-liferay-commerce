@@ -52,6 +52,26 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 	}
 
 	@Override
+	public CProduct updateDraftDefinitionId(
+		long cProductId, long draftDefinitionId) {
+
+		try {
+			CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+
+			Date now = new Date();
+
+			cProduct.setModifiedDate(now);
+
+			cProduct.setDraftDefinitionId(draftDefinitionId);
+
+			return cProductPersistence.update(cProduct);
+		}
+		catch(PortalException pe){
+			return null;
+		}
+	}
+
+	@Override
 	public CProduct updatePublishedDefinitionId(
 		long cProductId, long publishedDefinitionId) {
 

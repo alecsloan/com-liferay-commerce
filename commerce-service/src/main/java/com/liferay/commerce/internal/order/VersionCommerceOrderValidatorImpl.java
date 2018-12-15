@@ -59,32 +59,36 @@ public class VersionCommerceOrderValidatorImpl
 			Locale locale, CommerceOrderItem commerceOrderItem)
 		throws PortalException {
 
-		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+		if (commerceOrderItem.getCPInstanceId() != 0) &&
+			(commerceOrderItem.getCProductId()!= 0)) {
 
-		CProduct cProduct = commerceOrderItem.getCProduct();
+			CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
-		if (cpInstance.getCPDefinitionId() !=
-				cProduct.getPublishedDefinitionId()) {
+			CProduct cProduct = commerceOrderItem.getCProduct();
 
-			boolean instanceUpdated = _updateInstance(
-				commerceOrderItem, cProduct);
+			if (cpInstance.getCPDefinitionId() !=
+					cProduct.getPublishedDefinitionId()) {
 
-			if (instanceUpdated) {
+				boolean instanceUpdated = _updateInstance(
+					commerceOrderItem, cProduct);
+
+				if (instanceUpdated) {
+					return new CommerceOrderValidatorResult(
+						commerceOrderItem.getCommerceOrderItemId(), false,
+						_getLocalizedMessage(
+							locale,
+						"this-product-will-be-automatically-updated-to-a-newer-version"));
+				}
+
 				return new CommerceOrderValidatorResult(
 					commerceOrderItem.getCommerceOrderItemId(), false,
 					_getLocalizedMessage(
 						locale,
-					"this-product-will-be-automatically-updated-to-a-newer-version"));
+					"there-is-a-newer-version-of-this-product-available"));
 			}
-
-			return new CommerceOrderValidatorResult(
-				commerceOrderItem.getCommerceOrderItemId(), false,
-				_getLocalizedMessage(
-					locale,
-				"there-is-a-newer-version-of-this-product-available"));
 		}
 
-		return new CommerceOrderValidatorResult(true);
+		return new CommerceOrderValidatorResult(true)
 	}
 
 	@Override

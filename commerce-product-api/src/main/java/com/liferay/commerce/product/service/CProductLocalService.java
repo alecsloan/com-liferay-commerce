@@ -291,6 +291,9 @@ public interface CProductLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CProduct updateCProduct(CProduct cProduct);
 
+	public CProduct updateDraftDefinitionId(long cProductId,
+		long draftDefinitionId);
+
 	public CProduct updatePublishedDefinitionId(long cProductId,
 		long publishedDefinitionId);
 }
