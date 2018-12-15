@@ -102,7 +102,8 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 				cpDefinitionOptionValueRelId);
 
 		CPDefinitionOptionRel cpDefinitionOptionRel =
-			cpDefinitionOptionValueRel.getCPDefinitionOptionRel();
+			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
+				cpDefinitionOptionRelId);
 
 		if (cpDefinitionLocalService.isPublishedCPDefinition(
 				cpDefinitionOptionRel.getCPDefinitionId())) {
