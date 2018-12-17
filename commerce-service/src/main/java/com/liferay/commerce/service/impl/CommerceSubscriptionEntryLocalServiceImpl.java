@@ -22,8 +22,10 @@ import com.liferay.commerce.exception.CommerceSubscriptionEntrySubscriptionStatu
 import com.liferay.commerce.exception.CommerceSubscriptionTypeException;
 import com.liferay.commerce.internal.search.CommerceSubscriptionEntryIndexer;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
@@ -75,8 +77,11 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
+		CPDefinition cpDefinition = _cpInstanceLocalService.getCPDefinition(
+			cpInstance.getCPDefinitionId());
+
 		return addCommerceSubscriptionEntry(
-			cpInstance.getUuid(), cpInstance.getCProductId(),
+			cpInstance.getUuid(), cpDefinition.getCProductId(),
 			commerceOrderItemId, serviceContext);
 	}
 
@@ -464,6 +469,9 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 	private static final String[] _SELECTED_FIELD_NAMES =
 		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
+
+	@ServiceReference(type = CPDefinitionLocalService.class)
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@ServiceReference(type = CPInstanceLocalService.class)
 	private CPInstanceLocalService _cpInstanceLocalService;
