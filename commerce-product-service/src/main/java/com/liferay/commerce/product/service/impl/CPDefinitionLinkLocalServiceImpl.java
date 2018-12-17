@@ -301,7 +301,7 @@ public class CPDefinitionLinkLocalServiceImpl
 			return;
 		}
 
-		long[] cProductIds = new long[cpDefinitionIds2];
+		long[] cProductIds = new long[cpDefinitionIds2.length];
 
 		for (int i = 0; i < cProductIds.length; i++) {
 			long cpDefinitionId = cpDefinitionIds2[i];
@@ -312,7 +312,7 @@ public class CPDefinitionLinkLocalServiceImpl
 			cProductIds[i] = cpDefinition.getCProductId();
 		}
 
-		updateCPDefinitionLinksByCProductId(
+		cpDefinitionLinkLocalService.updateCPDefinitionLinkCProductIds(
 			cpDefinitionId1, cProductIds, type, serviceContext);
 	}
 
