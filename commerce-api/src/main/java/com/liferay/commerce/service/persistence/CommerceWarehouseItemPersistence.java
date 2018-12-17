@@ -179,6 +179,57 @@ public interface CommerceWarehouseItemPersistence extends BasePersistence<Commer
 	public int countByCommerceWarehouseId(long commerceWarehouseId);
 
 	/**
+	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or throws a {@link NoSuchWarehouseItemException} if it could not be found.
+	*
+	* @param commerceWarehouseId the commerce warehouse ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the matching commerce warehouse item
+	* @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
+	*/
+	public CommerceWarehouseItem findByCWI_CPIU(long commerceWarehouseId,
+		String CPInstanceUuid) throws NoSuchWarehouseItemException;
+
+	/**
+	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param commerceWarehouseId the commerce warehouse ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
+	*/
+	public CommerceWarehouseItem fetchByCWI_CPIU(long commerceWarehouseId,
+		String CPInstanceUuid);
+
+	/**
+	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param commerceWarehouseId the commerce warehouse ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
+	*/
+	public CommerceWarehouseItem fetchByCWI_CPIU(long commerceWarehouseId,
+		String CPInstanceUuid, boolean retrieveFromCache);
+
+	/**
+	* Removes the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; from the database.
+	*
+	* @param commerceWarehouseId the commerce warehouse ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the commerce warehouse item that was removed
+	*/
+	public CommerceWarehouseItem removeByCWI_CPIU(long commerceWarehouseId,
+		String CPInstanceUuid) throws NoSuchWarehouseItemException;
+
+	/**
+	* Returns the number of commerce warehouse items where commerceWarehouseId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* @param commerceWarehouseId the commerce warehouse ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the number of matching commerce warehouse items
+	*/
+	public int countByCWI_CPIU(long commerceWarehouseId, String CPInstanceUuid);
+
+	/**
 	* Returns all the commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63;.
 	*
 	* @param CProductId the c product ID
@@ -325,57 +376,6 @@ public interface CommerceWarehouseItemPersistence extends BasePersistence<Commer
 	* @return the number of matching commerce warehouse items
 	*/
 	public int countByCPI_CPIU(long CProductId, String CPInstanceUuid);
-
-	/**
-	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or throws a {@link NoSuchWarehouseItemException} if it could not be found.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param CPInstanceUuid the cp instance uuid
-	* @return the matching commerce warehouse item
-	* @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
-	*/
-	public CommerceWarehouseItem findByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid) throws NoSuchWarehouseItemException;
-
-	/**
-	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param CPInstanceUuid the cp instance uuid
-	* @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
-	*/
-	public CommerceWarehouseItem fetchByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid);
-
-	/**
-	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param CPInstanceUuid the cp instance uuid
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
-	*/
-	public CommerceWarehouseItem fetchByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid, boolean retrieveFromCache);
-
-	/**
-	* Removes the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; from the database.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param CPInstanceUuid the cp instance uuid
-	* @return the commerce warehouse item that was removed
-	*/
-	public CommerceWarehouseItem removeByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid) throws NoSuchWarehouseItemException;
-
-	/**
-	* Returns the number of commerce warehouse items where commerceWarehouseId = &#63; and CPInstanceUuid = &#63;.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param CPInstanceUuid the cp instance uuid
-	* @return the number of matching commerce warehouse items
-	*/
-	public int countByCWI_CPIU(long commerceWarehouseId, String CPInstanceUuid);
 
 	/**
 	* Caches the commerce warehouse item in the entity cache if it is enabled.

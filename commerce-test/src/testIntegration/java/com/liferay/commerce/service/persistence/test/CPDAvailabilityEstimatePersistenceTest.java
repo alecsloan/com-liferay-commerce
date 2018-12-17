@@ -205,18 +205,18 @@ public class CPDAvailabilityEstimatePersistenceTest {
 	}
 
 	@Test
-	public void testCountByCProductId() throws Exception {
-		_persistence.countByCProductId(RandomTestUtil.nextLong());
-
-		_persistence.countByCProductId(0L);
-	}
-
-	@Test
 	public void testCountByCommerceAvailabilityEstimateId()
 		throws Exception {
 		_persistence.countByCommerceAvailabilityEstimateId(RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceAvailabilityEstimateId(0L);
+	}
+
+	@Test
+	public void testCountByCProductId() throws Exception {
+		_persistence.countByCProductId(RandomTestUtil.nextLong());
+
+		_persistence.countByCProductId(0L);
 	}
 
 	@Test

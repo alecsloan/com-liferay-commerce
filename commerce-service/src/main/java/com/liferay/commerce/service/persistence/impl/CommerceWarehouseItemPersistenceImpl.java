@@ -618,6 +618,259 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 
 	private static final String _FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2 =
 		"commerceWarehouseItem.commerceWarehouseId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_CWI_CPIU = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceWarehouseItemImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByCWI_CPIU",
+			new String[] { Long.class.getName(), String.class.getName() },
+			CommerceWarehouseItemModelImpl.COMMERCEWAREHOUSEID_COLUMN_BITMASK |
+			CommerceWarehouseItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_CWI_CPIU = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCWI_CPIU",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or throws a {@link NoSuchWarehouseItemException} if it could not be found.
+	 *
+	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @return the matching commerce warehouse item
+	 * @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
+	 */
+	@Override
+	public CommerceWarehouseItem findByCWI_CPIU(long commerceWarehouseId,
+		String CPInstanceUuid) throws NoSuchWarehouseItemException {
+		CommerceWarehouseItem commerceWarehouseItem = fetchByCWI_CPIU(commerceWarehouseId,
+				CPInstanceUuid);
+
+		if (commerceWarehouseItem == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("commerceWarehouseId=");
+			msg.append(commerceWarehouseId);
+
+			msg.append(", CPInstanceUuid=");
+			msg.append(CPInstanceUuid);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchWarehouseItemException(msg.toString());
+		}
+
+		return commerceWarehouseItem;
+	}
+
+	/**
+	 * Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
+	 */
+	@Override
+	public CommerceWarehouseItem fetchByCWI_CPIU(long commerceWarehouseId,
+		String CPInstanceUuid) {
+		return fetchByCWI_CPIU(commerceWarehouseId, CPInstanceUuid, true);
+	}
+
+	/**
+	 * Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
+	 */
+	@Override
+	public CommerceWarehouseItem fetchByCWI_CPIU(long commerceWarehouseId,
+		String CPInstanceUuid, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { commerceWarehouseId, CPInstanceUuid };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CWI_CPIU,
+					finderArgs, this);
+		}
+
+		if (result instanceof CommerceWarehouseItem) {
+			CommerceWarehouseItem commerceWarehouseItem = (CommerceWarehouseItem)result;
+
+			if ((commerceWarehouseId != commerceWarehouseItem.getCommerceWarehouseId()) ||
+					!Objects.equals(CPInstanceUuid,
+						commerceWarehouseItem.getCPInstanceUuid())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_COMMERCEWAREHOUSEITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_CWI_CPIU_COMMERCEWAREHOUSEID_2);
+
+			boolean bindCPInstanceUuid = false;
+
+			if (CPInstanceUuid == null) {
+				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_1);
+			}
+			else if (CPInstanceUuid.equals("")) {
+				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_3);
+			}
+			else {
+				bindCPInstanceUuid = true;
+
+				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceWarehouseId);
+
+				if (bindCPInstanceUuid) {
+					qPos.add(CPInstanceUuid);
+				}
+
+				List<CommerceWarehouseItem> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_CWI_CPIU,
+						finderArgs, list);
+				}
+				else {
+					CommerceWarehouseItem commerceWarehouseItem = list.get(0);
+
+					result = commerceWarehouseItem;
+
+					cacheResult(commerceWarehouseItem);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_CWI_CPIU,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceWarehouseItem)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; from the database.
+	 *
+	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @return the commerce warehouse item that was removed
+	 */
+	@Override
+	public CommerceWarehouseItem removeByCWI_CPIU(long commerceWarehouseId,
+		String CPInstanceUuid) throws NoSuchWarehouseItemException {
+		CommerceWarehouseItem commerceWarehouseItem = findByCWI_CPIU(commerceWarehouseId,
+				CPInstanceUuid);
+
+		return remove(commerceWarehouseItem);
+	}
+
+	/**
+	 * Returns the number of commerce warehouse items where commerceWarehouseId = &#63; and CPInstanceUuid = &#63;.
+	 *
+	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @return the number of matching commerce warehouse items
+	 */
+	@Override
+	public int countByCWI_CPIU(long commerceWarehouseId, String CPInstanceUuid) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CWI_CPIU;
+
+		Object[] finderArgs = new Object[] { commerceWarehouseId, CPInstanceUuid };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCEWAREHOUSEITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_CWI_CPIU_COMMERCEWAREHOUSEID_2);
+
+			boolean bindCPInstanceUuid = false;
+
+			if (CPInstanceUuid == null) {
+				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_1);
+			}
+			else if (CPInstanceUuid.equals("")) {
+				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_3);
+			}
+			else {
+				bindCPInstanceUuid = true;
+
+				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceWarehouseId);
+
+				if (bindCPInstanceUuid) {
+					qPos.add(CPInstanceUuid);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_CWI_CPIU_COMMERCEWAREHOUSEID_2 = "commerceWarehouseItem.commerceWarehouseId = ? AND ";
+	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_1 = "commerceWarehouseItem.CPInstanceUuid IS NULL";
+	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_2 = "commerceWarehouseItem.CPInstanceUuid = ?";
+	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_3 = "(commerceWarehouseItem.CPInstanceUuid IS NULL OR commerceWarehouseItem.CPInstanceUuid = '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPI_CPIU = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
 			CommerceWarehouseItemImpl.class,
@@ -1220,259 +1473,6 @@ public class CommerceWarehouseItemPersistenceImpl extends BasePersistenceImpl<Co
 	private static final String _FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_1 = "commerceWarehouseItem.CPInstanceUuid IS NULL";
 	private static final String _FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_2 = "commerceWarehouseItem.CPInstanceUuid = ?";
 	private static final String _FINDER_COLUMN_CPI_CPIU_CPINSTANCEUUID_3 = "(commerceWarehouseItem.CPInstanceUuid IS NULL OR commerceWarehouseItem.CPInstanceUuid = '')";
-	public static final FinderPath FINDER_PATH_FETCH_BY_CWI_CPIU = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceWarehouseItemImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByCWI_CPIU",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceWarehouseItemModelImpl.COMMERCEWAREHOUSEID_COLUMN_BITMASK |
-			CommerceWarehouseItemModelImpl.CPINSTANCEUUID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CWI_CPIU = new FinderPath(CommerceWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceWarehouseItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCWI_CPIU",
-			new String[] { Long.class.getName(), String.class.getName() });
-
-	/**
-	 * Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or throws a {@link NoSuchWarehouseItemException} if it could not be found.
-	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
-	 * @param CPInstanceUuid the cp instance uuid
-	 * @return the matching commerce warehouse item
-	 * @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
-	 */
-	@Override
-	public CommerceWarehouseItem findByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid) throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = fetchByCWI_CPIU(commerceWarehouseId,
-				CPInstanceUuid);
-
-		if (commerceWarehouseItem == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("commerceWarehouseId=");
-			msg.append(commerceWarehouseId);
-
-			msg.append(", CPInstanceUuid=");
-			msg.append(CPInstanceUuid);
-
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchWarehouseItemException(msg.toString());
-		}
-
-		return commerceWarehouseItem;
-	}
-
-	/**
-	 * Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
-	 * @param CPInstanceUuid the cp instance uuid
-	 * @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
-	 */
-	@Override
-	public CommerceWarehouseItem fetchByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid) {
-		return fetchByCWI_CPIU(commerceWarehouseId, CPInstanceUuid, true);
-	}
-
-	/**
-	 * Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
-	 * @param CPInstanceUuid the cp instance uuid
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
-	 */
-	@Override
-	public CommerceWarehouseItem fetchByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid, boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { commerceWarehouseId, CPInstanceUuid };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CWI_CPIU,
-					finderArgs, this);
-		}
-
-		if (result instanceof CommerceWarehouseItem) {
-			CommerceWarehouseItem commerceWarehouseItem = (CommerceWarehouseItem)result;
-
-			if ((commerceWarehouseId != commerceWarehouseItem.getCommerceWarehouseId()) ||
-					!Objects.equals(CPInstanceUuid,
-						commerceWarehouseItem.getCPInstanceUuid())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_COMMERCEWAREHOUSEITEM_WHERE);
-
-			query.append(_FINDER_COLUMN_CWI_CPIU_COMMERCEWAREHOUSEID_2);
-
-			boolean bindCPInstanceUuid = false;
-
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
-				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_3);
-			}
-			else {
-				bindCPInstanceUuid = true;
-
-				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(commerceWarehouseId);
-
-				if (bindCPInstanceUuid) {
-					qPos.add(CPInstanceUuid);
-				}
-
-				List<CommerceWarehouseItem> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_CWI_CPIU,
-						finderArgs, list);
-				}
-				else {
-					CommerceWarehouseItem commerceWarehouseItem = list.get(0);
-
-					result = commerceWarehouseItem;
-
-					cacheResult(commerceWarehouseItem);
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_CWI_CPIU,
-					finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CommerceWarehouseItem)result;
-		}
-	}
-
-	/**
-	 * Removes the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; from the database.
-	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
-	 * @param CPInstanceUuid the cp instance uuid
-	 * @return the commerce warehouse item that was removed
-	 */
-	@Override
-	public CommerceWarehouseItem removeByCWI_CPIU(long commerceWarehouseId,
-		String CPInstanceUuid) throws NoSuchWarehouseItemException {
-		CommerceWarehouseItem commerceWarehouseItem = findByCWI_CPIU(commerceWarehouseId,
-				CPInstanceUuid);
-
-		return remove(commerceWarehouseItem);
-	}
-
-	/**
-	 * Returns the number of commerce warehouse items where commerceWarehouseId = &#63; and CPInstanceUuid = &#63;.
-	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
-	 * @param CPInstanceUuid the cp instance uuid
-	 * @return the number of matching commerce warehouse items
-	 */
-	@Override
-	public int countByCWI_CPIU(long commerceWarehouseId, String CPInstanceUuid) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CWI_CPIU;
-
-		Object[] finderArgs = new Object[] { commerceWarehouseId, CPInstanceUuid };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_COMMERCEWAREHOUSEITEM_WHERE);
-
-			query.append(_FINDER_COLUMN_CWI_CPIU_COMMERCEWAREHOUSEID_2);
-
-			boolean bindCPInstanceUuid = false;
-
-			if (CPInstanceUuid == null) {
-				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_1);
-			}
-			else if (CPInstanceUuid.equals("")) {
-				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_3);
-			}
-			else {
-				bindCPInstanceUuid = true;
-
-				query.append(_FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(commerceWarehouseId);
-
-				if (bindCPInstanceUuid) {
-					qPos.add(CPInstanceUuid);
-				}
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_CWI_CPIU_COMMERCEWAREHOUSEID_2 = "commerceWarehouseItem.commerceWarehouseId = ? AND ";
-	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_1 = "commerceWarehouseItem.CPInstanceUuid IS NULL";
-	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_2 = "commerceWarehouseItem.CPInstanceUuid = ?";
-	private static final String _FINDER_COLUMN_CWI_CPIU_CPINSTANCEUUID_3 = "(commerceWarehouseItem.CPInstanceUuid IS NULL OR commerceWarehouseItem.CPInstanceUuid = '')";
 
 	public CommerceWarehouseItemPersistenceImpl() {
 		setModelClass(CommerceWarehouseItem.class);

@@ -236,17 +236,17 @@ public class CommerceOrderItemPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCProductId() throws Exception {
-		_persistence.countByCProductId(RandomTestUtil.nextLong());
-
-		_persistence.countByCProductId(0L);
-	}
-
-	@Test
 	public void testCountByCommerceOrderId() throws Exception {
 		_persistence.countByCommerceOrderId(RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceOrderId(0L);
+	}
+
+	@Test
+	public void testCountByCProductId() throws Exception {
+		_persistence.countByCProductId(RandomTestUtil.nextLong());
+
+		_persistence.countByCProductId(0L);
 	}
 
 	@Test

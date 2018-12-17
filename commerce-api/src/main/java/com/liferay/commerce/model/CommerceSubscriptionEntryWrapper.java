@@ -280,6 +280,11 @@ public class CommerceSubscriptionEntryWrapper
 		return _commerceSubscriptionEntry.getCPDefinitionId();
 	}
 
+	@Override
+	public long getCPInstanceId() {
+		return _commerceSubscriptionEntry.getCPInstanceId();
+	}
+
 	/**
 	* Returns the cp instance uuid of this commerce subscription entry.
 	*
