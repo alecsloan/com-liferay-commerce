@@ -77,7 +77,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
-		CPDefinition cpDefinition = _cpInstanceLocalService.getCPDefinition(
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpInstance.getCPDefinitionId());
 
 		return addCommerceSubscriptionEntry(
