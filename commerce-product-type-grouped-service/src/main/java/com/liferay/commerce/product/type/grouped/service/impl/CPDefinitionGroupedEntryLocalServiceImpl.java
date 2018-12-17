@@ -42,7 +42,7 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 		throws PortalException {
 
 		for (long entryCPDefinitionId : entryCPDefinitionIds) {
-			addCPDefinitionGroupedEntry(
+			cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntry(
 				cpDefinitionId, entryCPDefinitionId, 0, 1, serviceContext);
 		}
 	}
@@ -65,6 +65,16 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 			cpDefinitionGroupedEntryPersistence.create(
 				cpDefinitionGroupedEntryId);
 
+		long cpDefinitionId = cpDefinitionGroupedEntry.getCPDefinitionId();
+
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			cpDefinition = _cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+		}
+
 		cpDefinitionGroupedEntry.setUuid(serviceContext.getUuid());
 		cpDefinitionGroupedEntry.setGroupId(cpDefinition.getGroupId());
 		cpDefinitionGroupedEntry.setCompanyId(user.getCompanyId());
@@ -83,6 +93,17 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 
 	@Override
 	public void deleteCPDefinitionGroupedEntries(long cpDefinitionId) {
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			CPDefinition newCPDefinition =
+				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionId = newCPDefinition.getCPDefinitionId();
+		}
+
 		cpDefinitionGroupedEntryPersistence.removeByCPDefinitionId(
 			cpDefinitionId);
 	}
@@ -134,6 +155,22 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry =
 			cpDefinitionGroupedEntryPersistence.findByPrimaryKey(
 				cpDefinitionGroupedEntryId);
+
+		long cpDefinitionId = cpDefinitionGroupedEntry.getCPDefinitionId();
+
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			CPDefinition newCPDefinition =
+				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionGroupedEntry =
+				cpDefinitionGroupedEntryPersistence.findByC_E(
+					newCPDefinition.getCPDefinitionId(),
+					cpDefinitionGroupedEntry.getEntryCPDefinitionId());
+		}
 
 		validate(
 			cpDefinitionGroupedEntry.getCPDefinitionId(),
