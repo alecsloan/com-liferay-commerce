@@ -763,56 +763,6 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	public int countByCPDefinitionId(long CPDefinitionId);
 
 	/**
-	* Returns the cp instance where uuid = &#63; and CPDefinitionId = &#63; or throws a {@link NoSuchCPInstanceException} if it could not be found.
-	*
-	* @param uuid the uuid
-	* @param CPDefinitionId the cp definition ID
-	* @return the matching cp instance
-	* @throws NoSuchCPInstanceException if a matching cp instance could not be found
-	*/
-	public CPInstance findByU_C(String uuid, long CPDefinitionId)
-		throws NoSuchCPInstanceException;
-
-	/**
-	* Returns the cp instance where uuid = &#63; and CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param uuid the uuid
-	* @param CPDefinitionId the cp definition ID
-	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
-	*/
-	public CPInstance fetchByU_C(String uuid, long CPDefinitionId);
-
-	/**
-	* Returns the cp instance where uuid = &#63; and CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param uuid the uuid
-	* @param CPDefinitionId the cp definition ID
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
-	*/
-	public CPInstance fetchByU_C(String uuid, long CPDefinitionId,
-		boolean retrieveFromCache);
-
-	/**
-	* Removes the cp instance where uuid = &#63; and CPDefinitionId = &#63; from the database.
-	*
-	* @param uuid the uuid
-	* @param CPDefinitionId the cp definition ID
-	* @return the cp instance that was removed
-	*/
-	public CPInstance removeByU_C(String uuid, long CPDefinitionId)
-		throws NoSuchCPInstanceException;
-
-	/**
-	* Returns the number of cp instances where uuid = &#63; and CPDefinitionId = &#63;.
-	*
-	* @param uuid the uuid
-	* @param CPDefinitionId the cp definition ID
-	* @return the number of matching cp instances
-	*/
-	public int countByU_C(String uuid, long CPDefinitionId);
-
-	/**
 	* Returns all the cp instances where groupId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
@@ -1097,6 +1047,56 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	* @return the number of matching cp instances
 	*/
 	public int countByG_NotST(long groupId, int status);
+
+	/**
+	* Returns the cp instance where CPDefinitionId = &#63; and CPInstanceUuid = &#63; or throws a {@link NoSuchCPInstanceException} if it could not be found.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the matching cp instance
+	* @throws NoSuchCPInstanceException if a matching cp instance could not be found
+	*/
+	public CPInstance findByC_C(long CPDefinitionId, String CPInstanceUuid)
+		throws NoSuchCPInstanceException;
+
+	/**
+	* Returns the cp instance where CPDefinitionId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	*/
+	public CPInstance fetchByC_C(long CPDefinitionId, String CPInstanceUuid);
+
+	/**
+	* Returns the cp instance where CPDefinitionId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	*/
+	public CPInstance fetchByC_C(long CPDefinitionId, String CPInstanceUuid,
+		boolean retrieveFromCache);
+
+	/**
+	* Removes the cp instance where CPDefinitionId = &#63; and CPInstanceUuid = &#63; from the database.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the cp instance that was removed
+	*/
+	public CPInstance removeByC_C(long CPDefinitionId, String CPInstanceUuid)
+		throws NoSuchCPInstanceException;
+
+	/**
+	* Returns the number of cp instances where CPDefinitionId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the number of matching cp instances
+	*/
+	public int countByC_C(long CPDefinitionId, String CPInstanceUuid);
 
 	/**
 	* Returns the cp instance where CPDefinitionId = &#63; and sku = &#63; or throws a {@link NoSuchCPInstanceException} if it could not be found.

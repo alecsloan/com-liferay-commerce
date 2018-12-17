@@ -145,6 +145,8 @@ public class CPInstancePersistenceTest {
 
 		newCPInstance.setCPDefinitionId(RandomTestUtil.nextLong());
 
+		newCPInstance.setCPInstanceUuid(RandomTestUtil.randomString());
+
 		newCPInstance.setSku(RandomTestUtil.randomString());
 
 		newCPInstance.setGtin(RandomTestUtil.randomString());
@@ -223,6 +225,8 @@ public class CPInstancePersistenceTest {
 			Time.getShortTimestamp(newCPInstance.getModifiedDate()));
 		Assert.assertEquals(existingCPInstance.getCPDefinitionId(),
 			newCPInstance.getCPDefinitionId());
+		Assert.assertEquals(existingCPInstance.getCPInstanceUuid(),
+			newCPInstance.getCPInstanceUuid());
 		Assert.assertEquals(existingCPInstance.getSku(), newCPInstance.getSku());
 		Assert.assertEquals(existingCPInstance.getGtin(),
 			newCPInstance.getGtin());
@@ -329,15 +333,6 @@ public class CPInstancePersistenceTest {
 	}
 
 	@Test
-	public void testCountByU_C() throws Exception {
-		_persistence.countByU_C("", RandomTestUtil.nextLong());
-
-		_persistence.countByU_C("null", 0L);
-
-		_persistence.countByU_C((String)null, 0L);
-	}
-
-	@Test
 	public void testCountByG_ST() throws Exception {
 		_persistence.countByG_ST(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextInt());
@@ -351,6 +346,15 @@ public class CPInstancePersistenceTest {
 			RandomTestUtil.nextInt());
 
 		_persistence.countByG_NotST(0L, 0);
+	}
+
+	@Test
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_C(0L, "null");
+
+		_persistence.countByC_C(0L, (String)null);
 	}
 
 	@Test
@@ -430,15 +434,15 @@ public class CPInstancePersistenceTest {
 			"externalReferenceCode", true, "CPInstanceId", true, "groupId",
 			true, "companyId", true, "userId", true, "userName", true,
 			"createDate", true, "modifiedDate", true, "CPDefinitionId", true,
-			"sku", true, "gtin", true, "manufacturerPartNumber", true,
-			"purchasable", true, "width", true, "height", true, "depth", true,
-			"weight", true, "price", true, "promoPrice", true, "cost", true,
-			"published", true, "displayDate", true, "expirationDate", true,
-			"lastPublishDate", true, "overrideSubscriptionInfo", true,
-			"subscriptionEnabled", true, "subscriptionLength", true,
-			"subscriptionType", true, "maxSubscriptionCycles", true, "status",
-			true, "statusByUserId", true, "statusByUserName", true,
-			"statusDate", true);
+			"CPInstanceUuid", true, "sku", true, "gtin", true,
+			"manufacturerPartNumber", true, "purchasable", true, "width", true,
+			"height", true, "depth", true, "weight", true, "price", true,
+			"promoPrice", true, "cost", true, "published", true, "displayDate",
+			true, "expirationDate", true, "lastPublishDate", true,
+			"overrideSubscriptionInfo", true, "subscriptionEnabled", true,
+			"subscriptionLength", true, "subscriptionType", true,
+			"maxSubscriptionCycles", true, "status", true, "statusByUserId",
+			true, "statusByUserName", true, "statusDate", true);
 	}
 
 	@Test
@@ -650,12 +654,13 @@ public class CPInstancePersistenceTest {
 			ReflectionTestUtil.<Long>invoke(existingCPInstance,
 				"getOriginalGroupId", new Class<?>[0]));
 
-		Assert.assertTrue(Objects.equals(existingCPInstance.getUuid(),
-				ReflectionTestUtil.invoke(existingCPInstance,
-					"getOriginalUuid", new Class<?>[0])));
 		Assert.assertEquals(Long.valueOf(existingCPInstance.getCPDefinitionId()),
 			ReflectionTestUtil.<Long>invoke(existingCPInstance,
 				"getOriginalCPDefinitionId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCPInstance.getCPInstanceUuid(),
+				ReflectionTestUtil.invoke(existingCPInstance,
+					"getOriginalCPInstanceUuid", new Class<?>[0])));
 
 		Assert.assertEquals(Long.valueOf(existingCPInstance.getCPDefinitionId()),
 			ReflectionTestUtil.<Long>invoke(existingCPInstance,
@@ -695,6 +700,8 @@ public class CPInstancePersistenceTest {
 		cpInstance.setModifiedDate(RandomTestUtil.nextDate());
 
 		cpInstance.setCPDefinitionId(RandomTestUtil.nextLong());
+
+		cpInstance.setCPInstanceUuid(RandomTestUtil.randomString());
 
 		cpInstance.setSku(RandomTestUtil.randomString());
 

@@ -227,15 +227,6 @@ public class CommercePriceEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCPInstanceUuid() throws Exception {
-		_persistence.countByCPInstanceUuid("");
-
-		_persistence.countByCPInstanceUuid("null");
-
-		_persistence.countByCPInstanceUuid((String)null);
-	}
-
-	@Test
 	public void testCountByGroupId() throws Exception {
 		_persistence.countByGroupId(RandomTestUtil.nextLong());
 
@@ -254,6 +245,15 @@ public class CommercePriceEntryPersistenceTest {
 		_persistence.countByCommercePriceListId(RandomTestUtil.nextLong());
 
 		_persistence.countByCommercePriceListId(0L);
+	}
+
+	@Test
+	public void testCountByCPInstanceUuid() throws Exception {
+		_persistence.countByCPInstanceUuid("");
+
+		_persistence.countByCPInstanceUuid("null");
+
+		_persistence.countByCPInstanceUuid((String)null);
 	}
 
 	@Test

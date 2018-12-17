@@ -173,6 +173,13 @@ public class CommerceWishListItemPersistenceTest {
 	}
 
 	@Test
+	public void testCountByCommerceWishListId() throws Exception {
+		_persistence.countByCommerceWishListId(RandomTestUtil.nextLong());
+
+		_persistence.countByCommerceWishListId(0L);
+	}
+
+	@Test
 	public void testCountByCPInstanceUuid() throws Exception {
 		_persistence.countByCPInstanceUuid("");
 
@@ -186,13 +193,6 @@ public class CommerceWishListItemPersistenceTest {
 		_persistence.countByCProductId(RandomTestUtil.nextLong());
 
 		_persistence.countByCProductId(0L);
-	}
-
-	@Test
-	public void testCountByCommerceWishListId() throws Exception {
-		_persistence.countByCommerceWishListId(RandomTestUtil.nextLong());
-
-		_persistence.countByCommerceWishListId(0L);
 	}
 
 	@Test

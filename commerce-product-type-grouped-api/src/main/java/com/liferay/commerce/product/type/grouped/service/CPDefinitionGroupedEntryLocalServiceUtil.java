@@ -44,7 +44,7 @@ public class CPDefinitionGroupedEntryLocalServiceUtil {
 	 */
 
 	/**
-	* @deprecated as of Judson (7.1.x)
+	* @deprecated As of Mueller (7.2.x)
 	*/
 	@Deprecated
 	public static void addCPDefinitionGroupedEntries(long cpDefinitionId,
@@ -77,7 +77,7 @@ public class CPDefinitionGroupedEntryLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated as of Judson (7.1.x)
+	* @deprecated As of Mueller (7.2.x)
 	*/
 	@Deprecated
 	public static com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry addCPDefinitionGroupedEntry(
@@ -243,7 +243,7 @@ public class CPDefinitionGroupedEntryLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated as of Judson (7.1.x)
+	* @deprecated As of Mueller (7.2.x)
 	*/
 	@Deprecated
 	public static com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(

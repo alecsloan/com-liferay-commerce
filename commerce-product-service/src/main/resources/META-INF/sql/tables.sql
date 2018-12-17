@@ -189,6 +189,7 @@ create table CPInstance (
 	createDate DATE null,
 	modifiedDate DATE null,
 	CPDefinitionId LONG,
+	CPInstanceUuid VARCHAR(75) null,
 	sku VARCHAR(75) null,
 	gtin VARCHAR(75) null,
 	manufacturerPartNumber VARCHAR(75) null,

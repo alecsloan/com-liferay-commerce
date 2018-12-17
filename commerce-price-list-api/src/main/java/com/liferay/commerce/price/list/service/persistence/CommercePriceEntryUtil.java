@@ -505,176 +505,6 @@ public class CommercePriceEntryUtil {
 	}
 
 	/**
-	* Returns all the commerce price entries where CPInstanceUuid = &#63;.
-	*
-	* @param CPInstanceUuid the cp instance uuid
-	* @return the matching commerce price entries
-	*/
-	public static List<CommercePriceEntry> findByCPInstanceUuid(
-		String CPInstanceUuid) {
-		return getPersistence().findByCPInstanceUuid(CPInstanceUuid);
-	}
-
-	/**
-	* Returns a range of all the commerce price entries where CPInstanceUuid = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param CPInstanceUuid the cp instance uuid
-	* @param start the lower bound of the range of commerce price entries
-	* @param end the upper bound of the range of commerce price entries (not inclusive)
-	* @return the range of matching commerce price entries
-	*/
-	public static List<CommercePriceEntry> findByCPInstanceUuid(
-		String CPInstanceUuid, int start, int end) {
-		return getPersistence().findByCPInstanceUuid(CPInstanceUuid, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce price entries where CPInstanceUuid = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param CPInstanceUuid the cp instance uuid
-	* @param start the lower bound of the range of commerce price entries
-	* @param end the upper bound of the range of commerce price entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce price entries
-	*/
-	public static List<CommercePriceEntry> findByCPInstanceUuid(
-		String CPInstanceUuid, int start, int end,
-		OrderByComparator<CommercePriceEntry> orderByComparator) {
-		return getPersistence()
-				   .findByCPInstanceUuid(CPInstanceUuid, start, end,
-			orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce price entries where CPInstanceUuid = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param CPInstanceUuid the cp instance uuid
-	* @param start the lower bound of the range of commerce price entries
-	* @param end the upper bound of the range of commerce price entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce price entries
-	*/
-	public static List<CommercePriceEntry> findByCPInstanceUuid(
-		String CPInstanceUuid, int start, int end,
-		OrderByComparator<CommercePriceEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByCPInstanceUuid(CPInstanceUuid, start, end,
-			orderByComparator, retrieveFromCache);
-	}
-
-	/**
-	* Returns the first commerce price entry in the ordered set where CPInstanceUuid = &#63;.
-	*
-	* @param CPInstanceUuid the cp instance uuid
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce price entry
-	* @throws NoSuchPriceEntryException if a matching commerce price entry could not be found
-	*/
-	public static CommercePriceEntry findByCPInstanceUuid_First(
-		String CPInstanceUuid,
-		OrderByComparator<CommercePriceEntry> orderByComparator)
-		throws com.liferay.commerce.price.list.exception.NoSuchPriceEntryException {
-		return getPersistence()
-				   .findByCPInstanceUuid_First(CPInstanceUuid, orderByComparator);
-	}
-
-	/**
-	* Returns the first commerce price entry in the ordered set where CPInstanceUuid = &#63;.
-	*
-	* @param CPInstanceUuid the cp instance uuid
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
-	*/
-	public static CommercePriceEntry fetchByCPInstanceUuid_First(
-		String CPInstanceUuid,
-		OrderByComparator<CommercePriceEntry> orderByComparator) {
-		return getPersistence()
-				   .fetchByCPInstanceUuid_First(CPInstanceUuid,
-			orderByComparator);
-	}
-
-	/**
-	* Returns the last commerce price entry in the ordered set where CPInstanceUuid = &#63;.
-	*
-	* @param CPInstanceUuid the cp instance uuid
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce price entry
-	* @throws NoSuchPriceEntryException if a matching commerce price entry could not be found
-	*/
-	public static CommercePriceEntry findByCPInstanceUuid_Last(
-		String CPInstanceUuid,
-		OrderByComparator<CommercePriceEntry> orderByComparator)
-		throws com.liferay.commerce.price.list.exception.NoSuchPriceEntryException {
-		return getPersistence()
-				   .findByCPInstanceUuid_Last(CPInstanceUuid, orderByComparator);
-	}
-
-	/**
-	* Returns the last commerce price entry in the ordered set where CPInstanceUuid = &#63;.
-	*
-	* @param CPInstanceUuid the cp instance uuid
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
-	*/
-	public static CommercePriceEntry fetchByCPInstanceUuid_Last(
-		String CPInstanceUuid,
-		OrderByComparator<CommercePriceEntry> orderByComparator) {
-		return getPersistence()
-				   .fetchByCPInstanceUuid_Last(CPInstanceUuid, orderByComparator);
-	}
-
-	/**
-	* Returns the commerce price entries before and after the current commerce price entry in the ordered set where CPInstanceUuid = &#63;.
-	*
-	* @param commercePriceEntryId the primary key of the current commerce price entry
-	* @param CPInstanceUuid the cp instance uuid
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce price entry
-	* @throws NoSuchPriceEntryException if a commerce price entry with the primary key could not be found
-	*/
-	public static CommercePriceEntry[] findByCPInstanceUuid_PrevAndNext(
-		long commercePriceEntryId, String CPInstanceUuid,
-		OrderByComparator<CommercePriceEntry> orderByComparator)
-		throws com.liferay.commerce.price.list.exception.NoSuchPriceEntryException {
-		return getPersistence()
-				   .findByCPInstanceUuid_PrevAndNext(commercePriceEntryId,
-			CPInstanceUuid, orderByComparator);
-	}
-
-	/**
-	* Removes all the commerce price entries where CPInstanceUuid = &#63; from the database.
-	*
-	* @param CPInstanceUuid the cp instance uuid
-	*/
-	public static void removeByCPInstanceUuid(String CPInstanceUuid) {
-		getPersistence().removeByCPInstanceUuid(CPInstanceUuid);
-	}
-
-	/**
-	* Returns the number of commerce price entries where CPInstanceUuid = &#63;.
-	*
-	* @param CPInstanceUuid the cp instance uuid
-	* @return the number of matching commerce price entries
-	*/
-	public static int countByCPInstanceUuid(String CPInstanceUuid) {
-		return getPersistence().countByCPInstanceUuid(CPInstanceUuid);
-	}
-
-	/**
 	* Returns all the commerce price entries where groupId = &#63;.
 	*
 	* @param groupId the group ID
@@ -1168,6 +998,176 @@ public class CommercePriceEntryUtil {
 	*/
 	public static int countByCommercePriceListId(long commercePriceListId) {
 		return getPersistence().countByCommercePriceListId(commercePriceListId);
+	}
+
+	/**
+	* Returns all the commerce price entries where CPInstanceUuid = &#63;.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the matching commerce price entries
+	*/
+	public static List<CommercePriceEntry> findByCPInstanceUuid(
+		String CPInstanceUuid) {
+		return getPersistence().findByCPInstanceUuid(CPInstanceUuid);
+	}
+
+	/**
+	* Returns a range of all the commerce price entries where CPInstanceUuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param start the lower bound of the range of commerce price entries
+	* @param end the upper bound of the range of commerce price entries (not inclusive)
+	* @return the range of matching commerce price entries
+	*/
+	public static List<CommercePriceEntry> findByCPInstanceUuid(
+		String CPInstanceUuid, int start, int end) {
+		return getPersistence().findByCPInstanceUuid(CPInstanceUuid, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce price entries where CPInstanceUuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param start the lower bound of the range of commerce price entries
+	* @param end the upper bound of the range of commerce price entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce price entries
+	*/
+	public static List<CommercePriceEntry> findByCPInstanceUuid(
+		String CPInstanceUuid, int start, int end,
+		OrderByComparator<CommercePriceEntry> orderByComparator) {
+		return getPersistence()
+				   .findByCPInstanceUuid(CPInstanceUuid, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce price entries where CPInstanceUuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param start the lower bound of the range of commerce price entries
+	* @param end the upper bound of the range of commerce price entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce price entries
+	*/
+	public static List<CommercePriceEntry> findByCPInstanceUuid(
+		String CPInstanceUuid, int start, int end,
+		OrderByComparator<CommercePriceEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByCPInstanceUuid(CPInstanceUuid, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce price entry in the ordered set where CPInstanceUuid = &#63;.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce price entry
+	* @throws NoSuchPriceEntryException if a matching commerce price entry could not be found
+	*/
+	public static CommercePriceEntry findByCPInstanceUuid_First(
+		String CPInstanceUuid,
+		OrderByComparator<CommercePriceEntry> orderByComparator)
+		throws com.liferay.commerce.price.list.exception.NoSuchPriceEntryException {
+		return getPersistence()
+				   .findByCPInstanceUuid_First(CPInstanceUuid, orderByComparator);
+	}
+
+	/**
+	* Returns the first commerce price entry in the ordered set where CPInstanceUuid = &#63;.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
+	*/
+	public static CommercePriceEntry fetchByCPInstanceUuid_First(
+		String CPInstanceUuid,
+		OrderByComparator<CommercePriceEntry> orderByComparator) {
+		return getPersistence()
+				   .fetchByCPInstanceUuid_First(CPInstanceUuid,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce price entry in the ordered set where CPInstanceUuid = &#63;.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce price entry
+	* @throws NoSuchPriceEntryException if a matching commerce price entry could not be found
+	*/
+	public static CommercePriceEntry findByCPInstanceUuid_Last(
+		String CPInstanceUuid,
+		OrderByComparator<CommercePriceEntry> orderByComparator)
+		throws com.liferay.commerce.price.list.exception.NoSuchPriceEntryException {
+		return getPersistence()
+				   .findByCPInstanceUuid_Last(CPInstanceUuid, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce price entry in the ordered set where CPInstanceUuid = &#63;.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
+	*/
+	public static CommercePriceEntry fetchByCPInstanceUuid_Last(
+		String CPInstanceUuid,
+		OrderByComparator<CommercePriceEntry> orderByComparator) {
+		return getPersistence()
+				   .fetchByCPInstanceUuid_Last(CPInstanceUuid, orderByComparator);
+	}
+
+	/**
+	* Returns the commerce price entries before and after the current commerce price entry in the ordered set where CPInstanceUuid = &#63;.
+	*
+	* @param commercePriceEntryId the primary key of the current commerce price entry
+	* @param CPInstanceUuid the cp instance uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce price entry
+	* @throws NoSuchPriceEntryException if a commerce price entry with the primary key could not be found
+	*/
+	public static CommercePriceEntry[] findByCPInstanceUuid_PrevAndNext(
+		long commercePriceEntryId, String CPInstanceUuid,
+		OrderByComparator<CommercePriceEntry> orderByComparator)
+		throws com.liferay.commerce.price.list.exception.NoSuchPriceEntryException {
+		return getPersistence()
+				   .findByCPInstanceUuid_PrevAndNext(commercePriceEntryId,
+			CPInstanceUuid, orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce price entries where CPInstanceUuid = &#63; from the database.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	*/
+	public static void removeByCPInstanceUuid(String CPInstanceUuid) {
+		getPersistence().removeByCPInstanceUuid(CPInstanceUuid);
+	}
+
+	/**
+	* Returns the number of commerce price entries where CPInstanceUuid = &#63;.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the number of matching commerce price entries
+	*/
+	public static int countByCPInstanceUuid(String CPInstanceUuid) {
+		return getPersistence().countByCPInstanceUuid(CPInstanceUuid);
 	}
 
 	/**

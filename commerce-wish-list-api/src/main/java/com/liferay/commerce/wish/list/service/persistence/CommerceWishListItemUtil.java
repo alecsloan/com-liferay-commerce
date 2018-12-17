@@ -114,6 +114,180 @@ public class CommerceWishListItemUtil {
 	}
 
 	/**
+	* Returns all the commerce wish list items where commerceWishListId = &#63;.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @return the matching commerce wish list items
+	*/
+	public static List<CommerceWishListItem> findByCommerceWishListId(
+		long commerceWishListId) {
+		return getPersistence().findByCommerceWishListId(commerceWishListId);
+	}
+
+	/**
+	* Returns a range of all the commerce wish list items where commerceWishListId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param start the lower bound of the range of commerce wish list items
+	* @param end the upper bound of the range of commerce wish list items (not inclusive)
+	* @return the range of matching commerce wish list items
+	*/
+	public static List<CommerceWishListItem> findByCommerceWishListId(
+		long commerceWishListId, int start, int end) {
+		return getPersistence()
+				   .findByCommerceWishListId(commerceWishListId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce wish list items where commerceWishListId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param start the lower bound of the range of commerce wish list items
+	* @param end the upper bound of the range of commerce wish list items (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce wish list items
+	*/
+	public static List<CommerceWishListItem> findByCommerceWishListId(
+		long commerceWishListId, int start, int end,
+		OrderByComparator<CommerceWishListItem> orderByComparator) {
+		return getPersistence()
+				   .findByCommerceWishListId(commerceWishListId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce wish list items where commerceWishListId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param start the lower bound of the range of commerce wish list items
+	* @param end the upper bound of the range of commerce wish list items (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce wish list items
+	*/
+	public static List<CommerceWishListItem> findByCommerceWishListId(
+		long commerceWishListId, int start, int end,
+		OrderByComparator<CommerceWishListItem> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByCommerceWishListId(commerceWishListId, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce wish list item in the ordered set where commerceWishListId = &#63;.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce wish list item
+	* @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
+	*/
+	public static CommerceWishListItem findByCommerceWishListId_First(
+		long commerceWishListId,
+		OrderByComparator<CommerceWishListItem> orderByComparator)
+		throws com.liferay.commerce.wish.list.exception.NoSuchWishListItemException {
+		return getPersistence()
+				   .findByCommerceWishListId_First(commerceWishListId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first commerce wish list item in the ordered set where commerceWishListId = &#63;.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
+	*/
+	public static CommerceWishListItem fetchByCommerceWishListId_First(
+		long commerceWishListId,
+		OrderByComparator<CommerceWishListItem> orderByComparator) {
+		return getPersistence()
+				   .fetchByCommerceWishListId_First(commerceWishListId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce wish list item in the ordered set where commerceWishListId = &#63;.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce wish list item
+	* @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
+	*/
+	public static CommerceWishListItem findByCommerceWishListId_Last(
+		long commerceWishListId,
+		OrderByComparator<CommerceWishListItem> orderByComparator)
+		throws com.liferay.commerce.wish.list.exception.NoSuchWishListItemException {
+		return getPersistence()
+				   .findByCommerceWishListId_Last(commerceWishListId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce wish list item in the ordered set where commerceWishListId = &#63;.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
+	*/
+	public static CommerceWishListItem fetchByCommerceWishListId_Last(
+		long commerceWishListId,
+		OrderByComparator<CommerceWishListItem> orderByComparator) {
+		return getPersistence()
+				   .fetchByCommerceWishListId_Last(commerceWishListId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the commerce wish list items before and after the current commerce wish list item in the ordered set where commerceWishListId = &#63;.
+	*
+	* @param commerceWishListItemId the primary key of the current commerce wish list item
+	* @param commerceWishListId the commerce wish list ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce wish list item
+	* @throws NoSuchWishListItemException if a commerce wish list item with the primary key could not be found
+	*/
+	public static CommerceWishListItem[] findByCommerceWishListId_PrevAndNext(
+		long commerceWishListItemId, long commerceWishListId,
+		OrderByComparator<CommerceWishListItem> orderByComparator)
+		throws com.liferay.commerce.wish.list.exception.NoSuchWishListItemException {
+		return getPersistence()
+				   .findByCommerceWishListId_PrevAndNext(commerceWishListItemId,
+			commerceWishListId, orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce wish list items where commerceWishListId = &#63; from the database.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	*/
+	public static void removeByCommerceWishListId(long commerceWishListId) {
+		getPersistence().removeByCommerceWishListId(commerceWishListId);
+	}
+
+	/**
+	* Returns the number of commerce wish list items where commerceWishListId = &#63;.
+	*
+	* @param commerceWishListId the commerce wish list ID
+	* @return the number of matching commerce wish list items
+	*/
+	public static int countByCommerceWishListId(long commerceWishListId) {
+		return getPersistence().countByCommerceWishListId(commerceWishListId);
+	}
+
+	/**
 	* Returns all the commerce wish list items where CPInstanceUuid = &#63;.
 	*
 	* @param CPInstanceUuid the cp instance uuid
@@ -445,180 +619,6 @@ public class CommerceWishListItemUtil {
 	*/
 	public static int countByCProductId(long CProductId) {
 		return getPersistence().countByCProductId(CProductId);
-	}
-
-	/**
-	* Returns all the commerce wish list items where commerceWishListId = &#63;.
-	*
-	* @param commerceWishListId the commerce wish list ID
-	* @return the matching commerce wish list items
-	*/
-	public static List<CommerceWishListItem> findByCommerceWishListId(
-		long commerceWishListId) {
-		return getPersistence().findByCommerceWishListId(commerceWishListId);
-	}
-
-	/**
-	* Returns a range of all the commerce wish list items where commerceWishListId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param commerceWishListId the commerce wish list ID
-	* @param start the lower bound of the range of commerce wish list items
-	* @param end the upper bound of the range of commerce wish list items (not inclusive)
-	* @return the range of matching commerce wish list items
-	*/
-	public static List<CommerceWishListItem> findByCommerceWishListId(
-		long commerceWishListId, int start, int end) {
-		return getPersistence()
-				   .findByCommerceWishListId(commerceWishListId, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce wish list items where commerceWishListId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param commerceWishListId the commerce wish list ID
-	* @param start the lower bound of the range of commerce wish list items
-	* @param end the upper bound of the range of commerce wish list items (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce wish list items
-	*/
-	public static List<CommerceWishListItem> findByCommerceWishListId(
-		long commerceWishListId, int start, int end,
-		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		return getPersistence()
-				   .findByCommerceWishListId(commerceWishListId, start, end,
-			orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce wish list items where commerceWishListId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWishListItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param commerceWishListId the commerce wish list ID
-	* @param start the lower bound of the range of commerce wish list items
-	* @param end the upper bound of the range of commerce wish list items (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce wish list items
-	*/
-	public static List<CommerceWishListItem> findByCommerceWishListId(
-		long commerceWishListId, int start, int end,
-		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByCommerceWishListId(commerceWishListId, start, end,
-			orderByComparator, retrieveFromCache);
-	}
-
-	/**
-	* Returns the first commerce wish list item in the ordered set where commerceWishListId = &#63;.
-	*
-	* @param commerceWishListId the commerce wish list ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce wish list item
-	* @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
-	*/
-	public static CommerceWishListItem findByCommerceWishListId_First(
-		long commerceWishListId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
-		throws com.liferay.commerce.wish.list.exception.NoSuchWishListItemException {
-		return getPersistence()
-				   .findByCommerceWishListId_First(commerceWishListId,
-			orderByComparator);
-	}
-
-	/**
-	* Returns the first commerce wish list item in the ordered set where commerceWishListId = &#63;.
-	*
-	* @param commerceWishListId the commerce wish list ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
-	*/
-	public static CommerceWishListItem fetchByCommerceWishListId_First(
-		long commerceWishListId,
-		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		return getPersistence()
-				   .fetchByCommerceWishListId_First(commerceWishListId,
-			orderByComparator);
-	}
-
-	/**
-	* Returns the last commerce wish list item in the ordered set where commerceWishListId = &#63;.
-	*
-	* @param commerceWishListId the commerce wish list ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce wish list item
-	* @throws NoSuchWishListItemException if a matching commerce wish list item could not be found
-	*/
-	public static CommerceWishListItem findByCommerceWishListId_Last(
-		long commerceWishListId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
-		throws com.liferay.commerce.wish.list.exception.NoSuchWishListItemException {
-		return getPersistence()
-				   .findByCommerceWishListId_Last(commerceWishListId,
-			orderByComparator);
-	}
-
-	/**
-	* Returns the last commerce wish list item in the ordered set where commerceWishListId = &#63;.
-	*
-	* @param commerceWishListId the commerce wish list ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
-	*/
-	public static CommerceWishListItem fetchByCommerceWishListId_Last(
-		long commerceWishListId,
-		OrderByComparator<CommerceWishListItem> orderByComparator) {
-		return getPersistence()
-				   .fetchByCommerceWishListId_Last(commerceWishListId,
-			orderByComparator);
-	}
-
-	/**
-	* Returns the commerce wish list items before and after the current commerce wish list item in the ordered set where commerceWishListId = &#63;.
-	*
-	* @param commerceWishListItemId the primary key of the current commerce wish list item
-	* @param commerceWishListId the commerce wish list ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce wish list item
-	* @throws NoSuchWishListItemException if a commerce wish list item with the primary key could not be found
-	*/
-	public static CommerceWishListItem[] findByCommerceWishListId_PrevAndNext(
-		long commerceWishListItemId, long commerceWishListId,
-		OrderByComparator<CommerceWishListItem> orderByComparator)
-		throws com.liferay.commerce.wish.list.exception.NoSuchWishListItemException {
-		return getPersistence()
-				   .findByCommerceWishListId_PrevAndNext(commerceWishListItemId,
-			commerceWishListId, orderByComparator);
-	}
-
-	/**
-	* Removes all the commerce wish list items where commerceWishListId = &#63; from the database.
-	*
-	* @param commerceWishListId the commerce wish list ID
-	*/
-	public static void removeByCommerceWishListId(long commerceWishListId) {
-		getPersistence().removeByCommerceWishListId(commerceWishListId);
-	}
-
-	/**
-	* Returns the number of commerce wish list items where commerceWishListId = &#63;.
-	*
-	* @param commerceWishListId the commerce wish list ID
-	* @return the number of matching commerce wish list items
-	*/
-	public static int countByCommerceWishListId(long commerceWishListId) {
-		return getPersistence().countByCommerceWishListId(commerceWishListId);
 	}
 
 	/**

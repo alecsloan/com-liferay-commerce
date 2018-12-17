@@ -66,7 +66,7 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 	 */
 
 	/**
-	* @deprecated as of Judson (7.1.x)
+	* @deprecated As of Mueller (7.2.x)
 	*/
 	@Deprecated
 	public void addCPDefinitionGroupedEntries(long cpDefinitionId,
@@ -88,7 +88,7 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry);
 
 	/**
-	* @deprecated as of Judson (7.1.x)
+	* @deprecated As of Mueller (7.2.x)
 	*/
 	@Deprecated
 	public CPDefinitionGroupedEntry addCPDefinitionGroupedEntry(
@@ -213,7 +213,7 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 		long cpDefinitionId, long entryCProductId);
 
 	/**
-	* @deprecated as of Judson (7.1.x)
+	* @deprecated As of Mueller (7.2.x)
 	*/
 	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

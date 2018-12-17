@@ -35,7 +35,7 @@ public class CPDefinitionGroupedEntryLocalServiceWrapper
 	}
 
 	/**
-	* @deprecated as of Judson (7.1.x)
+	* @deprecated As of Mueller (7.2.x)
 	*/
 	@Deprecated
 	@Override
@@ -69,7 +69,7 @@ public class CPDefinitionGroupedEntryLocalServiceWrapper
 	}
 
 	/**
-	* @deprecated as of Judson (7.1.x)
+	* @deprecated As of Mueller (7.2.x)
 	*/
 	@Deprecated
 	@Override
@@ -245,7 +245,7 @@ public class CPDefinitionGroupedEntryLocalServiceWrapper
 	}
 
 	/**
-	* @deprecated as of Judson (7.1.x)
+	* @deprecated As of Mueller (7.2.x)
 	*/
 	@Deprecated
 	@Override
