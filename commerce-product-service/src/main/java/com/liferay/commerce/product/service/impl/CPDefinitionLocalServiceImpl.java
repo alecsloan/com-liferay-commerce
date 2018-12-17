@@ -17,6 +17,7 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetLinkConstants;
+import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.product.exception.CPDefinitionDisplayDateException;
 import com.liferay.commerce.product.exception.CPDefinitionExpirationDateException;
 import com.liferay.commerce.product.exception.CPDefinitionIgnoreSKUCombinationsException;
@@ -45,6 +46,7 @@ import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.service.persistence.CPDefinitionGroupedEntryPersistence;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.persistence.CPDefinitionVirtualSettingPersistence;
+import com.liferay.commerce.service.persistence.CPDefinitionInventoryPersistence;
 import com.liferay.dynamic.data.mapping.exception.NoSuchStructureException;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
@@ -554,24 +556,20 @@ public class CPDefinitionLocalServiceImpl
 
 			// CPDefinitionInventory
 
-			List<CPDefinitionInventory> cpDefinitionInventories =
+			CPDefinitionInventory cpDefinitionInventory =
 				_cpDefinitionInventoryPersistence.findByCPDefinitionId(
 					cpDefinitionId);
 
-			for (CPDefinitionInventory cpDefinitionInventory :
-					cpDefinitionInventories) {
+			CPDefinitionInventory newCPDefinitionInventory =
+				(CPDefinitionInventory)cpDefinitionInventory.clone();
 
-				CPDefinitionInventory newCPDefinitionInventory =
-					(CPDefinitionInventory)cpDefinitionInventory.clone();
+			newCPDefinitionInventory.setCPDefinitionInventoryId(
+				counterLocalService.increment());
+			newCPDefinitionInventory.setModifiedDate(new Date());
+			newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
 
-				newCPDefinitionInventory.setCPDefinitionInventoryId(
-					counterLocalService.increment());
-				newCPDefinitionInventory.setModifiedDate(new Date());
-				newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
-
-				_cpDefinitionInventoryPersistence.update(
-					newCPDefinitionInventory);
-			}
+			_cpDefinitionInventoryPersistence.update(
+				newCPDefinitionInventory);
 
 			// CPDefinitionLink
 
@@ -2388,6 +2386,10 @@ public class CPDefinitionLocalServiceImpl
 	@Reference
 	private CPDefinitionGroupedEntryPersistence
 		_cpDefinitionGroupedEntryPersistence;
+
+	@Reference
+	private CPDefinitionInventoryPersistence
+		_cpDefinitionInventoryPersistence;
 
 	@Reference
 	private CPDefinitionVirtualSettingPersistence
