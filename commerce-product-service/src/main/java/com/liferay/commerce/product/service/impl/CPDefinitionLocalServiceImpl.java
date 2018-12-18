@@ -546,20 +546,23 @@ public class CPDefinitionLocalServiceImpl
 						cpDefinitionGroupedEntries) {
 
 					CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
-						(CPDefinitionGroupedEntry)cpDefinitionGroupedEntry.clone();
+						(CPDefinitionGroupedEntry)
+							cpDefinitionGroupedEntry.clone();
 
-					newCPDefinitionGroupedEntry.setUuid(PortalUUIDUtil.generate());
+					newCPDefinitionGroupedEntry.setUuid(
+						PortalUUIDUtil.generate());
 					newCPDefinitionGroupedEntry.setCPDefinitionGroupedEntryId(
 						counterLocalService.increment());
 					newCPDefinitionGroupedEntry.setModifiedDate(new Date());
 					newCPDefinitionGroupedEntry.setCPDefinitionId(
 						newCPDefinitionId);
 
-				_cpDefinitionGroupedEntryLocalService.
-					addCPDefinitionGroupedEntry(newCPDefinitionGroupedEntry);
+					_cpDefinitionGroupedEntryLocalService.
+						addCPDefinitionGroupedEntry(
+							newCPDefinitionGroupedEntry);
 				}
 			}
-			catch (Exception e){
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 
@@ -568,8 +571,9 @@ public class CPDefinitionLocalServiceImpl
 			try {
 				CPDefinitionInventory cpDefinitionInventory =
 					_cpDefinitionInventoryLocalService.
-						fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
-	
+						fetchCPDefinitionInventoryByCPDefinitionId(
+							cpDefinitionId);
+
 				if (cpDefinitionInventory != null) {
 					CPDefinitionInventory newCPDefinitionInventory =
 						(CPDefinitionInventory)cpDefinitionInventory.clone();
@@ -578,7 +582,8 @@ public class CPDefinitionLocalServiceImpl
 					newCPDefinitionInventory.setCPDefinitionInventoryId(
 						counterLocalService.increment());
 					newCPDefinitionInventory.setModifiedDate(new Date());
-					newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
+					newCPDefinitionInventory.setCPDefinitionId(
+						newCPDefinitionId);
 
 					_cpDefinitionInventoryLocalService.addCPDefinitionInventory(
 						newCPDefinitionInventory);
@@ -605,7 +610,7 @@ public class CPDefinitionLocalServiceImpl
 					cpDefinitionLinkPersistence.update(newCPDefinitionLink);
 				}
 			}
-			catch (Exception e){
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 
@@ -708,8 +713,9 @@ public class CPDefinitionLocalServiceImpl
 
 					newCPDefinitionVirtualSetting.setUuid(
 						PortalUUIDUtil.generate());
-					newCPDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
-						counterLocalService.increment());
+					newCPDefinitionVirtualSetting.
+						setCPDefinitionVirtualSettingId(
+							counterLocalService.increment());
 					newCPDefinitionVirtualSetting.setModifiedDate(new Date());
 					newCPDefinitionVirtualSetting.setClassPK(newCPDefinitionId);
 
@@ -717,7 +723,8 @@ public class CPDefinitionLocalServiceImpl
 						addCPDefinitionVirtualSetting(
 							newCPDefinitionVirtualSetting);
 				}
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 
@@ -1563,14 +1570,11 @@ public class CPDefinitionLocalServiceImpl
 			metaKeywordsMap, cpDefinition.getProductTypeName());
 
 		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
 
-    		cpDefinition =
-        		cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
-
-    		cProductLocalService.updatePublishedDefinitionId(
-        		cpDefinition.getCProductId(),
-        		cpDefinition.getCPDefinitionId());
-
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
 		}
 
 		cpDefinition.setIgnoreSKUCombinations(ignoreSKUCombinations);
@@ -1818,9 +1822,8 @@ public class CPDefinitionLocalServiceImpl
 
 			//CProduct
 
-    		cProductLocalService.updatePublishedDefinitionId(
-        		cpDefinition.getCProductId(),
-        		cpDefinition.getCPDefinitionId());
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
 
 			// Trash
 
@@ -1838,9 +1841,8 @@ public class CPDefinitionLocalServiceImpl
 
 			//CProduct
 
-    		cProductLocalService.updateDraftDefinitionId(
-        		cpDefinition.getCProductId(),
-        		cpDefinition.getCPDefinitionId());
+			cProductLocalService.updateDraftDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
 
 			// Trash
 

@@ -123,7 +123,8 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 			if (cpDefinitionOptionRel != null) {
 				cpDefinitionOptionValueRel =
 					cpDefinitionOptionValueRelPersistence.findByC_K(
-						cpDefinitionOptionRel.getCPDefinitionOptionRelId(), key);
+						cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+						key);
 			}
 		}
 

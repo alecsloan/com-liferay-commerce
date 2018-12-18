@@ -76,7 +76,7 @@ public class VersionCommerceOrderValidatorImpl
 
 			if ((cpInstance.getCPDefinitionId() !=
 					cProduct.getPublishedDefinitionId()) &&
-					(cProduct.getPublishedDefinitionId() != 0)) {
+				(cProduct.getPublishedDefinitionId() != 0)) {
 
 				boolean instanceUpdated = _updateInstance(
 					commerceOrderItem, cProduct);
