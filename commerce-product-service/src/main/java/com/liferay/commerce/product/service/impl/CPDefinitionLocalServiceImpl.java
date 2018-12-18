@@ -1543,6 +1543,17 @@ public class CPDefinitionLocalServiceImpl
 			groupId, ddmStructureKey, metaTitleMap, metaDescriptionMap,
 			metaKeywordsMap, cpDefinition.getProductTypeName());
 
+		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+
+    		cpDefinition =
+        		cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
+
+    		cProductLocalService.updatePublishedDefinitionId(
+        		cpDefinition.getCProductId(),
+        		cpDefinition.getCPDefinitionId());
+
+		}
+
 		cpDefinition.setIgnoreSKUCombinations(ignoreSKUCombinations);
 		cpDefinition.setShippable(shippable);
 		cpDefinition.setFreeShipping(freeShipping);
@@ -1785,6 +1796,12 @@ public class CPDefinitionLocalServiceImpl
 				CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
 				cpDefinition.getDisplayDate(), cpDefinition.getExpirationDate(),
 				true, true);
+
+			//CProduct
+
+    		cProductLocalService.updatePublishedDefinitionId(
+        		cpDefinition.getCProductId(),
+        		cpDefinition.getCPDefinitionId());
 
 			// Trash
 
