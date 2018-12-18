@@ -538,63 +538,71 @@ public class CPDefinitionLocalServiceImpl
 
 			// CPDefinitionGroupedEntry
 
-			List<CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
-				_cpDefinitionGroupedEntryPersistence.findByCPDefinitionId(
-					cpDefinitionId);
+			try {
+				List<CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
+					_cpDefinitionGroupedEntryPersistence.findByCPDefinitionId(
+						cpDefinitionId);
 
-			for (CPDefinitionGroupedEntry cpDefinitionGroupedEntry :
-					cpDefinitionGroupedEntries) {
+				for (CPDefinitionGroupedEntry cpDefinitionGroupedEntry :
+						cpDefinitionGroupedEntries) {
 
-				CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
-					(CPDefinitionGroupedEntry)cpDefinitionGroupedEntry.clone();
+					CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+						(CPDefinitionGroupedEntry)cpDefinitionGroupedEntry.clone();
 
-				newCPDefinitionGroupedEntry.setUuid(PortalUUIDUtil.generate());
-				newCPDefinitionGroupedEntry.setCPDefinitionGroupedEntryId(
-					counterLocalService.increment());
-				newCPDefinitionGroupedEntry.setModifiedDate(new Date());
-				newCPDefinitionGroupedEntry.setCPDefinitionId(
-					newCPDefinitionId);
+					newCPDefinitionGroupedEntry.setUuid(PortalUUIDUtil.generate());
+					newCPDefinitionGroupedEntry.setCPDefinitionGroupedEntryId(
+						counterLocalService.increment());
+					newCPDefinitionGroupedEntry.setModifiedDate(new Date());
+					newCPDefinitionGroupedEntry.setCPDefinitionId(
+						newCPDefinitionId);
 
-				_cpDefinitionGroupedEntryPersistence.update(
-					newCPDefinitionGroupedEntry);
+					_cpDefinitionGroupedEntryPersistence.update(
+						newCPDefinitionGroupedEntry);
+				}
+			} catch (Exception e){
+
 			}
 
 			// CPDefinitionInventory
 
-			CPDefinitionInventory cpDefinitionInventory =
-				_cpDefinitionInventoryPersistence.findByCPDefinitionId(
-					cpDefinitionId);
+			try {
+				CPDefinitionInventory cpDefinitionInventory =
+					_cpDefinitionInventoryPersistence.findByCPDefinitionId(
+						cpDefinitionId);
 
-			CPDefinitionInventory newCPDefinitionInventory =
-				(CPDefinitionInventory)cpDefinitionInventory.clone();
+				CPDefinitionInventory newCPDefinitionInventory =
+					(CPDefinitionInventory)cpDefinitionInventory.clone();
 
-			newCPDefinitionInventory.setUuid(PortalUUIDUtil.generate());
-			newCPDefinitionInventory.setCPDefinitionInventoryId(
-				counterLocalService.increment());
-			newCPDefinitionInventory.setModifiedDate(new Date());
-			newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
-
-			_cpDefinitionInventoryPersistence.update(newCPDefinitionInventory);
-
-			// CPDefinitionLink
-
-			List<CPDefinitionLink> cpDefinitionLinks1 =
-				cpDefinitionLinkPersistence.findByCPDefinitionId(
-					cpDefinitionId);
-
-			for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks1) {
-				CPDefinitionLink newCPDefinitionLink =
-					(CPDefinitionLink)cpDefinitionLink.clone();
-
-				newCPDefinitionLink.setUuid(PortalUUIDUtil.generate());
-				newCPDefinitionLink.setCPDefinitionLinkId(
+				newCPDefinitionInventory.setUuid(PortalUUIDUtil.generate());
+				newCPDefinitionInventory.setCPDefinitionInventoryId(
 					counterLocalService.increment());
-				newCPDefinitionLink.setModifiedDate(new Date());
-				newCPDefinitionLink.setCPDefinitionId(newCPDefinitionId);
-				newCPDefinitionLink.setCProductId(
-					cpDefinitionLink.getCProductId());
+				newCPDefinitionInventory.setModifiedDate(new Date());
+				newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
 
-				cpDefinitionLinkPersistence.update(newCPDefinitionLink);
+				_cpDefinitionInventoryPersistence.update(newCPDefinitionInventory);
+
+				// CPDefinitionLink
+
+				List<CPDefinitionLink> cpDefinitionLinks1 =
+					cpDefinitionLinkPersistence.findByCPDefinitionId(
+						cpDefinitionId);
+
+				for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks1) {
+					CPDefinitionLink newCPDefinitionLink =
+						(CPDefinitionLink)cpDefinitionLink.clone();
+
+					newCPDefinitionLink.setUuid(PortalUUIDUtil.generate());
+					newCPDefinitionLink.setCPDefinitionLinkId(
+						counterLocalService.increment());
+					newCPDefinitionLink.setModifiedDate(new Date());
+					newCPDefinitionLink.setCPDefinitionId(newCPDefinitionId);
+					newCPDefinitionLink.setCProductId(
+						cpDefinitionLink.getCProductId());
+
+					cpDefinitionLinkPersistence.update(newCPDefinitionLink);
+				}
+			} catch (Exception e){
+
 			}
 
 			// CPDefinitionOptionRel
@@ -682,24 +690,28 @@ public class CPDefinitionLocalServiceImpl
 
 			// CPDefinitionVirtualSetting
 
-			CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
-				_cpDefinitionVirtualSettingPersistence.fetchByC_C(
-					cpDefinitionClassNameId, cpDefinitionId);
+			try {
+				CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
+					_cpDefinitionVirtualSettingPersistence.fetchByC_C(
+						cpDefinitionClassNameId, cpDefinitionId);
 
-			if (cpDefinitionVirtualSetting != null) {
-				CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
-					(CPDefinitionVirtualSetting)
-						cpDefinitionVirtualSetting.clone();
+				if (cpDefinitionVirtualSetting != null) {
+					CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+						(CPDefinitionVirtualSetting)
+							cpDefinitionVirtualSetting.clone();
 
-				newCPDefinitionVirtualSetting.setUuid(
-					PortalUUIDUtil.generate());
-				newCPDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
-					counterLocalService.increment());
-				newCPDefinitionVirtualSetting.setModifiedDate(new Date());
-				newCPDefinitionVirtualSetting.setClassPK(newCPDefinitionId);
+					newCPDefinitionVirtualSetting.setUuid(
+						PortalUUIDUtil.generate());
+					newCPDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
+						counterLocalService.increment());
+					newCPDefinitionVirtualSetting.setModifiedDate(new Date());
+					newCPDefinitionVirtualSetting.setClassPK(newCPDefinitionId);
 
-				_cpDefinitionVirtualSettingPersistence.update(
-					newCPDefinitionVirtualSetting);
+					_cpDefinitionVirtualSettingPersistence.update(
+						newCPDefinitionVirtualSetting);
+				}
+			} catch (Exception e) {
+
 			}
 
 			// CPDisplayLayout
