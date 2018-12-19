@@ -56,21 +56,16 @@ public interface CommerceWishListItem extends CommerceWishListItemModel,
 			}
 		};
 
-	/**
-	* @deprecated As of Judson (7.1.x)
-	*/
-	@Deprecated()
 	public com.liferay.commerce.product.model.CPInstance fetchCPInstance()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public CommerceWishList getCommerceWishList()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	/**
-	* @deprecated As of Judson (7.1.x)
-	*/
-	@Deprecated()
 	public com.liferay.commerce.product.model.CPDefinition getCPDefinition()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public com.liferay.commerce.product.model.CProduct getCProduct()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public boolean isIgnoreSKUCombinations()

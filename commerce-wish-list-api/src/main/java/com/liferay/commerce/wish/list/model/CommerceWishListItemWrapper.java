@@ -154,10 +154,6 @@ public class CommerceWishListItemWrapper implements CommerceWishListItem,
 		return _commerceWishListItem.compareTo(commerceWishListItem);
 	}
 
-	/**
-	* @deprecated As of Judson (7.1.x)
-	*/
-	@Deprecated
 	@Override
 	public com.liferay.commerce.product.model.CPInstance fetchCPInstance()
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -200,10 +196,6 @@ public class CommerceWishListItemWrapper implements CommerceWishListItem,
 		return _commerceWishListItem.getCompanyId();
 	}
 
-	/**
-	* @deprecated As of Judson (7.1.x)
-	*/
-	@Deprecated
 	@Override
 	public com.liferay.commerce.product.model.CPDefinition getCPDefinition()
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -218,6 +210,12 @@ public class CommerceWishListItemWrapper implements CommerceWishListItem,
 	@Override
 	public String getCPInstanceUuid() {
 		return _commerceWishListItem.getCPInstanceUuid();
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CProduct getCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWishListItem.getCProduct();
 	}
 
 	/**
