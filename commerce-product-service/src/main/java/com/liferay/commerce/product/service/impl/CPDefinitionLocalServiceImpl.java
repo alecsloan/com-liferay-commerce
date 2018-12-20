@@ -509,7 +509,7 @@ public class CPDefinitionLocalServiceImpl
 				newAssetEntry.setModifiedDate(new Date());
 				newAssetEntry.setClassPK(newCPDefinitionId);
 
-				assetEntryLocalService.update(newAssetEntry);
+				assetEntryLocalService.updateAssetEntry(newAssetEntry);
 			}
 
 			// CPDefinitionLocalization
