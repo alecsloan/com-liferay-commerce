@@ -520,6 +520,9 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isVersionable(long cpDefinitionId);
 
+	public void maintainVersionThreshold(long cProductId)
+		throws PortalException;
+
 	public void moveCPDefinitionsToTrash(long groupId, long userId)
 		throws PortalException;
 

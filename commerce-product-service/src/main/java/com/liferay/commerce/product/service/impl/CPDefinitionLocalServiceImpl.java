@@ -40,6 +40,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.impl.CPDefinitionImpl;
+import com.liferay.commerce.product.model.impl.CPDefinitionModelImpl;
 import com.liferay.commerce.product.service.base.CPDefinitionLocalServiceBaseImpl;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
@@ -78,6 +79,7 @@ import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.settings.SystemSettingsLocator;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -85,6 +87,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -110,6 +113,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
@@ -775,6 +779,19 @@ public class CPDefinitionLocalServiceImpl
 			cProductLocalService.updatePublishedDefinitionId(
 				newCPDefinition.getCProductId(),
 				newCPDefinition.getCPDefinitionId());
+
+			TransactionCommitCallbackUtil.registerCallback(
+				new Callable<Void>() {
+
+					@Override
+					public Void call() throws Exception {
+						cpDefinitionLocalService.maintainVersionThreshold(
+							newCPDefinition.getCProductId());
+
+						return null;
+					}
+
+				});
 		}
 
 		return newCPDefinition;
@@ -1363,6 +1380,44 @@ public class CPDefinitionLocalServiceImpl
 		}
 
 		return isPublishedCPDefinition(cpDefinitionId);
+	}
+
+	@Override
+	public void maintainVersionThreshold(long cProductId)
+		throws PortalException {
+
+		int threshold = 0;
+
+		try {
+			CProductVersionConfiguration cProductVersionConfiguration =
+				ConfigurationProviderUtil.getConfiguration(
+					CProductVersionConfiguration.class,
+					new SystemSettingsLocator(
+						CProductVersionConfiguration.class.getName()));
+
+			threshold = cProductVersionConfiguration.versionThreshold();
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+
+			return;
+		}
+
+		OrderByComparator<CPDefinition> obc =
+			OrderByComparatorFactoryUtil.create(
+				CPDefinitionModelImpl.TABLE_NAME, Field.CREATE_DATE, false);
+
+		List<CPDefinition> deletableCPDefinitions =
+			cpDefinitionPersistence.findByC_S(
+				cProductId, WorkflowConstants.STATUS_APPROVED, threshold,
+				threshold + Short.MAX_VALUE, obc);
+
+		for (CPDefinition cpDefinition : deletableCPDefinitions) {
+			cpInstanceLocalService.deleteCPInstances(
+				cpDefinition.getCPDefinitionId());
+
+			cpDefinitionLocalService.deleteCPDefinition(cpDefinition);
+		}
 	}
 
 	@Override
@@ -2451,7 +2506,7 @@ public class CPDefinitionLocalServiceImpl
 			}
 		}
 		catch (PortalException pe) {
-			pe.printStackTrace();
+			_log.error(pe, pe);
 		}
 
 		return false;
