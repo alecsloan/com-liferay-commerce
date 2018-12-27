@@ -40,7 +40,6 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.impl.CPDefinitionImpl;
-import com.liferay.commerce.product.model.impl.CPDefinitionModelImpl;
 import com.liferay.commerce.product.service.base.CPDefinitionLocalServiceBaseImpl;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
@@ -53,8 +52,11 @@ import com.liferay.dynamic.data.mapping.exception.NoSuchStructureException;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -79,7 +81,6 @@ import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.settings.SystemSettingsLocator;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
-import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -87,7 +88,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -113,7 +113,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
@@ -500,6 +499,11 @@ public class CPDefinitionLocalServiceImpl
 
 		cpDefinitionPersistence.update(newCPDefinition);
 
+		if (cpDefinitionLocalService.isVersionable(originalCPDefinition)) {
+			cpDefinitionLocalService.maintainVersionThreshold(
+				newCPDefinition.getCProductId());
+		}
+
 		// AssetEntry
 
 		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
@@ -771,27 +775,6 @@ public class CPDefinitionLocalServiceImpl
 			newCPInstance.setCPDefinitionId(newCPDefinitionId);
 
 			cpInstancePersistence.update(newCPInstance);
-		}
-
-		// CProduct
-
-		if (cpDefinitionLocalService.isVersionable(originalCPDefinition)) {
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
-			TransactionCommitCallbackUtil.registerCallback(
-				new Callable<Void>() {
-
-					@Override
-					public Void call() throws Exception {
-						cpDefinitionLocalService.maintainVersionThreshold(
-							newCPDefinition.getCProductId());
-
-						return null;
-					}
-
-				});
 		}
 
 		return newCPDefinition;
@@ -1403,19 +1386,25 @@ public class CPDefinitionLocalServiceImpl
 			return;
 		}
 
-		OrderByComparator<CPDefinition> obc =
-			OrderByComparatorFactoryUtil.create(
-				CPDefinitionModelImpl.TABLE_NAME, Field.CREATE_DATE, false);
+		DynamicQuery cpDefinitionDynamicQuery =
+			cpDefinitionLocalService.dynamicQuery();
+
+		cpDefinitionDynamicQuery.add(
+			RestrictionsFactoryUtil.eq("CProductId", cProductId));
+
+		cpDefinitionDynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"status", WorkflowConstants.STATUS_APPROVED));
+
+		cpDefinitionDynamicQuery.addOrder(OrderFactoryUtil.desc("version"));
+
+		cpDefinitionDynamicQuery.setLimit(
+			threshold, threshold + Short.MAX_VALUE);
 
 		List<CPDefinition> deletableCPDefinitions =
-			cpDefinitionPersistence.findByC_S(
-				cProductId, WorkflowConstants.STATUS_APPROVED, threshold,
-				threshold + Short.MAX_VALUE, obc);
+			cpDefinitionLocalService.dynamicQuery(cpDefinitionDynamicQuery);
 
 		for (CPDefinition cpDefinition : deletableCPDefinitions) {
-			cpInstanceLocalService.deleteCPInstances(
-				cpDefinition.getCPDefinitionId());
-
 			cpDefinitionLocalService.deleteCPDefinition(cpDefinition);
 		}
 	}

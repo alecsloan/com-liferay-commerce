@@ -435,7 +435,9 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			cpDefinitionOptionRelPersistence.countByC_SC(
 				cpDefinition.getCPDefinitionId(), true);
 
-		if (cpDefinitionOptionRelsCount == 0) {
+		if ((cpDefinitionOptionRelsCount == 0) &&
+			cpDefinitionLocalService.isVersionable(cpDefinition)) {
+
 			cpDefinitionLocalService.updateCPDefinitionIgnoreSKUCombinations(
 				cpDefinition.getCPDefinitionId(), true, new ServiceContext());
 		}
