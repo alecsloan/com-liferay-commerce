@@ -273,13 +273,11 @@ public class CPAttachmentFileEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByU_C_C() throws Exception {
-		_persistence.countByU_C_C("", RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+	public void testCountByC_C_F() throws Exception {
+		_persistence.countByC_C_F(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
-		_persistence.countByU_C_C("null", 0L, 0L);
-
-		_persistence.countByU_C_C((String)null, 0L, 0L);
+		_persistence.countByC_C_F(0L, 0L, 0L);
 	}
 
 	@Test
@@ -572,10 +570,6 @@ public class CPAttachmentFileEntryPersistenceTest {
 			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
 				"getOriginalGroupId", new Class<?>[0]));
 
-		Assert.assertTrue(Objects.equals(
-				existingCPAttachmentFileEntry.getUuid(),
-				ReflectionTestUtil.invoke(existingCPAttachmentFileEntry,
-					"getOriginalUuid", new Class<?>[0])));
 		Assert.assertEquals(Long.valueOf(
 				existingCPAttachmentFileEntry.getClassNameId()),
 			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
@@ -584,6 +578,10 @@ public class CPAttachmentFileEntryPersistenceTest {
 				existingCPAttachmentFileEntry.getClassPK()),
 			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
 				"getOriginalClassPK", new Class<?>[0]));
+		Assert.assertEquals(Long.valueOf(
+				existingCPAttachmentFileEntry.getFileEntryId()),
+			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
+				"getOriginalFileEntryId", new Class<?>[0]));
 
 		Assert.assertEquals(Long.valueOf(
 				existingCPAttachmentFileEntry.getCompanyId()),
