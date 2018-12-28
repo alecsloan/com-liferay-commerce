@@ -240,8 +240,9 @@ public class CPAttachmentFileEntryLocalServiceImpl
 					cpAttachmentFileEntry.getClassPK());
 
 			cpAttachmentFileEntry =
-				cpAttachmentFileEntryPersistence.findByU_C_C(
-					cpAttachmentFileEntry.getUuid(), cpDefinitionClassNameId,
+				cpAttachmentFileEntryPersistence.findByF_C_C(
+					cpAttachmentFileEntry.getFileEntryId(),
+					cpDefinitionClassNameId, 
 					newCPDefinition.getCPDefinitionId());
 		}
 
