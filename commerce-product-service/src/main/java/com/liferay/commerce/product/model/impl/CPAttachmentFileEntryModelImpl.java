@@ -154,11 +154,12 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
 	public static final long DISPLAYDATE_COLUMN_BITMASK = 8L;
 	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 16L;
-	public static final long GROUPID_COLUMN_BITMASK = 32L;
-	public static final long STATUS_COLUMN_BITMASK = 64L;
-	public static final long TYPE_COLUMN_BITMASK = 128L;
-	public static final long UUID_COLUMN_BITMASK = 256L;
-	public static final long PRIORITY_COLUMN_BITMASK = 512L;
+	public static final long FILEENTRYID_COLUMN_BITMASK = 32L;
+	public static final long GROUPID_COLUMN_BITMASK = 64L;
+	public static final long STATUS_COLUMN_BITMASK = 128L;
+	public static final long TYPE_COLUMN_BITMASK = 256L;
+	public static final long UUID_COLUMN_BITMASK = 512L;
+	public static final long PRIORITY_COLUMN_BITMASK = 1024L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -687,7 +688,19 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 
 	@Override
 	public void setFileEntryId(long fileEntryId) {
+		_columnBitmask |= FILEENTRYID_COLUMN_BITMASK;
+
+		if (!_setOriginalFileEntryId) {
+			_setOriginalFileEntryId = true;
+
+			_originalFileEntryId = _fileEntryId;
+		}
+
 		_fileEntryId = fileEntryId;
+	}
+
+	public long getOriginalFileEntryId() {
+		return _originalFileEntryId;
 	}
 
 	@JSON
@@ -1252,6 +1265,10 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 
 		cpAttachmentFileEntryModelImpl._setOriginalClassPK = false;
 
+		cpAttachmentFileEntryModelImpl._originalFileEntryId = cpAttachmentFileEntryModelImpl._fileEntryId;
+
+		cpAttachmentFileEntryModelImpl._setOriginalFileEntryId = false;
+
 		cpAttachmentFileEntryModelImpl._originalDisplayDate = cpAttachmentFileEntryModelImpl._displayDate;
 
 		cpAttachmentFileEntryModelImpl._originalType = cpAttachmentFileEntryModelImpl._type;
@@ -1585,6 +1602,8 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
 	private long _fileEntryId;
+	private long _originalFileEntryId;
+	private boolean _setOriginalFileEntryId;
 	private Date _displayDate;
 	private Date _originalDisplayDate;
 	private Date _expirationDate;

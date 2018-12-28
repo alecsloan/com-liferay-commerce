@@ -865,6 +865,77 @@ public class CPAttachmentFileEntryUtil {
 	}
 
 	/**
+	* Returns the cp attachment file entry where fileEntryId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link NoSuchCPAttachmentFileEntryException} if it could not be found.
+	*
+	* @param fileEntryId the file entry ID
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @return the matching cp attachment file entry
+	* @throws NoSuchCPAttachmentFileEntryException if a matching cp attachment file entry could not be found
+	*/
+	public static CPAttachmentFileEntry findByF_C_C(long fileEntryId,
+		long classNameId, long classPK)
+		throws com.liferay.commerce.product.exception.NoSuchCPAttachmentFileEntryException {
+		return getPersistence().findByF_C_C(fileEntryId, classNameId, classPK);
+	}
+
+	/**
+	* Returns the cp attachment file entry where fileEntryId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param fileEntryId the file entry ID
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	*/
+	public static CPAttachmentFileEntry fetchByF_C_C(long fileEntryId,
+		long classNameId, long classPK) {
+		return getPersistence().fetchByF_C_C(fileEntryId, classNameId, classPK);
+	}
+
+	/**
+	* Returns the cp attachment file entry where fileEntryId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param fileEntryId the file entry ID
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	*/
+	public static CPAttachmentFileEntry fetchByF_C_C(long fileEntryId,
+		long classNameId, long classPK, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByF_C_C(fileEntryId, classNameId, classPK,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the cp attachment file entry where fileEntryId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	*
+	* @param fileEntryId the file entry ID
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @return the cp attachment file entry that was removed
+	*/
+	public static CPAttachmentFileEntry removeByF_C_C(long fileEntryId,
+		long classNameId, long classPK)
+		throws com.liferay.commerce.product.exception.NoSuchCPAttachmentFileEntryException {
+		return getPersistence().removeByF_C_C(fileEntryId, classNameId, classPK);
+	}
+
+	/**
+	* Returns the number of cp attachment file entries where fileEntryId = &#63; and classNameId = &#63; and classPK = &#63;.
+	*
+	* @param fileEntryId the file entry ID
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @return the number of matching cp attachment file entries
+	*/
+	public static int countByF_C_C(long fileEntryId, long classNameId,
+		long classPK) {
+		return getPersistence().countByF_C_C(fileEntryId, classNameId, classPK);
+	}
+
+	/**
 	* Returns the cp attachment file entry where uuid = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link NoSuchCPAttachmentFileEntryException} if it could not be found.
 	*
 	* @param uuid the uuid
