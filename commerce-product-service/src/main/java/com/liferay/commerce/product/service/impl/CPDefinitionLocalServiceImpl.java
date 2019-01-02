@@ -1405,7 +1405,7 @@ public class CPDefinitionLocalServiceImpl
 
 		OrderByComparator<CPDefinition> obc =
 			OrderByComparatorFactoryUtil.create(
-				CPDefinitionModelImpl.TABLE_NAME, Field.CREATE_DATE, false);
+				CPDefinitionModelImpl.TABLE_NAME, Field.VERSION, false);
 
 		List<CPDefinition> deletableCPDefinitions =
 			cpDefinitionPersistence.findByC_S(
@@ -1413,9 +1413,6 @@ public class CPDefinitionLocalServiceImpl
 				threshold + Short.MAX_VALUE, obc);
 
 		for (CPDefinition cpDefinition : deletableCPDefinitions) {
-			cpInstanceLocalService.deleteCPInstances(
-				cpDefinition.getCPDefinitionId());
-
 			cpDefinitionLocalService.deleteCPDefinition(cpDefinition);
 		}
 	}
