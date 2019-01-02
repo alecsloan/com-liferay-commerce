@@ -284,7 +284,7 @@ public class CPDefinitionLinkLocalServiceImpl
 						cpDefinitionId, cProductId, type);
 
 				if (cpDefinitionLink == null) {
-					cpDefinitionLinkLocalService.addCPDefinitionLink(
+					cpDefinitionLinkLocalService.addCPDefinitionLinkByCProductId(
 						cpDefinitionId, cProductId, 0, type, serviceContext);
 				}
 			}
