@@ -27,6 +27,13 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.portlet.PortletProviderUtil;
+import com.liferay.portal.kernel.portlet.PortletProvider;
+import com.liferay.commerce.product.model.CPDefinition;
+import javax.portlet.PortletURL;
+import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -104,6 +111,8 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
+		String redirect = getSaveAndContinueRedirect(actionRequest);
+
 		try {
 			if (cmd.equals(Constants.ADD)) {
 				addCPDefinitionLinks(actionRequest);
@@ -114,6 +123,8 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 			else if (cmd.equals(Constants.UPDATE)) {
 				updateCPDefinitionLink(actionRequest);
 			}
+
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchCPDefinitionLinkException ||
@@ -127,6 +138,44 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 				throw e;
 			}
 		}
+	}
+
+	protected String getSaveAndContinueRedirect(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletURL portletURL = PortletProviderUtil.getPortletURL(
+			actionRequest, themeDisplay.getScopeGroup(),
+			CPDefinition.class.getName(), PortletProvider.Action.EDIT);
+
+		long cpDefinitionLinkId = ParamUtil.getLong(
+			actionRequest, "cpDefinitionLinkId");
+
+		if (cpDefinitionLinkId > 0) {
+			portletURL.setParameter(
+				"cpDefinitionLinkId",
+				String.valueOf(cpDefinitionLinkId));
+		}
+
+		long cpDefinitionId = ParamUtil.getLong(
+			actionRequest, "cpDefinitionId");
+
+		String toolbarItem = ParamUtil.getString(actionRequest, "toolbarItem");
+
+		portletURL.setParameter(
+			"mvcRenderCommandName", "editProductDefinition");
+		portletURL.setParameter(
+			"cpDefinitionId", String.valueOf(cpDefinitionId));
+		portletURL.setParameter("toolbarItem", toolbarItem);
+		portletURL.setParameter(
+			"screenNavigationCategoryKey",
+				CPDefinitionScreenNavigationConstants.
+				CATEGORY_KEY_PRODUCT_RELATIONS);
+		portletURL.setWindowState(actionRequest.getWindowState());
+
+		return portletURL.toString();
 	}
 
 	protected CPDefinitionLink updateCPDefinitionLink(
