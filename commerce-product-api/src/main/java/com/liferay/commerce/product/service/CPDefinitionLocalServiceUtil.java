@@ -688,6 +688,11 @@ public class CPDefinitionLocalServiceUtil {
 		return getService().isVersionable(cpDefinitionId);
 	}
 
+	public static boolean isVersionable(long cpDefinitionId,
+		javax.servlet.http.HttpServletRequest httpServletRequest) {
+		return getService().isVersionable(cpDefinitionId, httpServletRequest);
+	}
+
 	public static void maintainVersionThreshold(long cProductId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().maintainVersionThreshold(cProductId);
