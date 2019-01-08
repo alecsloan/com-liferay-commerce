@@ -15,28 +15,28 @@
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionLinkException;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
+import com.liferay.portal.kernel.portlet.PortletProvider;
+import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.commerce.product.model.CPDefinition;
-import javax.portlet.PortletURL;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -155,8 +155,7 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 
 		if (cpDefinitionLinkId > 0) {
 			portletURL.setParameter(
-				"cpDefinitionLinkId",
-				String.valueOf(cpDefinitionLinkId));
+				"cpDefinitionLinkId", String.valueOf(cpDefinitionLinkId));
 		}
 
 		long cpDefinitionId = ParamUtil.getLong(
@@ -171,7 +170,7 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 		portletURL.setParameter("toolbarItem", toolbarItem);
 		portletURL.setParameter(
 			"screenNavigationCategoryKey",
-				CPDefinitionScreenNavigationConstants.
+			CPDefinitionScreenNavigationConstants.
 				CATEGORY_KEY_PRODUCT_RELATIONS);
 		portletURL.setWindowState(actionRequest.getWindowState());
 

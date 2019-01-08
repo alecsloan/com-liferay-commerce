@@ -5,6 +5,7 @@
  *
  */
 {template .render}
+	{@param? cpDefinitionId: string}
 	{@param? cpDefinitionOptionRelId: string}
 	{@param? cpDefinitionOptionValueRelURL: string}
 	{@param? id: string}
@@ -41,6 +42,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<div class="modal-title" id="clayLargeModalLabel"></div>
+
 						<button aria-labelledby="Close" class="close" data-dismiss="modal" onClick="{$_handleClose}" role="button" type="button">
 							<svg aria-hidden="true" class="lexicon-icon lexicon-icon-times">
 								<use xlink:href="{$pathThemeImages}/lexicon/icons.svg#times" />
@@ -72,6 +74,7 @@
 										<div class="form-container">
 											{if $_currentCPDefinitionOptionValueRelId}
 												{call CPDefinitionOptionValueDetail.render}
+													{param cpDefinitionId : $cpDefinitionId /}
 													{param cpDefinitionOptionRelId : $cpDefinitionOptionRelId /}
 													{param cpDefinitionOptionValueRelId : $_currentCPDefinitionOptionValueRelId /}
 													{param namespace: $namespace /}

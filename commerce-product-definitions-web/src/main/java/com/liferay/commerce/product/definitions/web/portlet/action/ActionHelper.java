@@ -461,10 +461,10 @@ public class ActionHelper {
 	}
 
 	private CPDefinition _validateCPDefinition(Long cpDefinitionId)
-	 	throws PortalException{
+		throws PortalException {
 
-		CPDefinition cpDefinition =
-			_cpDefinitionService.fetchCPDefinition(cpDefinitionId);
+		CPDefinition cpDefinition = _cpDefinitionService.fetchCPDefinition(
+			cpDefinitionId);
 
 		if (cpDefinition != null) {
 			CProduct cProduct = _cProductLocalService.fetchCProduct(

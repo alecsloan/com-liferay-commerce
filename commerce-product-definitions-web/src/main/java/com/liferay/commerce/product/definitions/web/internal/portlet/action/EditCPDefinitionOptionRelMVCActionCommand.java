@@ -141,8 +141,8 @@ public class EditCPDefinitionOptionRelMVCActionCommand
 					cpDefinitionOptionRel.getCPDefinitionOptionRelId());
 			}
 
-			CPDefinition cpDefinition =
-				_actionHelper.getCPDefinition(actionRequest);
+			CPDefinition cpDefinition = _actionHelper.getCPDefinition(
+				actionRequest);
 
 			Long cpDefinitionId = cpDefinition.getCPDefinitionId();
 
