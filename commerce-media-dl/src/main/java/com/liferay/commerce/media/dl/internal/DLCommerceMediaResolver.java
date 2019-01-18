@@ -53,6 +53,7 @@ import java.io.IOException;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -99,19 +100,21 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 			long cpAttachmentFileEntryId, boolean download, boolean thumbnail)
 		throws PortalException {
 
-		CPAttachmentFileEntry cpAttachmentFileEntry =
-			_cpAttachmentFileEntryService.fetchCPAttachmentFileEntry(
-				cpAttachmentFileEntryId);
-
-		if (cpAttachmentFileEntry == null) {
-			return StringPool.BLANK;
-		}
-
 		StringBundler sb = new StringBundler(13);
 
 		sb.append(_portal.getPathModule());
 		sb.append(StringPool.SLASH);
 		sb.append(CommerceMediaConstants.SERVLET_PATH);
+
+		CPAttachmentFileEntry cpAttachmentFileEntry =
+			_cpAttachmentFileEntryService.fetchCPAttachmentFileEntry(
+				cpAttachmentFileEntryId);
+
+		if (cpAttachmentFileEntry == null) {
+			sb.append("/default/");
+
+			return _html.escape(sb.toString());
+		}
 
 		Locale siteDefaultLocale = _portal.getSiteDefaultLocale(
 			cpAttachmentFileEntry.getGroupId());
@@ -122,7 +125,7 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 			sb.append("/products/");
 
 			CPDefinition cpDefinition =
-				_cpDefinitionLocalService.getCPDefinition(
+				_cpDefinitionLocalService.fetchCPDefinition(
 					cpAttachmentFileEntry.getClassPK());
 
 			sb.append(cpDefinition.getCProductId());
@@ -169,8 +172,9 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 
 		String[] pathArray = StringUtil.split(path, CharPool.SLASH);
 
-		if (pathArray.length < 2) {
-			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+		if ((pathArray.length < 2)) {
+			httpServletResponse.sendRedirect(
+		"/image/layout_set_logo?img_id=35890&t=1547850545040");
 
 			return;
 		}
