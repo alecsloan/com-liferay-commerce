@@ -12,17 +12,23 @@
  * details.
  */
 
-package com.liferay.commerce.media.constants;
+package com.liferay.commerce.media.internal.configuration.definition;
+
+import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
+import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Alec Sloan
  */
-public class CommerceMediaConstants {
+@Component(service = ConfigurationBeanDeclaration.class)
+public class CommerceMediaDefaultImageConfigurationBeanDeclaration
+	implements ConfigurationBeanDeclaration {
 
-	public static final String SERVICE_NAME =
-		"com.liferay.commerce.media.internal.configuration." +
-			"CommerceMediaDefaultImageConfiguration";
-
-	public static final String SERVLET_PATH = "commerce-media";
+	@Override
+	public Class<?> getConfigurationBeanClass() {
+		return CommerceMediaDefaultImageConfiguration.class;
+	}
 
 }

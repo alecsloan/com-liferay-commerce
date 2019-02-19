@@ -12,23 +12,21 @@
  * details.
  */
 
-package com.liferay.commerce.media.impl.configuration.definition;
+package com.liferay.commerce.media;
 
-import com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration;
-import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
+import aQute.bnd.annotation.ProviderType;
 
-import org.osgi.service.component.annotations.Component;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Alec Sloan
  */
-@Component(service = ConfigurationBeanDeclaration.class)
-public class CommerceMediaDefaultImageConfigurationBeanDeclaration
-	implements ConfigurationBeanDeclaration {
+@ProviderType
+public interface CommerceMediaDefaultImage {
 
-	@Override
-	public Class<?> getConfigurationBeanClass() {
-		return CommerceMediaDefaultImageConfiguration.class;
-	}
+	public long getConfiguration(long groupId) throws PortalException;
+
+	public void updateConfiguration(String fileEntryId, long groupId)
+		throws Exception;
 
 }
