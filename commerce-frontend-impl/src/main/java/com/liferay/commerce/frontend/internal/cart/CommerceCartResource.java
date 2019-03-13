@@ -32,6 +32,7 @@ import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -246,6 +247,7 @@ public class CommerceCartResource {
 		@FormParam("productId") long cpInstanceId,
 		@FormParam("options") String options,
 		@FormParam("orderId") long orderId,
+		@FormParam("wareHouseId") long warehouseId,
 		@Context HttpServletRequest httpServletRequest) {
 
 		Cart cart = null;
@@ -291,6 +293,14 @@ public class CommerceCartResource {
 				_commerceOrderItemService.upsertCommerceOrderItem(
 					commerceOrder.getCommerceOrderId(), cpInstanceId, quantity,
 					0, options, commerceContext, serviceContext);
+
+			ExpandoBridge expandoBridge = commerceOrderItem.getExpandoBridge();
+
+			if (!expandoBridge.hasAttribute("warehouseId")) {
+				expandoBridge.addAttribute("warehouseId", false);
+			}
+
+			expandoBridge.setAttribute("warehouseId", warehouseId, false);
 
 			cart = _commerceCartResourceUtil.getCart(
 				commerceOrderItem.getCommerceOrderId(),
