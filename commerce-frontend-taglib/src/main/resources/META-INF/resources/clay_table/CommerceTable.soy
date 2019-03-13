@@ -129,3 +129,76 @@
 		</h1>
 	</td>
 {/deltemplate}
+
+{deltemplate ClayTable.Cell variant="'contactDetail'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+		<td>
+			<h1 class="table-list-title">
+				<span class="text-truncate">
+					{$value}
+					<br>
+					<p style="font-weight: normal">
+					{$item.address}
+					<br>
+					{$item.phoneNumber}
+					</p>
+				</span>
+			</h1>
+		</td>
+{/deltemplate}
+
+{deltemplate ClayTable.Cell variant="'directionsButton'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+		<td>
+		<span class="text-truncate">
+			<a href="{$value}" target="_blank">
+				<img src="https://www.americaspharmacy.com/assets/icon/directions.svg" style="width:50px">
+			</a>
+		</span>
+		</td>
+{/deltemplate}
+
+{deltemplate ClayTable.Cell variant="'price'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+		<td>
+		<span class="text-truncate">
+			{if $item.discountPrice != $value}
+				<span class="price price--discounted price-big">{$item.discountPrice}</span>
+
+				<br>
+				<span class="price price--old" style="margin-left: 0">{$value}</span>
+			{else}
+				<span class="price price--big">{$value}</span>
+			{/if}
+		</span>
+		</td>
+{/deltemplate}
+
+{deltemplate ClayTable.Cell variant="'addToCartButton'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+		<td>
+		<span class="text-truncate">
+			{if $item.price != '' or $item.discountPrice != ''}
+			<button c-warehouse-id="{$item.warehouseId}" class="btn btn-lg btn-primary taglib-add-to-cart" cp-instance-id="{$item.instanceId}" id="{$item.name}" name="addToCart" title="Add to Cart" type="submit">
+				Add to Cart
+			</button>
+			{/if}
+		</span>
+		</td>
+{/deltemplate}
