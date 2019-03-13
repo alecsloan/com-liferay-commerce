@@ -358,6 +358,15 @@ public class CommerceWarehouseLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceWarehouse> searchCommerceWarehouses(
+		long companyId, long groupId, double latitude, double longitude,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWarehouseLocalService.searchCommerceWarehouses(companyId,
+			groupId, latitude, longitude, start, end, sort);
+	}
+
+	@Override
 	public int searchCount(long groupId, String keywords, Boolean active,
 		long commerceCountryId) {
 		return _commerceWarehouseLocalService.searchCount(groupId, keywords,

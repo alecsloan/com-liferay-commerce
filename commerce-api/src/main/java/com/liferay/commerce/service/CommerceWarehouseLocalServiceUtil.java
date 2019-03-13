@@ -337,6 +337,15 @@ public class CommerceWarehouseLocalServiceUtil {
 			end, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceWarehouse> searchCommerceWarehouses(
+		long companyId, long groupId, double latitude, double longitude,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceWarehouses(companyId, groupId, latitude,
+			longitude, start, end, sort);
+	}
+
 	public static int searchCount(long groupId, String keywords,
 		Boolean active, long commerceCountryId) {
 		return getService()

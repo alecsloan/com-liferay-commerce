@@ -26,12 +26,25 @@ import com.liferay.commerce.service.base.CommerceWarehouseLocalServiceBaseImpl;
 import com.liferay.commerce.util.comparator.CommerceWarehouseNameComparator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,6 +53,7 @@ import java.util.List;
 public class CommerceWarehouseLocalServiceImpl
 	extends CommerceWarehouseLocalServiceBaseImpl {
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceWarehouse addCommerceWarehouse(
 			String name, String description, boolean active, String street1,
@@ -83,6 +97,7 @@ public class CommerceWarehouseLocalServiceImpl
 		return commerceWarehouse;
 	}
 
+	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommerceWarehouse deleteCommerceWarehouse(
 		CommerceWarehouse commerceWarehouse) {
@@ -273,6 +288,31 @@ public class CommerceWarehouseLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceWarehouse> searchCommerceWarehouses(
+		long companyId,long groupId, double latitude, double longitude, int start, int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, groupId, latitude, longitude, start, end, sort);
+
+		Indexer<CommerceWarehouse> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(CommerceWarehouse.class);
+
+		for (int i = 0; i < 10; i++) {
+			Hits hits = indexer.search(searchContext);
+
+			List<CommerceWarehouse> commerceAccounts = getCommerceWarehouses(hits);
+
+			if (commerceAccounts != null) {
+				return commerceAccounts;
+			}
+		}
+
+		throw new SearchException(
+			"Unable to fix the search index after 10 attempts");
+	}
+
+	@Override
 	public int searchCount(
 		long groupId, String keywords, Boolean active, long commerceCountryId) {
 
@@ -294,6 +334,7 @@ public class CommerceWarehouseLocalServiceImpl
 		return commerceWarehouse;
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceWarehouse updateCommerceWarehouse(
 			long commerceWarehouseId, String name, String description,
@@ -362,6 +403,55 @@ public class CommerceWarehouseLocalServiceImpl
 			commerceWarehouse.getDescription(), true, street1, street2, street3,
 			city, zip, commerceRegionId, commerceCountryId, latitude, longitude,
 			serviceContext);
+	}
+
+	protected SearchContext buildSearchContext(
+		long companyId, long groupId, double latitude, double longitude,
+		int start, int end, Sort sort) {
+
+		SearchContext searchContext = new SearchContext();
+
+
+		searchContext.setAttribute("latitude", latitude);
+		searchContext.setAttribute("longitude", longitude);
+
+		searchContext.setCompanyId(companyId);
+
+		searchContext.setGroupIds(new long[] {groupId});
+		searchContext.setStart(start);
+		searchContext.setEnd(end);
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		if (sort != null) {
+			searchContext.setSorts(sort);
+		}
+
+		return searchContext;
+	}
+
+	protected List<CommerceWarehouse> getCommerceWarehouses(Hits hits)
+		throws PortalException {
+
+		List<Document> documents = hits.toList();
+
+		List<CommerceWarehouse> commerceWarehouses = new ArrayList<>(
+			documents.size());
+
+		for (Document document : documents) {
+			long commerceAccountId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
+
+			CommerceWarehouse commerceWarehouse =
+				commerceWarehousePersistence.fetchByPrimaryKey(commerceAccountId);
+
+			commerceWarehouses.add(commerceWarehouse);
+		}
+
+		return commerceWarehouses;
 	}
 
 	protected void validate(

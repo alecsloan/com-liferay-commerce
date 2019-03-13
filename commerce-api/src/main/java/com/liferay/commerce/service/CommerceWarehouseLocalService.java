@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -72,6 +73,7 @@ public interface CommerceWarehouseLocalService extends BaseLocalService,
 	public CommerceWarehouse addCommerceWarehouse(
 		CommerceWarehouse commerceWarehouse);
 
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceWarehouse addCommerceWarehouse(String name,
 		String description, boolean active, String street1, String street2,
 		String street3, String city, String zip, long commerceRegionId,
@@ -284,6 +286,11 @@ public interface CommerceWarehouseLocalService extends BaseLocalService,
 		OrderByComparator<CommerceWarehouse> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceWarehouse> searchCommerceWarehouses(long companyId,
+		long groupId, double latitude, double longitude, int start, int end,
+		Sort sort) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long groupId, String keywords, Boolean active,
 		long commerceCountryId);
 
@@ -300,6 +307,7 @@ public interface CommerceWarehouseLocalService extends BaseLocalService,
 	public CommerceWarehouse updateCommerceWarehouse(
 		CommerceWarehouse commerceWarehouse);
 
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceWarehouse updateCommerceWarehouse(long commerceWarehouseId,
 		String name, String description, boolean active, String street1,
 		String street2, String street3, String city, String zip,
