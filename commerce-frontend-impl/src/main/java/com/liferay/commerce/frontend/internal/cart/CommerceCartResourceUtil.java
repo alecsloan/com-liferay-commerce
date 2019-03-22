@@ -94,7 +94,8 @@ public class CommerceCartResourceUtil {
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 			PriceModel prices = _productHelper.getPrice(
 				commerceOrderItem.getCPInstanceId(),
-				commerceOrderItem.getQuantity(), commerceContext, locale);
+				commerceOrderItem.getQuantity(), commerceContext, locale,
+				commerceOrder.isOpen());
 
 			ProductSettingsModel settings =
 				_productHelper.getProductSettingsModel(

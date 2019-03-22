@@ -42,14 +42,24 @@ import org.osgi.service.component.annotations.Reference;
 @Component(service = ProductHelper.class)
 public class ProductHelperImpl implements ProductHelper {
 
+	@Override
 	public PriceModel getPrice(
 			long cpInstanceId, int quantity, CommerceContext commerceContext,
 			Locale locale)
 		throws PortalException {
 
+		return getPrice(cpInstanceId, quantity, commerceContext, locale, true);
+	}
+
+	@Override
+	public PriceModel getPrice(
+			long cpInstanceId, int quantity, CommerceContext commerceContext,
+			Locale locale, boolean secure)
+		throws PortalException {
+
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
-				cpInstanceId, quantity, true, commerceContext);
+				cpInstanceId, quantity, secure, commerceContext);
 
 		if (commerceProductPrice == null) {
 			return null;
@@ -82,6 +92,7 @@ public class ProductHelperImpl implements ProductHelper {
 		return priceModel;
 	}
 
+	@Override
 	public ProductSettingsModel getProductSettingsModel(long cpInstanceId)
 		throws PortalException {
 

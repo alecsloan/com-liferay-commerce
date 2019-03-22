@@ -34,6 +34,11 @@ public interface ProductHelper {
 			Locale locale)
 		throws PortalException;
 
+	public PriceModel getPrice(
+			long cpInstanceId, int quantity, CommerceContext commerceContext,
+			Locale locale, boolean secure)
+		throws PortalException;
+
 	public ProductSettingsModel getProductSettingsModel(long cpInstanceId)
 		throws PortalException;
 
