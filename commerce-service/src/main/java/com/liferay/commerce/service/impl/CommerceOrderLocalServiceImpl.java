@@ -396,8 +396,11 @@ public class CommerceOrderLocalServiceImpl
 
 		// Workflow
 
+		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
+
 		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
-			commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
+			commerceOrder.getCompanyId(),
+			commerceAccount.getCommerceAccountGroupId(),
 			CommerceOrder.class.getName(), commerceOrder.getCommerceOrderId());
 
 		return commerceOrder;
@@ -510,6 +513,16 @@ public class CommerceOrderLocalServiceImpl
 
 	@Override
 	public List<CommerceOrder> getCommerceOrders(
+		long groupId, long commerceAccountId, int orderStatus, int start,
+		int end, OrderByComparator<CommerceOrder> orderByComparator) {
+
+		return commerceOrderPersistence.findByG_C_O(
+			groupId, commerceAccountId, orderStatus, start, end,
+			orderByComparator);
+	}
+
+	@Override
+	public List<CommerceOrder> getCommerceOrders(
 		long groupId, long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator) {
 
@@ -545,21 +558,26 @@ public class CommerceOrderLocalServiceImpl
 
 	@Override
 	public List<CommerceOrder> getUserCommerceOrders(
+		long groupId, long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, int start, int end) {
+
+		if (excludeOrderStatus) {
+			return getCommerceOrders(
+				groupId, commerceAccountId, start, end, null);
+		}
+
+		return getCommerceOrders(
+			groupId, commerceAccountId, orderStatus, start, end, null);
+	}
+
+	@Override
+	public List<CommerceOrder> getUserCommerceOrders(
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
 
-		QueryDefinition<CommerceOrder> queryDefinition =
-			new QueryDefinition<>();
-
-		queryDefinition.setAttribute("commerceAccountId", commerceAccountId);
-		queryDefinition.setAttribute("excludeOrderStatus", excludeOrderStatus);
-		queryDefinition.setAttribute("groupId", groupId);
-		queryDefinition.setAttribute("keywords", keywords);
-		queryDefinition.setAttribute("orderStatus", orderStatus);
-		queryDefinition.setStart(start);
-		queryDefinition.setEnd(end);
-
-		return commerceOrderFinder.findByG_U_C_O(userId, queryDefinition);
+		return getUserCommerceOrders(
+			groupId, commerceAccountId, orderStatus, excludeOrderStatus, start,
+			end);
 	}
 
 	@Override
@@ -804,6 +822,24 @@ public class CommerceOrderLocalServiceImpl
 
 		return startWorkflowInstance(
 			serviceContext.getUserId(), commerceOrder, serviceContext);
+	}
+
+	@Override
+	public CommerceOrder updateAccount(
+			long commerceOrderId, long userId, long commerceAccountId)
+		throws PortalException {
+
+		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
+			commerceOrderId);
+
+		User user = userLocalService.getUser(userId);
+
+		commerceOrder.setUserId(user.getUserId());
+		commerceOrder.setUserName(user.getFullName());
+
+		commerceOrder.setCommerceAccountId(commerceAccountId);
+
+		return commerceOrderPersistence.update(commerceOrder);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
