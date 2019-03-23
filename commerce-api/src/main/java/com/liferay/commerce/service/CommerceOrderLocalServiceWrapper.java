@@ -406,6 +406,15 @@ public class CommerceOrderLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceOrder> getCommerceOrders(
+		long groupId, long commerceAccountId, int orderStatus, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceOrder> orderByComparator) {
+		return _commerceOrderLocalService.getCommerceOrders(groupId,
+			commerceAccountId, orderStatus, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceOrder> getCommerceOrders(
 		long groupId, long commerceAccountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceOrder> orderByComparator) {
 		return _commerceOrderLocalService.getCommerceOrders(groupId,
@@ -507,6 +516,14 @@ public class CommerceOrderLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
+		long groupId, long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, int start, int end) {
+		return _commerceOrderLocalService.getUserCommerceOrders(groupId,
+			commerceAccountId, orderStatus, excludeOrderStatus, start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
 		return _commerceOrderLocalService.getUserCommerceOrders(groupId,
@@ -577,6 +594,14 @@ public class CommerceOrderLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderLocalService.submitCommerceOrder(userId,
 			commerceOrderId);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrder updateAccount(
+		long commerceOrderId, long userId, long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderLocalService.updateAccount(commerceOrderId,
+			userId, commerceAccountId);
 	}
 
 	@Override

@@ -381,6 +381,15 @@ public class CommerceOrderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getCommerceOrders(
+		long groupId, long commerceAccountId, int orderStatus, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceOrder> orderByComparator) {
+		return getService()
+				   .getCommerceOrders(groupId, commerceAccountId, orderStatus,
+			start, end, orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getCommerceOrders(
 		long groupId, long commerceAccountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceOrder> orderByComparator) {
 		return getService()
@@ -471,6 +480,14 @@ public class CommerceOrderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
+		long groupId, long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, int start, int end) {
+		return getService()
+				   .getUserCommerceOrders(groupId, commerceAccountId,
+			orderStatus, excludeOrderStatus, start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
 		return getService()
@@ -534,6 +551,13 @@ public class CommerceOrderLocalServiceUtil {
 		long userId, long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().submitCommerceOrder(userId, commerceOrderId);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder updateAccount(
+		long commerceOrderId, long userId, long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateAccount(commerceOrderId, userId, commerceAccountId);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder updateBillingAddress(

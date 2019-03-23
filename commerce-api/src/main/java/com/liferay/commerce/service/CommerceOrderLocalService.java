@@ -317,6 +317,11 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getCommerceOrders(long groupId,
+		long commerceAccountId, int orderStatus, int start, int end,
+		OrderByComparator<CommerceOrder> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getCommerceOrders(long groupId,
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator);
 
@@ -388,6 +393,11 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getUserCommerceOrders(long groupId,
+		long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
 		long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end);
@@ -424,6 +434,9 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder submitCommerceOrder(long userId, long commerceOrderId)
 		throws PortalException;
+
+	public CommerceOrder updateAccount(long commerceOrderId, long userId,
+		long commerceAccountId) throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder updateBillingAddress(long commerceOrderId,
