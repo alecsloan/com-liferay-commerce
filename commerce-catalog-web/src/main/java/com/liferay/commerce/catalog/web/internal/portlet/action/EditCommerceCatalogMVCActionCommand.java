@@ -52,7 +52,7 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = MVCActionCommand.class
 )
-public class CommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
+public class EditCommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
 
 	protected void deleteCommerceCatalog(ActionRequest actionRequest)
 		throws Exception {
