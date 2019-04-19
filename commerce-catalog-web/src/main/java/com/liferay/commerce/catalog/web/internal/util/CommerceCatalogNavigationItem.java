@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -76,6 +77,9 @@ public class CommerceCatalogNavigationItem implements CPNavigationItem {
 
 		portletURL.setParameter("mvcRenderCommandName", "editCommerceCatalog");
 		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
+
+		portletURL.setParameter("commerceCatalogId",
+			ParamUtil.getString(portletRequest, "commerceCatalogId"));
 
 		navigationItem.setHref(portletURL.toString());
 

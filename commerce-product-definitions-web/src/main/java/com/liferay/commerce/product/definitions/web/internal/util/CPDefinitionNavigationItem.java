@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -77,6 +78,10 @@ public class CPDefinitionNavigationItem implements CPNavigationItem {
 		PortletURL portletURL = PortletProviderUtil.getPortletURL(
 			portletRequest, themeDisplay.getScopeGroup(),
 			CPDefinition.class.getName(), PortletProvider.Action.MANAGE);
+
+		portletURL.setParameter(
+			"commerceCatalogId",
+			ParamUtil.getString(portletRequest, "commerceCatalogId"));
 
 		navigationItem.setHref(portletURL.toString());
 
