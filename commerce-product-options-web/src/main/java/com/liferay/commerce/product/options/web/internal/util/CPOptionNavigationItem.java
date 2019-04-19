@@ -76,10 +76,9 @@ public class CPOptionNavigationItem implements CPNavigationItem {
 			portletRequest, themeDisplay.getScopeGroup(),
 			CPOption.class.getName(), PortletProvider.Action.MANAGE);
 
-		String commerceCatalogId = ParamUtil.getString(
-			portletRequest, "commerceCatalogId");
-
-		portletURL.setParameter("commerceCatalogId", commerceCatalogId);
+		portletURL.setParameter(
+			"commerceCatalogId",
+			ParamUtil.getString(portletRequest, "commerceCatalogId"));
 
 		navigationItem.setHref(portletURL.toString());
 
