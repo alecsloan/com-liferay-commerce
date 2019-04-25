@@ -38,7 +38,6 @@ CommerceCatalog commerceCatalog = (CommerceCatalog)row.getObject();
 
 	<portlet:actionURL name="editCommerceCatalog" var="deleteURL">
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalog.getCommerceCatalogId()) %>" />
 	</portlet:actionURL>
 
