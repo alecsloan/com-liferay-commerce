@@ -43,7 +43,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"commerce.product.navigation.item.key=" + CPPortletKeys.COMMERCE_CATALOGS,
-		"commerce.product.navigation.item.order:Integer=10"
+		"commerce.product.navigation.item.order:Integer=0"
 	},
 	service = CPNavigationItem.class
 )
