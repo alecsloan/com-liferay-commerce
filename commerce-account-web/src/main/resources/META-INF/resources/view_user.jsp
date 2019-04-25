@@ -90,6 +90,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 		<commerce-ui:user-roles-modal
 			commerceAccountId="<%= commerceAccount.getCommerceAccountId() %>"
 			componentId="userRolesModal"
+			subtype="<%= CommerceAccountConstants.ROLE_SUBTYPE_ACCOUNT %>"
 			userId="<%= selectedUser.getUserId() %>"
 		/>
 

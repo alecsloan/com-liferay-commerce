@@ -14,25 +14,29 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountServiceUtil;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.commerce.frontend.taglib.internal.model.AccountRole;
+import com.liferay.commerce.product.constants.CommerceCatalogConstants;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.UserGroupRole;
+import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 import com.liferay.portal.kernel.service.RoleServiceUtil;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.taglib.util.HtmlTopTag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,7 @@ import java.util.Map;
 
 /**
  * @author Fabio Diego Mastrorilli
+ * @author Alec Sloan
  */
 public class UserRolesModalTag extends ComponentRendererTag {
 
@@ -49,32 +54,62 @@ public class UserRolesModalTag extends ComponentRendererTag {
 			WebKeys.THEME_DISPLAY);
 
 		putValue(
-			"spritemap",
-			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
+			"spritemap", themeDisplay.getPathThemeImages() + "/clay/icons.svg");
 
 		try {
-			List<AccountRole> selectedRoles = new ArrayList<>();
+			HtmlTopTag htmlTopTag = new HtmlTopTag() {
+
+				@Override
+				public StringBundler getBodyContentAsStringBundler() {
+					return new StringBundler(
+						"<link rel=\"stylesheet\" type=\"text/css\" " +
+							"href=\"/o/commerce-frontend-taglib/css" +
+								"/main.css\">");
+				}
+
+			};
+
+			htmlTopTag.doTag(pageContext);
 
 			Map<String, Object> context = getContext();
 
 			long userId = GetterUtil.getLong(context.get("userId"));
 
-			long commerceAccountId = GetterUtil.getLong(
-				context.get("commerceAccountId"));
+			String subtype = GetterUtil.getString(context.get("subtype"));
 
-			CommerceAccount commerceAccount =
-				CommerceAccountServiceUtil.getCommerceAccount(
-					commerceAccountId);
+			List<AccountRole> selectedRoles = new ArrayList<>();
 
-			List<UserGroupRole> userGroupRoles =
-				UserGroupRoleLocalServiceUtil.getUserGroupRoles(
-					userId, commerceAccount.getCommerceAccountGroupId());
+			if (subtype.equals(CommerceAccountConstants.ROLE_SUBTYPE_ACCOUNT)) {
+				long commerceAccountId = GetterUtil.getLong(
+					context.get("commerceAccountId"));
 
-			for (UserGroupRole userGroupRole : userGroupRoles) {
-				Role role = userGroupRole.getRole();
+				CommerceAccount commerceAccount =
+					CommerceAccountServiceUtil.getCommerceAccount(
+						commerceAccountId);
 
-				selectedRoles.add(
-					new AccountRole(role.getRoleId(), role.getName()));
+				List<UserGroupRole> userGroupRoles =
+					UserGroupRoleLocalServiceUtil.getUserGroupRoles(
+						userId, commerceAccount.getCommerceAccountGroupId());
+
+				for (UserGroupRole userGroupRole : userGroupRoles) {
+					Role role = userGroupRole.getRole();
+
+					selectedRoles.add(
+						new AccountRole(role.getRoleId(), role.getName()));
+				}
+			}
+			else if (subtype.equals(
+						CommerceCatalogConstants.ROLE_SUBTYPE_CATALOG)) {
+
+				long groupId = GetterUtil.getLong(context.get("groupId"));
+
+				List<Role> userRoles = RoleLocalServiceUtil.getUserGroupRoles(
+					userId, groupId);
+
+				for (Role role : userRoles) {
+					selectedRoles.add(
+						new AccountRole(role.getRoleId(), role.getName()));
+				}
 			}
 
 			putValue("selectedRoles", selectedRoles);
@@ -86,14 +121,19 @@ public class UserRolesModalTag extends ComponentRendererTag {
 				new int[] {RoleConstants.TYPE_SITE});
 
 			for (Role role : roles) {
-				availableRoles.add(
-					new AccountRole(role.getRoleId(), role.getName()));
+				if (subtype.equals(role.getSubtype()) &&
+					!subtype.equals(
+						CommerceAccountConstants.ROLE_SUBTYPE_ACCOUNT)) {
+
+					availableRoles.add(
+						new AccountRole(role.getRoleId(), role.getName()));
+				}
 			}
 
 			putValue("roles", availableRoles);
 		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		setTemplateNamespace("UserRolesModal.render");
@@ -115,6 +155,14 @@ public class UserRolesModalTag extends ComponentRendererTag {
 
 	public void setCommerceAccountId(long commerceAccountId) {
 		putValue("commerceAccountId", commerceAccountId);
+	}
+
+	public void setGroupId(long groupId) {
+		putValue("groupId", groupId);
+	}
+
+	public void setSubtype(String subtype) {
+		putValue("subtype", subtype);
 	}
 
 	public void setUserId(long userId) {
