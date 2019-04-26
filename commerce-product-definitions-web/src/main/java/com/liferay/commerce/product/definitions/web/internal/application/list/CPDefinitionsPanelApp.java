@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.definitions.web.internal.application.list;
 
+import com.liferay.application.list.BaseJSPPanelApp;
 import com.liferay.application.list.BasePanelApp;
 import com.liferay.application.list.PanelApp;
 import com.liferay.application.list.constants.PanelCategoryKeys;
@@ -30,7 +31,8 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"panel.app.order:Integer=100",
-		"panel.category.key=" + PanelCategoryKeys.HIDDEN
+		"panel.category.key=" + PanelCategoryKeys.HIDDEN,
+
 	},
 	service = PanelApp.class
 )
