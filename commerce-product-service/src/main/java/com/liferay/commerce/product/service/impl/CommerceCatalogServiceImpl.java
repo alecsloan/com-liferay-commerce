@@ -16,8 +16,11 @@ package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CommerceCatalogServiceBaseImpl;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.List;
@@ -63,16 +66,18 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	public List<CommerceCatalog> searchCommerceCatalogs(long companyId)
 		throws PortalException {
 
-		return commerceCatalogLocalService.searchCommerceCatalogs(companyId);
+		return searchCommerceCatalogs(
+			companyId, StringPool.BLANK, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	@Override
 	public List<CommerceCatalog> searchCommerceCatalogs(
-			long companyId, String keywords, int start, int end)
+			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException {
 
 		return commerceCatalogLocalService.searchCommerceCatalogs(
-			companyId, keywords, start, end);
+			companyId, keywords, start, end, sort);
 	}
 
 	@Override
