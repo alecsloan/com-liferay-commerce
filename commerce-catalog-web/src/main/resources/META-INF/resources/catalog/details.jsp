@@ -21,7 +21,7 @@ String catalogNavigationItem = ParamUtil.getString(request, "catalogNavigationIt
 
 CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceCatalog commerceCatalog = commerceCatalogDisplayContext.getCommerceCatalog(request);
+CommerceCatalog commerceCatalog = commerceCatalogDisplayContext.getCommerceCatalog();
 %>
 
 <%@ include file="/catalog/navbar_definitions.jspf" %>

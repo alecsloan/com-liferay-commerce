@@ -88,12 +88,9 @@ public class CommerceCatalogDisplayContext
 		return portletURL.toString();
 	}
 
-	public CommerceCatalog getCommerceCatalog(
-			HttpServletRequest httpServletRequest)
-		throws PortalException {
-
+	public CommerceCatalog getCommerceCatalog() throws PortalException {
 		long commerceCatalogId = ParamUtil.getLong(
-			httpServletRequest, "commerceCatalogId");
+			_httpServletRequest, "commerceCatalogId");
 
 		return CommerceCatalogLocalServiceUtil.fetchCommerceCatalog(
 			commerceCatalogId);
