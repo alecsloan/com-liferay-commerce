@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.catalog.web.internal.portlet.action;
 
-import com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogDisplayContext;
+import com.liferay.commerce.catalog.web.internal.display.context.CommerceChannelDisplayContext;
+import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.item.selector.ItemSelector;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -40,10 +40,13 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "javax.portlet.name=" + CPPortletKeys.COMMERCE_CATALOGS,
+	property = {
+		"javax.portlet.name=" + CPPortletKeys.COMMERCE_CHANNELS,
+		"mvc.command.name=editCommerceChannel"
+	},
 	service = MVCRenderCommand.class
 )
-public class CommerceCatalogMVCRenderCommand implements MVCRenderCommand {
+public class EditCommerceChannelMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
@@ -54,13 +57,14 @@ public class CommerceCatalogMVCRenderCommand implements MVCRenderCommand {
 			HttpServletRequest httpServletRequest =
 				_portal.getHttpServletRequest(renderRequest);
 
-			CommerceCatalogDisplayContext commerceCatalogDisplayContext =
-				new CommerceCatalogDisplayContext(
-					httpServletRequest, _commerceCatalogService, _itemSelector,
-					_portal, _portletResourcePermission);
+			CommerceChannelDisplayContext commerceChannelDisplayContext =
+				new CommerceChannelDisplayContext(
+					httpServletRequest, _commerceChannelService,
+					_commerceChannelTypeRegistry, _portal,
+					_portletResourcePermission);
 
 			renderRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCatalogDisplayContext);
+				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceChannelDisplayContext);
 		}
 		catch (PortalException pe) {
 			SessionErrors.add(renderRequest, pe.getClass());
@@ -71,14 +75,14 @@ public class CommerceCatalogMVCRenderCommand implements MVCRenderCommand {
 			throw new PortletException(e);
 		}
 
-		return "/catalog/view.jsp";
+		return "/channel/details.jsp";
 	}
 
 	@Reference
-	private CommerceCatalogService _commerceCatalogService;
+	private CommerceChannelService _commerceChannelService;
 
 	@Reference
-	private ItemSelector _itemSelector;
+	private CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
 
 	@Reference
 	private Portal _portal;

@@ -55,7 +55,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.scopeable=true",
 		"javax.portlet.display-name=Catalogs",
 		"javax.portlet.expiration-cache=0",
-		"javax.portlet.init-param.view-template=/view.jsp",
+		"javax.portlet.init-param.view-template=/catalog/view.jsp",
 		"javax.portlet.name=" + CPPortletKeys.COMMERCE_CATALOGS,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user",
