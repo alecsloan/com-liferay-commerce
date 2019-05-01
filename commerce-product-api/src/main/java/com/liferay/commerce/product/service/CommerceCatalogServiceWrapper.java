@@ -50,6 +50,19 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 		return _commerceCatalogService.deleteCommerceCatalog(commerceCatalogId);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalog(
+		long commerceCatalogId) {
+		return _commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.Group getCommerceCatalogGroup(
+		long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogService.getCommerceCatalogGroup(commerceCatalogId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -69,10 +82,11 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
-		long companyId, String keywords, int start, int end)
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogService.searchCommerceCatalogs(companyId,
-			keywords, start, end);
+			keywords, start, end, sort);
 	}
 
 	@Override
