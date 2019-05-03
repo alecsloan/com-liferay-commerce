@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.catalog.web.internal.util;
 
-import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.util.CPNavigationItem;
+import com.liferay.commerce.product.util.ChannelNavigationItem;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.NavigationItem;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -42,12 +39,12 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"commerce.product.navigation.item.key=" + CPPortletKeys.COMMERCE_CATALOGS,
-		"commerce.product.navigation.item.order:Integer=10"
+		"commerce.channel.navigation.item.key=" + CPPortletKeys.COMMERCE_CHANNELS,
+		"commerce.channel.navigation.item.order:Integer=10"
 	},
-	service = CPNavigationItem.class
+	service = ChannelNavigationItem.class
 )
-public class CommerceCatalogNavigationItem implements CPNavigationItem {
+public class CommerceChannelNavigationItem implements ChannelNavigationItem {
 
 	@Override
 	public NavigationItem getNavigationItem(PortletRequest portletRequest)
@@ -56,29 +53,21 @@ public class CommerceCatalogNavigationItem implements CPNavigationItem {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		boolean manageCatalogPermission = _portletResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
-			CPActionKeys.MANAGE_CATALOG);
-
-		if (!manageCatalogPermission) {
-			return null;
-		}
-
 		NavigationItem navigationItem = new NavigationItem();
 
 		String portletId = _portal.getPortletId(portletRequest);
 
 		navigationItem.setActive(
-			portletId.equals(CPPortletKeys.COMMERCE_CATALOGS));
+			portletId.equals(CPPortletKeys.COMMERCE_CHANNELS));
 
 		PortletURL portletURL = _portal.getControlPanelPortletURL(
-			portletRequest, CPPortletKeys.COMMERCE_CATALOGS,
+			portletRequest, CPPortletKeys.COMMERCE_CHANNELS,
 			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter(
-			"commerceCatalogId",
-			ParamUtil.getString(portletRequest, "commerceCatalogId"));
-		portletURL.setParameter("mvcRenderCommandName", "editCommerceCatalog");
+			"commerceChannelId",
+			ParamUtil.getString(portletRequest, "commerceChannelId"));
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
 
 		navigationItem.setHref(portletURL.toString());
 
@@ -92,8 +81,5 @@ public class CommerceCatalogNavigationItem implements CPNavigationItem {
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
-	private PortletResourcePermission _portletResourcePermission;
 
 }
