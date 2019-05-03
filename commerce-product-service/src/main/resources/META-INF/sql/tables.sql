@@ -401,6 +401,7 @@ create table CommerceChannel (
 	createDate DATE null,
 	modifiedDate DATE null,
 	filterType VARCHAR(75) null,
+	name STRING null,
 	type_ VARCHAR(75) null,
 	typeSettings VARCHAR(75) null
 );
