@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.catalog.web.internal.display.context;
 
+import com.liferay.commerce.item.selector.criterion.SimpleSitetemSelectorCriterion;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -31,7 +32,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.site.item.selector.criterion.SiteItemSelectorCriterion;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -94,16 +94,16 @@ public class SiteCommerceChannelTypeDisplayContext
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(httpServletRequest);
 
-		SiteItemSelectorCriterion siteItemSelectorCriterion =
-			new SiteItemSelectorCriterion();
+		SimpleSitetemSelectorCriterion simpleSitetemSelectorCriterion =
+			new SimpleSitetemSelectorCriterion();
 
-		siteItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
+		simpleSitetemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			Collections.<ItemSelectorReturnType>singletonList(
 				new UUIDItemSelectorReturnType()));
 
 		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
 			requestBackedPortletURLFactory, "sitesSelectItem",
-			siteItemSelectorCriterion);
+			simpleSitetemSelectorCriterion);
 
 		String checkedGroupIds = StringUtil.merge(getCheckedGroupIds());
 
