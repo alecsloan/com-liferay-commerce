@@ -24,10 +24,13 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Locale;
 import java.util.Map;
@@ -119,6 +122,56 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 		return portletURL.toString();
 	}
 
+	protected String getTypeSettings(
+			long commerceChannelId, String type, ActionRequest actionRequest)
+		throws PortalException {
+
+		String typeSettings = ParamUtil.getString(
+			actionRequest, "typeSettings");
+
+		if (Validator.isNotNull(typeSettings)) {
+			return typeSettings;
+		}
+
+		CommerceChannel commerceChannel = null;
+
+		if (commerceChannelId > 0) {
+			commerceChannel = _commerceChannelService.getCommerceChannels(
+				-1, -1
+			).get(
+				0
+			);
+		}
+
+		if ((commerceChannel != null) &&
+			type.equals(commerceChannel.getType())) {
+
+			typeSettings = commerceChannel.getTypeSettings();
+		}
+
+		String[] typeSettingsArray = StringUtil.split(typeSettings);
+
+		String[] addTypeSettings = ParamUtil.getStringValues(
+			actionRequest, "addTypeSettings");
+
+		String[] deleteTypeSettings = ParamUtil.getStringValues(
+			actionRequest, "deleteTypeSettings");
+
+		if (deleteTypeSettings.length > 0) {
+			for (String deleteTypeSetting : deleteTypeSettings) {
+				typeSettingsArray = ArrayUtil.remove(
+					typeSettingsArray, deleteTypeSetting);
+			}
+		}
+
+		if (addTypeSettings.length > 0) {
+			typeSettingsArray = ArrayUtil.append(
+				typeSettingsArray, addTypeSettings);
+		}
+
+		return StringUtil.merge(ArrayUtil.unique(typeSettingsArray));
+	}
+
 	protected CommerceChannel updateCommerceChannel(ActionRequest actionRequest)
 		throws Exception {
 
@@ -128,16 +181,19 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "name");
 		String type = ParamUtil.getString(actionRequest, "type");
 
+		String typeSettings = getTypeSettings(
+			commerceChannelId, type, actionRequest);
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceChannel.class.getName(), actionRequest);
 
 		if (commerceChannelId <= 0) {
 			return _commerceChannelService.addCommerceChannel(
-				nameMap, type, serviceContext);
+				nameMap, type, typeSettings, serviceContext);
 		}
 
 		return _commerceChannelService.updateCommerceChannel(
-			commerceChannelId, nameMap, type, serviceContext);
+			commerceChannelId, nameMap, type, typeSettings, serviceContext);
 	}
 
 	@Reference
