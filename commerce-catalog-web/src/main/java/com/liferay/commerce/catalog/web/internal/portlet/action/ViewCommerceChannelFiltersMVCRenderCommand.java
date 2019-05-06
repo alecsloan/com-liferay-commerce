@@ -40,11 +40,11 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + CPPortletKeys.COMMERCE_CHANNELS,
-		"mvc.command.name=editCommerceChannelFilter"
+		"mvc.command.name=viewCommerceChannelFilters"
 	},
 	service = MVCRenderCommand.class
 )
-public class EditCommerceChannelFilterMVCRenderCommand
+public class ViewCommerceChannelFiltersMVCRenderCommand
 	implements MVCRenderCommand {
 
 	@Override
@@ -69,7 +69,7 @@ public class EditCommerceChannelFilterMVCRenderCommand
 			throw new PortletException(e);
 		}
 
-		return "/channel/edit_filter.jsp";
+		return "/channel/filters.jsp";
 	}
 
 	@Reference
