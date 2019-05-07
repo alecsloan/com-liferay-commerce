@@ -67,7 +67,8 @@ PortletURL portletURL = simpleSiteItemSelectorViewDisplayContext.getPortletURL()
 
 			<liferay-ui:search-container-column-text
 				cssClass="table-cell-content"
-				property="name"
+				name="name"
+				value="<%= HtmlUtil.escape(group.getName(locale)) %>"
 			/>
 		</liferay-ui:search-container-row>
 
