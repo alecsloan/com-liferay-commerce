@@ -228,6 +228,11 @@ public class CommerceChannelWrapper implements CommerceChannel,
 		return _commerceChannel.getTypeSettings();
 	}
 
+	@Override
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
+		return _commerceChannel.getTypeSettingsProperties();
+	}
+
 	/**
 	* Returns the user ID of this commerce channel.
 	*
@@ -392,6 +397,12 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	@Override
 	public void setTypeSettings(String typeSettings) {
 		_commerceChannel.setTypeSettings(typeSettings);
+	}
+
+	@Override
+	public void setTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
+		_commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
 	}
 
 	/**
