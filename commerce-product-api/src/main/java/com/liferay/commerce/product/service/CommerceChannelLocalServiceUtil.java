@@ -54,6 +54,14 @@ public class CommerceChannelLocalServiceUtil {
 		return getService().addCommerceChannel(commerceChannel);
 	}
 
+	public static com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
+		String name, String type, String typeSettings,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceChannel(name, type, typeSettings, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce channel with the primary key. Does not add the commerce channel to the database.
 	*
@@ -251,6 +259,15 @@ public class CommerceChannelLocalServiceUtil {
 	public static com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
 		com.liferay.commerce.product.model.CommerceChannel commerceChannel) {
 		return getService().updateCommerceChannel(commerceChannel);
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
+		long commerceChannelId, String name, String type, String typeSettings,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCommerceChannel(commerceChannelId, name, type,
+			typeSettings, serviceContext);
 	}
 
 	public static CommerceChannelLocalService getService() {

@@ -217,7 +217,7 @@ public class CommerceCatalogServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
 		HttpPrincipal httpPrincipal, long companyId, String keywords,
-		int start, int end)
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
@@ -225,7 +225,7 @@ public class CommerceCatalogServiceHttp {
 					_searchCommerceCatalogsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, keywords, start, end);
+					companyId, keywords, start, end, sort);
 
 			Object returnObj = null;
 
@@ -249,6 +249,39 @@ public class CommerceCatalogServiceHttp {
 		}
 	}
 
+	public static int searchCommerceCatalogsCount(HttpPrincipal httpPrincipal,
+		long companyId, String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
+					"searchCommerceCatalogsCount",
+					_searchCommerceCatalogsCountParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, keywords);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
 		HttpPrincipal httpPrincipal, long commerceCatalogId,
 		String catalogDefaultLanguageId,
@@ -258,7 +291,7 @@ public class CommerceCatalogServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
 					"updateCommerceCatalog",
-					_updateCommerceCatalogParameterTypes6);
+					_updateCommerceCatalogParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceCatalogId, catalogDefaultLanguageId, nameMap,
@@ -304,9 +337,13 @@ public class CommerceCatalogServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _searchCommerceCatalogsParameterTypes5 = new Class[] {
-			long.class, String.class, int.class, int.class
+			long.class, String.class, int.class, int.class,
+			com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _updateCommerceCatalogParameterTypes6 = new Class[] {
+	private static final Class<?>[] _searchCommerceCatalogsCountParameterTypes6 = new Class[] {
+			long.class, String.class
+		};
+	private static final Class<?>[] _updateCommerceCatalogParameterTypes7 = new Class[] {
 			long.class, String.class, java.util.Map.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};

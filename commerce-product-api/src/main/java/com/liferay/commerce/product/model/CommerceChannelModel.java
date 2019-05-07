@@ -192,6 +192,21 @@ public interface CommerceChannelModel extends AuditedModel,
 	public void setFilterType(String filterType);
 
 	/**
+	 * Returns the name of this commerce channel.
+	 *
+	 * @return the name of this commerce channel
+	 */
+	@AutoEscape
+	public String getName();
+
+	/**
+	 * Sets the name of this commerce channel.
+	 *
+	 * @param name the name of this commerce channel
+	 */
+	public void setName(String name);
+
+	/**
 	 * Returns the type of this commerce channel.
 	 *
 	 * @return the type of this commerce channel

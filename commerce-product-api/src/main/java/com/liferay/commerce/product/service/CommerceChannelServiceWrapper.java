@@ -33,6 +33,42 @@ public class CommerceChannelServiceWrapper implements CommerceChannelService,
 		_commerceChannelService = commerceChannelService;
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
+		String name, String type, String typeSettings,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannelService.addCommerceChannel(name, type,
+			typeSettings, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceChannel deleteCommerceChannel(
+		long commerceChannelId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannelService.deleteCommerceChannel(commerceChannelId);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannel(
+		long commerceChannelId) {
+		return _commerceChannelService.fetchCommerceChannel(commerceChannelId);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceChannel getCommerceChannel(
+		long commerceChannelId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannelService.getCommerceChannel(commerceChannelId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CommerceChannel> getCommerceChannels(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannelService.getCommerceChannels(start, end);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -41,6 +77,15 @@ public class CommerceChannelServiceWrapper implements CommerceChannelService,
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceChannelService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
+		long commerceChannelId, String name, String type, String typeSettings,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannelService.updateCommerceChannel(commerceChannelId,
+			name, type, typeSettings, serviceContext);
 	}
 
 	@Override

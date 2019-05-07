@@ -65,6 +65,7 @@ public class CommerceChannelWrapper implements CommerceChannel,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("filterType", getFilterType());
+		attributes.put("name", getName());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
 
@@ -113,6 +114,12 @@ public class CommerceChannelWrapper implements CommerceChannel,
 
 		if (filterType != null) {
 			setFilterType(filterType);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
 		}
 
 		String type = (String)attributes.get("type");
@@ -191,6 +198,16 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	@Override
 	public Date getModifiedDate() {
 		return _commerceChannel.getModifiedDate();
+	}
+
+	/**
+	* Returns the name of this commerce channel.
+	*
+	* @return the name of this commerce channel
+	*/
+	@Override
+	public String getName() {
+		return _commerceChannel.getName();
 	}
 
 	/**
@@ -357,6 +374,16 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceChannel.setModifiedDate(modifiedDate);
+	}
+
+	/**
+	* Sets the name of this commerce channel.
+	*
+	* @param name the name of this commerce channel
+	*/
+	@Override
+	public void setName(String name) {
+		_commerceChannel.setName(name);
 	}
 
 	@Override
