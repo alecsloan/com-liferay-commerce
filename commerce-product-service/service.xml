@@ -56,7 +56,7 @@
 		<!-- Other fields -->
 
 		<column name="filterType" type="String" />
-		<column localized="true" name="name" type="String" />
+		<column name="name" type="String" />
 		<column name="type" type="String" />
 		<column name="typeSettings" type="String" />
 
