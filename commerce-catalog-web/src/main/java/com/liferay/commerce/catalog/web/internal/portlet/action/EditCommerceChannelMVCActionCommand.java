@@ -27,14 +27,10 @@ import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-
-import java.util.Locale;
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -183,8 +179,7 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 			filterType = "orSearch";
 		}
 
-		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
-			actionRequest, "name");
+		String name = ParamUtil.getString(actionRequest, "name");
 
 		String type = ParamUtil.getString(actionRequest, "type");
 
@@ -196,11 +191,11 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 
 		if (commerceChannelId <= 0) {
 			return _commerceChannelService.addCommerceChannel(
-				nameMap, type, typeSettings, serviceContext);
+				name, type, typeSettings, serviceContext);
 		}
 
 		return _commerceChannelService.updateCommerceChannel(
-			commerceChannelId, nameMap, type, typeSettings, serviceContext);
+			commerceChannelId, name, type, typeSettings, serviceContext);
 	}
 
 	@Reference
