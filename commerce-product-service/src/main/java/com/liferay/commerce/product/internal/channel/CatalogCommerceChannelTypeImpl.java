@@ -15,7 +15,6 @@
 package com.liferay.commerce.product.internal.channel;
 
 import com.liferay.commerce.product.channel.CommerceChannelType;
-import com.liferay.commerce.product.constants.CommerceChannelConstants;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -35,21 +34,23 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"commerce.product.channel.type.key=" + CommerceChannelConstants.TYPE_SITE,
-		"commerce.product.channel.type.order:Integer=30"
+		"commerce.product.channel.type.key=" + CatalogCommerceChannelTypeImpl.KEY,
+		"commerce.product.channel.type.order:Integer=10"
 	},
 	service = CommerceChannelType.class
 )
-public class SiteCommerceChannelTypeImpl implements CommerceChannelType {
+public class CatalogCommerceChannelTypeImpl implements CommerceChannelType {
+
+	public static final String KEY = "catalog";
 
 	@Override
 	public String getKey() {
-		return CommerceChannelConstants.TYPE_SITE;
+		return KEY;
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "site");
+		return LanguageUtil.get(locale, KEY);
 	}
 
 	@Override

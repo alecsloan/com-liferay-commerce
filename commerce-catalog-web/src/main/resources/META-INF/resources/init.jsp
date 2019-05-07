@@ -29,6 +29,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.catalog.web.internal.display.context.CPCatalogRuleDisplayContext" %><%@
+page import="com.liferay.commerce.catalog.web.internal.display.context.CatalogCommerceChannelTypeDisplayContext" %><%@
 page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogDisplayContext" %><%@
 page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogUsersDisplayContext" %><%@
 page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceChannelDisplayContext" %><%@
