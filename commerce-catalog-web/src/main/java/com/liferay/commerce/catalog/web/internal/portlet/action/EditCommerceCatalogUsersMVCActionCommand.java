@@ -80,10 +80,23 @@ public class EditCommerceCatalogUsersMVCActionCommand
 		Group group = _commerceCatalogService.getCommerceCatalogGroup(
 			commerceCatalogId);
 
-		_userGroupRoleLocalService.deleteUserGroupRoles(
-			commerceCatalogUserId, new long[] {group.getGroupId()});
+		long[] commerceCatalogUserIds = null;
 
-		_groupLocalService.deleteUserGroup(commerceCatalogUserId, group);
+		if (commerceCatalogUserId > 0) {
+			commerceCatalogUserIds = new long[] {commerceCatalogUserId};
+		}
+		else {
+			commerceCatalogUserIds = ParamUtil.getLongValues(
+				actionRequest, "commerceCatalogUserIds");
+		}
+
+		for (long deleteCommerceCatalogUserId : commerceCatalogUserIds) {
+			_userGroupRoleLocalService.deleteUserGroupRoles(
+				deleteCommerceCatalogUserId, new long[] {group.getGroupId()});
+
+			_groupLocalService.deleteUserGroup(
+				deleteCommerceCatalogUserId, group);
+		}
 	}
 
 	@Override
