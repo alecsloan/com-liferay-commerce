@@ -29,6 +29,7 @@ import com.liferay.commerce.product.internal.upgrade.v1_5_0.CommerceChannelUpgra
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -70,7 +71,7 @@ public class CommerceProductUpgradeStepRegistrator
 
 		registry.register(
 			_SCHEMA_VERSION_1_4_0, _SCHEMA_VERSION_1_5_0,
-			new CommerceCatalogUpgradeProcess(),
+			new CommerceCatalogUpgradeProcess(_groupLocalService),
 			new CommerceChannelUpgradeProcess(),
 			new com.liferay.commerce.product.internal.upgrade.v1_5_0.
 				CPRuleUpgradeProcess());
@@ -97,5 +98,8 @@ public class CommerceProductUpgradeStepRegistrator
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
+	private GroupLocalService _groupLocalService;
 
 }
