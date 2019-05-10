@@ -60,6 +60,8 @@ public class SiteCommerceChannelTypeImpl implements CommerceChannelType {
 
 		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
 
+// add groupIds here
+
 		boolean orSearch = ParamUtil.getBoolean(httpServletRequest, "orSearch");
 
 		typeSettingsProperties.put("orSearch", String.valueOf(orSearch));

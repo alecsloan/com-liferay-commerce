@@ -61,6 +61,8 @@ public class OrganizationCommerceChannelTypeImpl
 
 		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
 
+// organizationId
+
 		boolean orSearch = ParamUtil.getBoolean(httpServletRequest, "orSearch");
 
 		typeSettingsProperties.put("orSearch", String.valueOf(orSearch));

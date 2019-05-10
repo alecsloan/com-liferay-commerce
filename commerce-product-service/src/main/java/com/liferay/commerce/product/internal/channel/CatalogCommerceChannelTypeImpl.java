@@ -60,6 +60,8 @@ public class CatalogCommerceChannelTypeImpl implements CommerceChannelType {
 
 		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
 
+// add commerceCatalogId here
+
 		boolean orSearch = ParamUtil.getBoolean(httpServletRequest, "orSearch");
 
 		typeSettingsProperties.put("orSearch", String.valueOf(orSearch));
