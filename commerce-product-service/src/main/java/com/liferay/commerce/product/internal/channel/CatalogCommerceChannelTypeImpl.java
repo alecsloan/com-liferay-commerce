@@ -15,11 +15,9 @@
 package com.liferay.commerce.product.internal.channel;
 
 import com.liferay.commerce.product.channel.CommerceChannelType;
-import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -68,20 +66,6 @@ public class CatalogCommerceChannelTypeImpl implements CommerceChannelType {
 		typeSettingsProperties.put("catalogIds", StringUtil.merge(catalogIds));
 
 		return typeSettingsProperties;
-	}
-
-	@Override
-	public boolean isSatisfied(
-			CProduct cProduct, CommerceChannel commerceChannel)
-		throws PortalException {
-
-		return true;
-	}
-
-	@Override
-	public void postProcessContextBooleanFilter(
-			BooleanFilter booleanFilter, CommerceChannel commerceChannel)
-		throws PortalException {
 	}
 
 	@Override

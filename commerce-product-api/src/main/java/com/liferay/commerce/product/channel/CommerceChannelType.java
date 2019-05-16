@@ -16,10 +16,8 @@ package com.liferay.commerce.product.channel;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.Locale;
@@ -38,14 +36,6 @@ public interface CommerceChannelType {
 
 	public UnicodeProperties getTypeSettingsProperties(
 		HttpServletRequest httpServletRequest);
-
-	public boolean isSatisfied(
-			CProduct cProduct, CommerceChannel commerceChannel)
-		throws PortalException;
-
-	public void postProcessContextBooleanFilter(
-			BooleanFilter contextBooleanFilter, CommerceChannel commerceChannel)
-		throws PortalException;
 
 	public void update(
 			CommerceChannel commerceChannel,
