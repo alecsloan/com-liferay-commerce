@@ -18,6 +18,7 @@ import com.liferay.commerce.product.catalog.rule.CPRuleType;
 import com.liferay.commerce.product.constants.CPRuleConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPRule;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.Document;
@@ -73,6 +74,13 @@ public class AllProductsCPRuleTypeImpl implements CPRuleType {
 		HttpServletRequest httpServletRequest) {
 
 		return null;
+	}
+
+	@Override
+	public String getTypeSettingsPropertiesNames(
+		HttpServletRequest httpServletRequest, CPRule cpRule) {
+
+		return StringPool.BLANK;
 	}
 
 	@Override

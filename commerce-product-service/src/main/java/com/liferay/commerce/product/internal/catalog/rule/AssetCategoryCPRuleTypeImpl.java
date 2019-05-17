@@ -107,6 +107,13 @@ public class AssetCategoryCPRuleTypeImpl implements CPRuleType {
 	}
 
 	@Override
+	public String getTypeSettingsPropertiesNames(
+		HttpServletRequest httpServletRequest, CPRule cpRule) {
+
+		return StringPool.BLANK;
+	}
+
+	@Override
 	public boolean isSatisfied(CPDefinition cpDefinition, CPRule cpRule)
 		throws PortalException {
 

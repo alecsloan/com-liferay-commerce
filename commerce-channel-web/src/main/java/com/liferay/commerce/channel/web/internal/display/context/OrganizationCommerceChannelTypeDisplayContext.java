@@ -14,9 +14,11 @@
 
 package com.liferay.commerce.channel.web.internal.display.context;
 
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CPRuleService;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -51,6 +53,7 @@ public class OrganizationCommerceChannelTypeDisplayContext
 			CommerceChannelTypeRegistry commerceChannelTypeRegistry,
 			CommerceChannelTypeJSPContributorRegistry
 				commerceChannelTypeJSPContributorRegistry,
+			CPRuleService cpRuleService, CPRuleTypeRegistry cpRuleTypeRegistry,
 			HttpServletRequest httpServletRequest,
 			OrganizationLocalService organizationLocalService, Portal portal,
 			PortletResourcePermission portletResourcePermission,
@@ -59,8 +62,9 @@ public class OrganizationCommerceChannelTypeDisplayContext
 
 		super(
 			commerceChannelService, commerceChannelTypeRegistry,
-			commerceChannelTypeJSPContributorRegistry, httpServletRequest,
-			portal, portletResourcePermission);
+			commerceChannelTypeJSPContributorRegistry, cpRuleService,
+			cpRuleTypeRegistry, httpServletRequest, portal,
+			portletResourcePermission);
 
 		_organizationLocalService = organizationLocalService;
 		_itemSelector = itemSelector;

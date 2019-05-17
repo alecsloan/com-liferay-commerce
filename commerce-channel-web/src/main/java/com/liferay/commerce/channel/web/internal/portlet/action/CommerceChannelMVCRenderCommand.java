@@ -15,10 +15,12 @@
 package com.liferay.commerce.channel.web.internal.portlet.action;
 
 import com.liferay.commerce.channel.web.internal.display.context.CommerceChannelDisplayContext;
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.service.CPRuleService;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
@@ -58,8 +60,9 @@ public class CommerceChannelMVCRenderCommand implements MVCRenderCommand {
 			CommerceChannelDisplayContext commerceChannelDisplayContext =
 				new CommerceChannelDisplayContext(
 					_commerceChannelService, _commerceChannelTypeRegistry,
-					_commerceChannelTypeJSPContributorRegistry,
-					httpServletRequest, _portal, _portletResourcePermission);
+					_commerceChannelTypeJSPContributorRegistry, _cpRuleService,
+					_cpRuleTypeRegistry, httpServletRequest, _portal,
+					_portletResourcePermission);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceChannelDisplayContext);
@@ -85,6 +88,12 @@ public class CommerceChannelMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
+
+	@Reference
+	private CPRuleService _cpRuleService;
+
+	@Reference
+	private CPRuleTypeRegistry _cpRuleTypeRegistry;
 
 	@Reference
 	private Portal _portal;

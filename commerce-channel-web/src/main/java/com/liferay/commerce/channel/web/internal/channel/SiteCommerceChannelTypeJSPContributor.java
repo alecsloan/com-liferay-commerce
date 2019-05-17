@@ -15,10 +15,12 @@
 package com.liferay.commerce.channel.web.internal.channel;
 
 import com.liferay.commerce.channel.web.internal.display.context.SiteCommerceChannelTypeDisplayContext;
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPConstants;
+import com.liferay.commerce.product.service.CPRuleService;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
@@ -54,9 +56,9 @@ public class SiteCommerceChannelTypeJSPContributor
 			siteCommerceChannelTypeDisplayContext =
 				new SiteCommerceChannelTypeDisplayContext(
 					_commerceChannelService, _commerceChannelTypeRegistry,
-					_commerceChannelTypeJSPContributorRegistry,
-					_groupLocalService, httpServletRequest, _itemSelector,
-					_portal, _portletResourcePermission);
+					_commerceChannelTypeJSPContributorRegistry, _cpRuleService,
+					_cpRuleTypeRegistry, _groupLocalService, httpServletRequest,
+					_itemSelector, _portal, _portletResourcePermission);
 
 		httpServletRequest.setAttribute(
 			"site.jsp-portletDisplayContext",
@@ -76,6 +78,12 @@ public class SiteCommerceChannelTypeJSPContributor
 
 	@Reference
 	private CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
+
+	@Reference
+	private CPRuleService _cpRuleService;
+
+	@Reference
+	private CPRuleTypeRegistry _cpRuleTypeRegistry;
 
 	@Reference
 	private GroupLocalService _groupLocalService;

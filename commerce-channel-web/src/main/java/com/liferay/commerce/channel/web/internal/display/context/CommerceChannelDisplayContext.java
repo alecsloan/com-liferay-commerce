@@ -15,21 +15,28 @@
 package com.liferay.commerce.channel.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
+import com.liferay.commerce.product.catalog.rule.CPRuleType;
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelType;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CPRuleService;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.List;
 
@@ -49,6 +56,7 @@ public class CommerceChannelDisplayContext
 			CommerceChannelTypeRegistry commerceChannelTypeRegistry,
 			CommerceChannelTypeJSPContributorRegistry
 				commerceChannelTypeJSPContributorRegistry,
+			CPRuleService cpRuleService, CPRuleTypeRegistry cpRuleTypeRegistry,
 			HttpServletRequest httpServletRequest, Portal portal,
 			PortletResourcePermission portletResourcePermission)
 		throws PortalException {
@@ -61,6 +69,8 @@ public class CommerceChannelDisplayContext
 		_commerceChannelTypeRegistry = commerceChannelTypeRegistry;
 		_commerceChannelTypeJSPContributorRegistry =
 			commerceChannelTypeJSPContributorRegistry;
+		_cpRuleService = cpRuleService;
+		_cpRuleTypeRegistry = cpRuleTypeRegistry;
 		_portal = portal;
 		_portletResourcePermission = portletResourcePermission;
 	}
@@ -110,6 +120,45 @@ public class CommerceChannelDisplayContext
 
 	public List<CommerceChannelType> getCommerceChannelTypes() {
 		return _commerceChannelTypeRegistry.getCommerceChannelTypes();
+	}
+
+	public List<CPRule> getCPRules() throws PortalException {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		BaseModelSearchResult<CPRule> cpRulesBaseModelSearchResult =
+			_cpRuleService.searchCPRules(
+				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+				getKeywords(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		return cpRulesBaseModelSearchResult.getBaseModels();
+	}
+
+	public String getCPRuleURL(long commerceChannelId, CPRule cpRule) {
+		if (cpRule == null) {
+			return StringPool.BLANK;
+		}
+
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+		portletURL.setParameter(
+			"commerceChannelId", String.valueOf(commerceChannelId));
+
+		portletURL.setParameter(
+			"cpRuleId", String.valueOf(cpRule.getCPRuleId()));
+		portletURL.setParameter(
+			"mvcRenderCommandName", "editCommerceChannelFilter");
+
+		return portletURL.toString();
+	}
+
+	public String getCPRuleValues(CPRule cpRule) {
+		CPRuleType cpRuleType = _cpRuleTypeRegistry.getCPRuleType(
+			cpRule.getType());
+
+		return cpRuleType.getTypeSettingsPropertiesNames(
+			httpServletRequest, cpRule);
 	}
 
 	@Override
@@ -169,6 +218,8 @@ public class CommerceChannelDisplayContext
 	private final CommerceChannelTypeJSPContributorRegistry
 		_commerceChannelTypeJSPContributorRegistry;
 	private final CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
+	private final CPRuleService _cpRuleService;
+	private final CPRuleTypeRegistry _cpRuleTypeRegistry;
 	private final Portal _portal;
 	private final PortletResourcePermission _portletResourcePermission;
 

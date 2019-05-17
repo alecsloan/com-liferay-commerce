@@ -48,6 +48,9 @@ public interface CPRuleType {
 	public UnicodeProperties getTypeSettingsProperties(
 		HttpServletRequest httpServletRequest);
 
+	public String getTypeSettingsPropertiesNames(
+		HttpServletRequest httpServletRequest, CPRule cpRule);
+
 	public boolean isSatisfied(CPDefinition cpDefinition, CPRule cpRule)
 		throws PortalException;
 

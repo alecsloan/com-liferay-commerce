@@ -20,11 +20,13 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -101,6 +103,39 @@ public class CatalogCPRuleTypeImpl implements CPRuleType {
 		typeSettingsProperties.put("catalogIds", StringUtil.merge(catalogIds));
 
 		return typeSettingsProperties;
+	}
+
+	@Override
+	public String getTypeSettingsPropertiesNames(
+		HttpServletRequest httpServletRequest, CPRule cpRule) {
+
+		UnicodeProperties typeSettingsProperties =
+			cpRule.getTypeSettingsProperties();
+
+		long[] commerceCatalogIds = GetterUtil.getLongValues(
+			StringUtil.split(typeSettingsProperties.get("catalogIds")));
+
+		if (commerceCatalogIds.length < 1) {
+			return StringPool.BLANK;
+		}
+
+		StringBuilder sb = new StringBuilder(commerceCatalogIds.length * 2);
+
+		for (long commerceCatalogId : commerceCatalogIds) {
+			CommerceCatalog commerceCatalog =
+				_commerceCatalogLocalService.fetchCommerceCatalog(
+					commerceCatalogId);
+
+			sb.append(commerceCatalog.getName(httpServletRequest.getLocale()));
+
+			if (commerceCatalogId !=
+					commerceCatalogIds[commerceCatalogIds.length - 1]) {
+
+				sb.append(StringPool.COMMA_AND_SPACE);
+			}
+		}
+
+		return sb.toString();
 	}
 
 	@Override

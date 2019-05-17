@@ -15,10 +15,12 @@
 package com.liferay.commerce.channel.web.internal.channel;
 
 import com.liferay.commerce.channel.web.internal.display.context.OrganizationCommerceChannelTypeDisplayContext;
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPConstants;
+import com.liferay.commerce.product.service.CPRuleService;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
@@ -54,8 +56,9 @@ public class OrganizationCommerceChannelTypeJSPContributor
 			organizationCommerceChannelTypeDisplayContext =
 				new OrganizationCommerceChannelTypeDisplayContext(
 					_commerceChannelService, _commerceChannelTypeRegistry,
-					_commerceChannelTypeJSPContributorRegistry,
-					httpServletRequest, _organizationLocalService, _portal,
+					_commerceChannelTypeJSPContributorRegistry, _cpRuleService,
+					_cpRuleTypeRegistry, httpServletRequest,
+					_organizationLocalService, _portal,
 					_portletResourcePermission, _itemSelector);
 
 		httpServletRequest.setAttribute(
@@ -76,6 +79,12 @@ public class OrganizationCommerceChannelTypeJSPContributor
 
 	@Reference
 	private CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
+
+	@Reference
+	private CPRuleService _cpRuleService;
+
+	@Reference
+	private CPRuleTypeRegistry _cpRuleTypeRegistry;
 
 	@Reference
 	private ItemSelector _itemSelector;

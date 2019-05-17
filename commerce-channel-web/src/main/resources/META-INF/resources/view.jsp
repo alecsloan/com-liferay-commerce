@@ -52,9 +52,30 @@ SearchContainer commerceCatalogChannelsSearchContainer = commerceChannelDisplayC
 						<liferay-ui:search-container-column-text
 							cssClass="important table-cell-content"
 							href="<%= commerceChannelDisplayContext.getChannelURL(commerceChannel) %>"
-							name="name"
+							name="channel"
 							value="<%= HtmlUtil.escape(commerceChannel.getName()) %>"
 						/>
+
+						<liferay-ui:search-container-column-text
+							cssClass="important row table-cell-content"
+							name="filters"
+						>
+
+							<%
+							List<CPRule> cpRules = commerceChannelDisplayContext.getCPRules();
+
+							for (CPRule cpRule : cpRules) {
+							%>
+
+								<p>
+									<a class="row" href="<%= commerceChannelDisplayContext.getCPRuleURL(commerceChannel.getCommerceChannelId(), cpRule) %>"><%= HtmlUtil.escape(LanguageUtil.get(request, cpRule.getName())) %> (<%= LanguageUtil.get(request, cpRule.getType()) %>): <%= commerceChannelDisplayContext.getCPRuleValues(cpRule) %></a>
+								</p>
+
+							<%
+							}
+							%>
+
+						</liferay-ui:search-container-column-text>
 
 						<liferay-ui:search-container-column-jsp
 							cssClass="entry-action-column"
