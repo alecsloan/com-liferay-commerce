@@ -312,9 +312,11 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
 				serviceContext.getCompanyId());
 
+		String languageId = serviceContext.getLanguageId();
+
 		return _commerceCatalogLocalService.addCommerceCatalog(
-			group.getName(), commerceCurrency.getCode(),
-			serviceContext.getLanguageId(), StringPool.BLANK, serviceContext);
+			group.getName(languageId), commerceCurrency.getCode(), languageId,
+			StringPool.BLANK, serviceContext);
 	}
 
 	protected CommerceChannel createChannel(
