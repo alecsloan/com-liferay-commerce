@@ -37,6 +37,7 @@ import java.text.DateFormat;
 import java.text.Format;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -76,7 +77,7 @@ public class CommerceOrderClayTableUtil {
 		portletURL.setParameter(
 			"commerceOrderId", String.valueOf(commerceOrderId));
 
-		portletURL.setParameter("backURL", themeDisplay.getURLCurrent());
+		portletURL.setParameter("backURL", backURL.toString());
 
 		return portletURL.toString();
 	}
@@ -125,13 +126,21 @@ public class CommerceOrderClayTableUtil {
 				resourceBundle,
 				WorkflowConstants.getStatusLabel(commerceOrder.getStatus()));
 
+			Date date = commerceOrder.getCreateDate();
+
+			if (!commerceOrder.isOpen() &&
+				(commerceOrder.getOrderDate() != null)) {
+
+				date = commerceOrder.getOrderDate();
+			}
+
 			orders.add(
 				new Order(
 					commerceOrder.getCommerceOrderId(),
 					commerceOrder.getCommerceAccountName(),
-					dateFormat.format(commerceOrder.getCreateDate()),
-					commerceOrder.getUserName(), commerceOrderStatusLabel,
-					workflowStatusLabel, amount, url));
+					dateFormat.format(date), commerceOrder.getUserName(),
+					commerceOrderStatusLabel, workflowStatusLabel, amount,
+					url));
 		}
 
 		return orders;
