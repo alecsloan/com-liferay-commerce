@@ -339,38 +339,23 @@ public class CommerceSubscriptionEntryDisplayContext {
 		}
 
 		String emptyResultsMessage = "there-are-no-subscriptions";
-		Long maxSubscriptionCycles = null;
-		Integer subscriptionStatus =
-			CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ANY;
 
 		String navigation = getNavigation();
 
 		if (navigation.equals("active")) {
 			emptyResultsMessage = "there-are-no-active-subscriptions";
-			subscriptionStatus =
-				CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE;
 		}
 		else if (navigation.equals("suspended")) {
 			emptyResultsMessage = "there-are-no-suspended-subscriptions";
-			subscriptionStatus =
-				CommerceSubscriptionEntryConstants.
-					SUBSCRIPTION_STATUS_SUSPENDED;
 		}
 		else if (navigation.equals("cancelled")) {
 			emptyResultsMessage = "there-are-no-cancelled-subscriptions";
-			subscriptionStatus =
-				CommerceSubscriptionEntryConstants.
-					SUBSCRIPTION_STATUS_CANCELLED;
 		}
 		else if (navigation.equals("completed")) {
 			emptyResultsMessage = "there-are-no-completed-subscriptions";
-			subscriptionStatus =
-				CommerceSubscriptionEntryConstants.
-					SUBSCRIPTION_STATUS_COMPLETED;
 		}
 		else if (navigation.equals("never-ends")) {
 			emptyResultsMessage = "there-are-no-unlimited-subscriptions";
-			maxSubscriptionCycles = 0L;
 		}
 
 		_searchContainer = new SearchContainer<>(
